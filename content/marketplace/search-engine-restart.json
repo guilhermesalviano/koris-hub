@@ -1,0 +1,20 @@
+{
+  "slug": "search-engine-restart",
+  "name": "Restart Search Engine",
+  "family": "tool",
+  "type": "action",
+  "summary": "Restart the local SearXNG Docker container when web search stops responding.",
+  "description": "Runs `docker compose down` then `up` for the local SearXNG container used by **Search Engine**.\n\nUse it when `search_engine` fails with a connection error or HTTP 403 — both usually mean the container is down or running a stale config.\n\nRequires Docker on the host and takes up to ~2 minutes. **Requires confirmation:** the model must tell you search failed and get an explicit follow-up \"yes\" before it stops and recreates the container.",
+  "tags": [
+    "search",
+    "docker",
+    "ops",
+    "confirmation-required"
+  ],
+  "sourcePath": "plugins/tools/search-engine-restart",
+  "sourceUrl": "https://github.com/guilhermesalviano/koris/tree/main/plugins/tools/search-engine-restart",
+  "toolName": "restart_search_engine",
+  "params": [],
+  "requiresConfirmation": true,
+  "defaultEnabled": true
+}

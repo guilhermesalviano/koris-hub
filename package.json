@@ -1,0 +1,45 @@
+{
+  "name": "koris-hub",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Public website, plugins marketplace, and docs for Koris.",
+  "packageManager": "pnpm@10.18.3",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "preview": "pnpm dlx serve out",
+    "lint": "tsc --noEmit -p tsconfig.json",
+    "sync:changelog": "tsx scripts/sync-changelog.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guilhermesalviano/koris-hub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/guilhermesalviano/koris-hub/issues"
+  },
+  "homepage": "https://guilhermesalviano.github.io/koris-hub",
+  "author": "guilhermesalviano",
+  "license": "ISC",
+  "dependencies": {
+    "next": "^16.3.3",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "react-markdown": "^9.0.1",
+    "remark-gfm": "^4.0.0",
+    "gray-matter": "^4.0.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "@tailwindcss/typography": "^0.5.15",
+    "@types/node": "^26.4.0",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.5",
+    "tailwindcss": "^4.3.3",
+    "tsx": "^4.23.12",
+    "typescript": "^7.0.2"
+  }
+}

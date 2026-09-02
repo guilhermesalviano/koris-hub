@@ -1,0 +1,18 @@
+{
+  "slug": "cat-fact",
+  "name": "Cat Fact",
+  "family": "skill",
+  "type": "utility",
+  "summary": "Random cat facts and breed info from catfact.ninja — free, no API key.",
+  "description": "Fetches a random cat fact (or breed information) from `catfact.ninja`. A minimal example skill — a single endpoint reached through **Curl Request**.",
+  "tags": [
+    "fun",
+    "cats",
+    "catfact.ninja"
+  ],
+  "sourcePath": "skills/cat-fact",
+  "sourceUrl": "https://github.com/guilhermesalviano/koris/tree/main/skills/cat-fact",
+  "readWhen": [
+    "asked random cat facts"
+  ]
+}

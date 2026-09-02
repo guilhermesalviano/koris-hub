@@ -1,0 +1,25 @@
+{
+  "slug": "unlearn-sticker",
+  "name": "Unlearn Sticker",
+  "family": "tool",
+  "type": "action",
+  "summary": "Forget a learned sticker so it stops being suggested or sent.",
+  "description": "Forgets a previously learned sticker. Call it when the user asks to remove, forget, or stop using a sticker rule, or says a learned sticker no longer fits. Uses the id from the \"Learned Stickers\" list.",
+  "tags": [
+    "whatsapp",
+    "stickers",
+    "memory"
+  ],
+  "sourcePath": "plugins/tools/unlearn-sticker",
+  "sourceUrl": "https://github.com/guilhermesalviano/koris/tree/main/plugins/tools/unlearn-sticker",
+  "toolName": "unlearn_sticker",
+  "params": [
+    {
+      "name": "id",
+      "type": "string",
+      "required": true,
+      "description": "The id of the learned sticker to forget, from the \"Learned Stickers\" list."
+    }
+  ],
+  "defaultEnabled": true
+}

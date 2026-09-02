@@ -1,0 +1,17 @@
+{
+  "slug": "list-beats",
+  "name": "List Beats",
+  "family": "tool",
+  "type": "query",
+  "summary": "List every saved reminder and scheduled beat, with IDs.",
+  "description": "Lists all saved beats and scheduled beats. Call it before **Update Beat** or **Delete Beat** when the target ID is not already known.",
+  "tags": [
+    "heartbeats",
+    "scheduling"
+  ],
+  "sourcePath": "plugins/tools/list-beats",
+  "sourceUrl": "https://github.com/guilhermesalviano/koris/tree/main/plugins/tools/list-beats",
+  "toolName": "list_beats",
+  "params": [],
+  "defaultEnabled": true
+}

@@ -1,0 +1,25 @@
+{
+  "slug": "learn-sticker",
+  "name": "Learn Sticker",
+  "family": "tool",
+  "type": "action",
+  "summary": "Remember a quoted WhatsApp sticker so it can be reused in matching situations later.",
+  "description": "Remembers a sticker for later reuse. Only fires when the user's message is a reply that quotes a sticker (e.g. quoting one and saying \"use this when I'm happy\").\n\nWhatsApp cannot caption a sticker, so teaching is always done by quoting it in a separate text reply. Fails if the answered message did not quote a sticker.",
+  "tags": [
+    "whatsapp",
+    "stickers",
+    "memory"
+  ],
+  "sourcePath": "plugins/tools/learn-sticker",
+  "sourceUrl": "https://github.com/guilhermesalviano/koris/tree/main/plugins/tools/learn-sticker",
+  "toolName": "learn_sticker",
+  "params": [
+    {
+      "name": "description",
+      "type": "string",
+      "required": true,
+      "description": "The situation in which this sticker should be reused later."
+    }
+  ],
+  "defaultEnabled": true
+}

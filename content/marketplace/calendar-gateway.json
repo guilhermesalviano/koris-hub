@@ -1,0 +1,22 @@
+{
+  "slug": "calendar-gateway",
+  "name": "Calendar Gateway",
+  "family": "skill",
+  "type": "gateway",
+  "summary": "Read and manage a user's Google Calendar through a secure internal gateway.",
+  "description": "Lets the assistant view upcoming events, check availability, and retrieve meeting details from Google Calendar via an internal gateway API. Calls are made with **Curl Request** against the configured `GATEWAY_HOST`.",
+  "tags": [
+    "calendar",
+    "google",
+    "gateway",
+    "schedule"
+  ],
+  "sourcePath": "skills/calendar-gateway",
+  "sourceUrl": "https://github.com/guilhermesalviano/koris/tree/main/skills/calendar-gateway",
+  "readWhen": [
+    "asked about upcoming meetings or events",
+    "asked what is on the schedule for a specific day",
+    "asked for event locations or attendee lists",
+    "asked to check availability"
+  ]
+}

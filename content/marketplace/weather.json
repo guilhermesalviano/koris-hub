@@ -1,0 +1,19 @@
+{
+  "slug": "weather",
+  "name": "Weather",
+  "family": "skill",
+  "type": "utility",
+  "summary": "Current conditions and short forecasts from wttr.in / Open-Meteo — no API key.",
+  "description": "Gets current weather and short-range forecasts via `wttr.in` or Open-Meteo, no API key required. Not for historical data, severe-weather alerts, or detailed meteorological analysis. Queries run through **Curl Request**.",
+  "tags": [
+    "weather",
+    "forecast",
+    "wttr.in",
+    "open-meteo"
+  ],
+  "sourcePath": "skills/weather",
+  "sourceUrl": "https://github.com/guilhermesalviano/koris/tree/main/skills/weather",
+  "readWhen": [
+    "user asks about weather, temperature, or forecasts for any location"
+  ]
+}

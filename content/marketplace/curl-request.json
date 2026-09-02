@@ -1,0 +1,71 @@
+{
+  "slug": "curl-request",
+  "name": "Curl Request",
+  "family": "tool",
+  "type": "action",
+  "summary": "Execute HTTP requests with curl — the transport most skills use to reach their APIs.",
+  "description": "Executes HTTP requests using `curl`. This is the transport layer most skills build on: a skill describes the endpoint, and `curl_request` makes the call.\n\nOutbound URLs are checked against the `allowed_domains` list in `koris.json` by the security gate, and the tool is only offered to trusted senders.\n\nUse only the parameters a skill explicitly requires — do not invent extra shell transformations.",
+  "tags": [
+    "http",
+    "network",
+    "skills",
+    "domain-gated"
+  ],
+  "sourcePath": "plugins/tools/curl-request",
+  "sourceUrl": "https://github.com/guilhermesalviano/koris/tree/main/plugins/tools/curl-request",
+  "toolName": "curl_request",
+  "params": [
+    {
+      "name": "url",
+      "type": "string",
+      "required": true,
+      "description": "URL to request. Keep values exactly as required by the skill."
+    },
+    {
+      "name": "method",
+      "type": "string",
+      "required": false,
+      "enum": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH"
+      ],
+      "description": "HTTP method (default: GET)."
+    },
+    {
+      "name": "headers",
+      "type": "object",
+      "required": false,
+      "description": "Custom HTTP headers, e.g. {\"Authorization\": \"Bearer token\"}."
+    },
+    {
+      "name": "data",
+      "type": [
+        "string",
+        "object"
+      ],
+      "required": false,
+      "description": "Request body for POST/PUT/PATCH — JSON object, JSON string, or form data."
+    },
+    {
+      "name": "follow_redirects",
+      "type": "boolean",
+      "required": false,
+      "description": "Follow HTTP redirects (default: true)."
+    },
+    {
+      "name": "timeout",
+      "type": "number",
+      "required": false,
+      "description": "Request timeout in seconds (default: 30)."
+    },
+    {
+      "name": "pipe",
+      "type": "string",
+      "required": false,
+      "description": "Optional: pipe the response through a command, e.g. \"| jq '.fact'\"."
+    }
+  ],
+  "defaultEnabled": true
+}

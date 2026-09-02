@@ -1,0 +1,47 @@
+{
+  "slug": "update-beat",
+  "name": "Update Beat",
+  "family": "tool",
+  "type": "action",
+  "summary": "Change the description, type, or schedule of an existing beat by ID.",
+  "description": "Updates an existing beat. Use **List Beats** first if the ID is unknown. Any of description, type, or cron schedule can be changed independently.",
+  "tags": [
+    "heartbeats",
+    "scheduling",
+    "cron"
+  ],
+  "sourcePath": "plugins/tools/update-beat",
+  "sourceUrl": "https://github.com/guilhermesalviano/koris/tree/main/plugins/tools/update-beat",
+  "toolName": "update_beat",
+  "params": [
+    {
+      "name": "id",
+      "type": "string",
+      "required": true,
+      "description": "The UUID of the beat to update."
+    },
+    {
+      "name": "beat",
+      "type": "string",
+      "required": false,
+      "description": "New description for the beat."
+    },
+    {
+      "name": "type",
+      "type": "string",
+      "required": false,
+      "enum": [
+        "reminder",
+        "scheduled_beat"
+      ],
+      "description": "New type for the beat."
+    },
+    {
+      "name": "cron_expression",
+      "type": "string",
+      "required": false,
+      "description": "New 5-field cron expression, e.g. \"0 9 * * 1\" (every Monday at 9am)."
+    }
+  ],
+  "defaultEnabled": true
+}

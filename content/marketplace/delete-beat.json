@@ -1,0 +1,24 @@
+{
+  "slug": "delete-beat",
+  "name": "Delete Beat",
+  "family": "tool",
+  "type": "action",
+  "summary": "Remove or cancel a beat by ID.",
+  "description": "Deletes a beat by ID. Call it when the user wants to remove or cancel a beat; use **List Beats** first if the ID is unknown.",
+  "tags": [
+    "heartbeats",
+    "scheduling"
+  ],
+  "sourcePath": "plugins/tools/delete-beat",
+  "sourceUrl": "https://github.com/guilhermesalviano/koris/tree/main/plugins/tools/delete-beat",
+  "toolName": "delete_beat",
+  "params": [
+    {
+      "name": "id",
+      "type": "string",
+      "required": true,
+      "description": "The UUID of the beat to delete."
+    }
+  ],
+  "defaultEnabled": true
+}

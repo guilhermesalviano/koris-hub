@@ -1,0 +1,39 @@
+{
+  "slug": "create-tool",
+  "name": "Create Tool",
+  "family": "tool",
+  "type": "meta",
+  "summary": "Scaffold a brand-new tool plugin from chat — name, description, and a parameter list.",
+  "description": "Scaffolds a new tool plugin (folder + `index.ts` + test) from a name, description, and parameter list, using the same generator as `pnpm scaffold:tool`.\n\n**Requires confirmation.** It writes new source files to the server; once built and deployed they become executable code the agent can call. The model must show you the intended tool name, description, and parameters and wait for an explicit follow-up confirmation.\n\nThe scaffolded tool is **not** usable immediately — the plugin loader only discovers plugins at process startup, so it needs `pnpm build` and a restart to become callable.\n\nDisabled by default; enable it from the dashboard Plugins panel.",
+  "tags": [
+    "meta",
+    "scaffolding",
+    "confirmation-required",
+    "disabled-by-default"
+  ],
+  "sourcePath": "plugins/tools/create-tool",
+  "sourceUrl": "https://github.com/guilhermesalviano/koris/tree/main/plugins/tools/create-tool",
+  "toolName": "create_tool",
+  "params": [
+    {
+      "name": "name",
+      "type": "string",
+      "required": true,
+      "description": "Plugin folder name and base for the LLM tool name, strict kebab-case (e.g. \"weather-lookup\")."
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "required": true,
+      "description": "The LLM-facing description of what the new tool does."
+    },
+    {
+      "name": "parameters",
+      "type": "array",
+      "required": false,
+      "description": "Optional list of {name, type, description, required}. type ∈ string | number | boolean | object | array."
+    }
+  ],
+  "requiresConfirmation": true,
+  "defaultEnabled": false
+}

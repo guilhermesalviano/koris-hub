@@ -1,0 +1,41 @@
+{
+  "slug": "set-beat",
+  "name": "Set Beat",
+  "family": "tool",
+  "type": "action",
+  "summary": "Schedule a reminder or a background \"beat\" with a 5-field cron expression.",
+  "description": "Saves a reminder (a scheduled nudge to the user) or a `scheduled_beat` (an automated background agent run) with a standard 5-field cron expression.\n\nDefault behavior is a **one-time** beat — every field is pinned; wildcards are used only when you explicitly ask for a recurring pattern (\"every day\", \"every Monday\").\n\nNot available to the heartbeat sub-agent itself, so a beat cannot recursively schedule more beats.",
+  "tags": [
+    "heartbeats",
+    "scheduling",
+    "cron"
+  ],
+  "sourcePath": "plugins/tools/set-beat",
+  "sourceUrl": "https://github.com/guilhermesalviano/koris/tree/main/plugins/tools/set-beat",
+  "toolName": "set_beat",
+  "params": [
+    {
+      "name": "beat",
+      "type": "string",
+      "required": true,
+      "description": "What the user wants to be reminded about, or the beat to schedule."
+    },
+    {
+      "name": "type",
+      "type": "string",
+      "required": false,
+      "enum": [
+        "reminder",
+        "scheduled_beat"
+      ],
+      "description": "Defaults to \"reminder\". \"scheduled_beat\" runs the agent in the background."
+    },
+    {
+      "name": "cron_expression",
+      "type": "string",
+      "required": true,
+      "description": "5-field cron: \"minute hour day-of-month month day-of-week\"."
+    }
+  ],
+  "defaultEnabled": true
+}

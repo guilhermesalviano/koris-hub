@@ -1,0 +1,22 @@
+{
+  "slug": "emails-gateway",
+  "name": "Emails Gateway",
+  "family": "skill",
+  "type": "gateway",
+  "summary": "Triage and read a user's email inbox through a secure internal gateway.",
+  "description": "Lets the assistant scan recent correspondence and open full message details through an internal gateway API, without leaving the chat. Calls go through **Curl Request** against the configured `GATEWAY_HOST`.",
+  "tags": [
+    "email",
+    "gmail",
+    "gateway",
+    "triage"
+  ],
+  "sourcePath": "skills/emails-gateway",
+  "sourceUrl": "https://github.com/guilhermesalviano/koris/tree/main/skills/emails-gateway",
+  "readWhen": [
+    "asked about recent emails",
+    "asked about specific email details",
+    "asked to check Gmail inbox",
+    "asked to list recent emails"
+  ]
+}

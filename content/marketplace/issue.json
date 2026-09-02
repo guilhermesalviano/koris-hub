@@ -1,0 +1,44 @@
+{
+  "slug": "issue",
+  "name": "Issue",
+  "family": "tool",
+  "type": "action",
+  "summary": "File a GitHub issue — via the API when configured, otherwise as formatted text to paste.",
+  "description": "Creates a GitHub issue. With `owner`/`repo` and a token configured it posts through the GitHub API; otherwise it returns formatted issue text for manual creation.\n\nYou usually describe the problem in free-form text — the model derives the `title` (a short summary) and `body` (the fuller description) from that, without inventing details.\n\n**Requires confirmation:** this is a state-changing action; the model must show you the derived title/body/owner/repo and wait for an explicit follow-up confirmation.",
+  "tags": [
+    "github",
+    "issues",
+    "confirmation-required"
+  ],
+  "sourcePath": "plugins/tools/issue",
+  "sourceUrl": "https://github.com/guilhermesalviano/koris/tree/main/plugins/tools/issue",
+  "toolName": "issue",
+  "params": [
+    {
+      "name": "title",
+      "type": "string",
+      "required": true,
+      "description": "The issue title — a short, clear summary derived from your description."
+    },
+    {
+      "name": "body",
+      "type": "string",
+      "required": false,
+      "description": "The issue body, expanded from what you said without inventing new details."
+    },
+    {
+      "name": "owner",
+      "type": "string",
+      "required": false,
+      "description": "GitHub owner/organization. Defaults to the configured owner when set."
+    },
+    {
+      "name": "repo",
+      "type": "string",
+      "required": false,
+      "description": "GitHub repository name (required if owner is provided)."
+    }
+  ],
+  "requiresConfirmation": true,
+  "defaultEnabled": true
+}

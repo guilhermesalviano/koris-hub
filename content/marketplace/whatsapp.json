@@ -1,0 +1,17 @@
+{
+  "slug": "whatsapp",
+  "name": "WhatsApp",
+  "family": "channel",
+  "type": "messaging",
+  "summary": "Connect the agent to WhatsApp over Baileys — text, images, and stickers.",
+  "description": "A WhatsApp channel plugin built on Baileys. Pairing is done by scanning a QR code on first run; auth state is persisted locally.\n\nSupports inbound images, JID-based whitelisting, and the sticker tools (**Learn / Send / Unlearn Sticker**). Disabled by default — enable it from the dashboard, then pair.",
+  "tags": [
+    "messaging",
+    "whatsapp",
+    "baileys",
+    "stickers"
+  ],
+  "sourcePath": "plugins/channels/whatsapp",
+  "sourceUrl": "https://github.com/guilhermesalviano/koris/tree/main/plugins/channels/whatsapp",
+  "defaultEnabled": false
+}

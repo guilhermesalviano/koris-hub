@@ -1,0 +1,16 @@
+{
+  "slug": "telegram",
+  "name": "Telegram",
+  "family": "channel",
+  "type": "messaging",
+  "summary": "Talk to the agent from a Telegram bot — text, images, group mentions, approvals.",
+  "description": "A Telegram channel plugin. Set a bot token (`CHANNELS_TELEGRAM_BOT_TOKEN` or `bot_token` in `plugins/channels/telegram/config.yml`) and a sender whitelist; unlisted senders can optionally reach the agent as untrusted (no tools/skills).\n\nSupports inbound images, group-mention filtering, reply splitting, and an approval flow for sensitive actions. Disabled by default — enable it and provide a token from the dashboard.",
+  "tags": [
+    "messaging",
+    "telegram",
+    "bot"
+  ],
+  "sourcePath": "plugins/channels/telegram",
+  "sourceUrl": "https://github.com/guilhermesalviano/koris/tree/main/plugins/channels/telegram",
+  "defaultEnabled": false
+}

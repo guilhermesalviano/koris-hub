@@ -1,0 +1,74 @@
+{
+  "slug": "search-engine",
+  "name": "Search Engine",
+  "family": "tool",
+  "type": "query",
+  "summary": "Web search via a self-hosted SearXNG instance (SerpAPI kept as an inactive fallback).",
+  "description": "Performs a web search with country, language, recency, pagination, and result-type controls.\n\nThe active backend is a self-hosted **SearXNG** instance (`ai.searxng_url`) — free, no per-query cost. The older SerpAPI implementation (`ai.search_api_key`) stays in the code as an inactive fallback.\n\nOn a connection error or HTTP 403 the SearXNG container is usually down — pair this with **Restart Search Engine**.",
+  "tags": [
+    "search",
+    "web",
+    "searxng"
+  ],
+  "sourcePath": "plugins/tools/search-engine",
+  "sourceUrl": "https://github.com/guilhermesalviano/koris/tree/main/plugins/tools/search-engine",
+  "toolName": "search_engine",
+  "params": [
+    {
+      "name": "query",
+      "type": "string",
+      "required": true,
+      "description": "The search query string."
+    },
+    {
+      "name": "num",
+      "type": "number",
+      "required": false,
+      "description": "Number of results (default: 5, max: 100)."
+    },
+    {
+      "name": "start",
+      "type": "number",
+      "required": false,
+      "description": "Pagination offset (0 = first page, 10 = second page)."
+    },
+    {
+      "name": "gl",
+      "type": "string",
+      "required": false,
+      "description": "Country code (ISO 3166-1 alpha-2), e.g. \"br\", \"us\", \"de\"."
+    },
+    {
+      "name": "hl",
+      "type": "string",
+      "required": false,
+      "description": "Language code, e.g. \"pt-br\", \"en\"."
+    },
+    {
+      "name": "time_period",
+      "type": "string",
+      "required": false,
+      "enum": [
+        "past_hour",
+        "past_day",
+        "past_week",
+        "past_month",
+        "past_year"
+      ],
+      "description": "Recency filter."
+    },
+    {
+      "name": "search_type",
+      "type": "string",
+      "required": false,
+      "enum": [
+        "web",
+        "news",
+        "images",
+        "video"
+      ],
+      "description": "Search type (default: \"web\")."
+    }
+  ],
+  "defaultEnabled": true
+}

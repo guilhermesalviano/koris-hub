@@ -1,0 +1,22 @@
+{
+  "slug": "todo-gateway",
+  "name": "Todo Gateway",
+  "family": "skill",
+  "type": "gateway",
+  "summary": "Manage a user's daily to-do list through a secure internal gateway.",
+  "description": "Lets the assistant list the day's tasks, review what is unfinished, and mark tasks as checked through an internal gateway API. Calls go through **Curl Request** against the configured `GATEWAY_HOST`.",
+  "tags": [
+    "todo",
+    "tasks",
+    "gateway",
+    "productivity"
+  ],
+  "sourcePath": "skills/todo-gateway",
+  "sourceUrl": "https://github.com/guilhermesalviano/koris/tree/main/skills/todo-gateway",
+  "readWhen": [
+    "asked about tasks of the day",
+    "asked about unchecked tasks of the day",
+    "asked to 'check' some specific task",
+    "asked to review today's priorities"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "slug": "send-sticker",
+  "name": "Send Sticker",
+  "family": "tool",
+  "type": "action",
+  "summary": "Send a previously learned sticker whose description matches the current moment.",
+  "description": "Sends a learned sticker in the current chat as part of replying. Only use one whose \"Learned Stickers\" description clearly matches the situation; never invent an id.\n\nIt is always sent as its own standalone message. If the sticker alone answers the request, the model returns an empty final message rather than also describing it in words.",
+  "tags": [
+    "whatsapp",
+    "stickers",
+    "outbound"
+  ],
+  "sourcePath": "plugins/tools/send-sticker",
+  "sourceUrl": "https://github.com/guilhermesalviano/koris/tree/main/plugins/tools/send-sticker",
+  "toolName": "send_sticker",
+  "params": [
+    {
+      "name": "id",
+      "type": "string",
+      "required": true,
+      "description": "The id of the learned sticker to send, from the \"Learned Stickers\" list."
+    }
+  ],
+  "defaultEnabled": true
+}
