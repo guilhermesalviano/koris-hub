@@ -35,6 +35,8 @@ export async function fetchChangelogEntries(): Promise<ChangelogEntry[]> {
 
     return releases
       .filter((release) => !release.draft && !release.prerelease)
+      // Newest first by publish date; unpublished releases sink to the bottom.
+      .sort((a, b) => (b.published_at ?? '').localeCompare(a.published_at ?? ''))
       .slice(0, MAX_ENTRIES)
       .map((release) => ({
         version: release.tag_name.replace(/^v/, ''),

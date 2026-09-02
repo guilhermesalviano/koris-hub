@@ -1,11 +1,12 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { ChangelogEntry } from '@/lib/changelog';
 import { REPO_URL } from '@/lib/constants';
 
 export function Changelog() {
   const [entries, setEntries] = useState<ChangelogEntry[] | null>(null);
+  const scrollerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let active = true;
@@ -22,6 +23,12 @@ export function Changelog() {
     };
   }, []);
 
+  // Newest card is rightmost — start the strip scrolled to the end.
+  useEffect(() => {
+    const el = scrollerRef.current;
+    if (el) el.scrollLeft = el.scrollWidth;
+  }, [entries]);
+
   // Loaded, but nothing to show — drop the section entirely.
   if (entries !== null && entries.length === 0) return null;
 
@@ -34,7 +41,11 @@ export function Changelog() {
         <p className="mt-3 text-muted">Every release, straight from GitHub.</p>
       </div>
 
-      <div className="-mx-6 flex snap-x snap-mandatory gap-6 overflow-x-auto px-6 pb-4">
+      <div
+        ref={scrollerRef}
+        className="-mx-6 flex snap-x snap-mandatory gap-6 overflow-x-auto px-6 pb-4"
+      >
+
         {loading
           ? Array.from({ length: 3 }).map((_, i) => (
               <div
@@ -42,7 +53,8 @@ export function Changelog() {
                 className="h-[104px] w-[260px] flex-shrink-0 animate-pulse rounded-xl border border-border bg-bg-subtle p-6"
               />
             ))
-          : entries.map((entry) => (
+          : // API is newest-first; render oldest → newest so the latest sits on the right.
+            [...entries].reverse().map((entry) => (
               <div
                 key={entry.version}
                 className="flex w-[260px] flex-shrink-0 snap-start flex-col rounded-xl border border-border bg-bg-subtle p-6"

@@ -140,7 +140,7 @@ export function HowItWorks() {
 
       {tab === 'desktop' ? (
         <div className="mt-6">
-          <p className="max-w-2xl text-sm leading-relaxed text-muted">
+          <p className="max-w-3xl text-sm leading-relaxed text-muted">
             A self-contained build &mdash; agent, dashboard, and channels in one installer.{' '}
             {data && (
               <>
