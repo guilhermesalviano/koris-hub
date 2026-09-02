@@ -7,7 +7,7 @@ marketplace, and docs for [Koris](https://github.com/guilhermesalviano/koris).
 
 A standalone Next.js 16 App Router app, **statically exported** (`output: 'export'`
 in `next.config.ts`), deployed to GitHub Pages at
-`https://guilhermesalviano.github.io/koris-hub` — hence `basePath: '/koris-hub'`.
+`https://guilhermesalviano.github.io/koris-hub` — hence `basePath: '/koris'`.
 Independent repo; not part of the `koris` pnpm workspace (it has its own
 `pnpm-workspace.yaml` so pnpm/Turbopack stop walking up).
 

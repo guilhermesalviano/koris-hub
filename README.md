@@ -13,7 +13,7 @@ It is a standalone [Next.js](https://nextjs.org) App Router app, statically expo
 
 ## Stack
 
-- Next.js 16 (static export, `basePath: '/koris-hub'`)
+- Next.js 16 (static export, `basePath: '/koris'`)
 - React 19, TypeScript 7 (`tsc --noEmit` for type-checking — no ESLint)
 - Tailwind CSS v4 via `@tailwindcss/postcss` (`@theme` tokens in `src/app/globals.css`, dark only)
 - Markdown via `react-markdown` + `remark-gfm` + `gray-matter` — no second build tool
