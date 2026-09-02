@@ -7,4 +7,4 @@ export const HUB_REPO_URL = 'https://github.com/guilhermesalviano/koris-hub';
 
 // Must match `basePath` in next.config.ts — next/image does not auto-prefix
 // local `src` values with basePath in this static-export setup.
-export const BASE_PATH = '/koris-hub';
+export const BASE_PATH = '/koris';

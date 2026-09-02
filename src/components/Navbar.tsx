@@ -20,7 +20,7 @@ export function Navbar() {
             <span className="text-md font-semibold tracking-tight text-txt">koris</span>
           </Link>
 
-          <div className="hidden items-center gap-2 sm:flex">
+          <div className="hidden items-center gap-4 sm:flex">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
