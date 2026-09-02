@@ -7,16 +7,16 @@ marketplace, and docs for [Koris](https://github.com/guilhermesalviano/koris).
 
 A standalone Next.js 16 App Router app, **statically exported** (`output: 'export'`
 in `next.config.ts`), deployed to GitHub Pages at
-`https://guilhermesalviano.github.io/koris-hub` — hence `basePath: '/koris'`.
+`https://guilhermesalviano.github.io/koris` — hence `basePath: '/koris'`.
 Independent repo; not part of the `koris` pnpm workspace (it has its own
 `pnpm-workspace.yaml` so pnpm/Turbopack stop walking up).
 
 ## Commands
 
-- `pnpm dev` — dev server (`http://localhost:3000/koris-hub`)
+- `pnpm dev` — dev server (`http://localhost:3000/koris`)
 - `pnpm build` — static export to `out/`
 - `pnpm lint` — `tsc --noEmit -p tsconfig.json` (no ESLint; strict TS)
-- `pnpm preview` — `serve out/` (does **not** replicate the `/koris-hub` prefix)
+- `pnpm preview` — `serve out/` (does **not** replicate the `/koris` prefix)
 - `pnpm sync:changelog` — refresh `content/changelog.md` from the koris repo
 
 Run `pnpm lint` and `pnpm build` before considering a change done.

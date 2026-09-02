@@ -9,7 +9,7 @@ autonomous AI assistant framework. This repo holds:
 
 It is a standalone [Next.js](https://nextjs.org) App Router app, statically exported
 (`output: 'export'`) and deployed to GitHub Pages at
-<https://guilhermesalviano.github.io/koris-hub>.
+<https://guilhermesalviano.github.io/koris>.
 
 ## Stack
 
@@ -27,9 +27,9 @@ fully independent repository (`koris` `.gitignore`s it). It has its own
 
 ```bash
 pnpm install
-pnpm dev        # dev server — http://localhost:3000/koris-hub
+pnpm dev        # dev server — http://localhost:3000/koris
 pnpm build      # static export to out/
-pnpm preview    # serve out/ (note: does not replicate the /koris-hub base path)
+pnpm preview    # serve out/ (note: does not replicate the /koris base path)
 pnpm lint       # tsc --noEmit
 pnpm sync:changelog   # refresh the vendored changelog snapshot (see below)
 ```

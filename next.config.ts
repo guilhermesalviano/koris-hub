@@ -1,6 +1,6 @@
 import type { NextConfig } from 'next';
 
-// GitHub Pages project site: https://guilhermesalviano.github.io/koris-hub
+// GitHub Pages project site: https://guilhermesalviano.github.io/koris
 // If a custom domain is added later (public/CNAME), set `basePath: ''`.
 const nextConfig: NextConfig = {
   output: 'export',
