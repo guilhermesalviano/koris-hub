@@ -16,7 +16,7 @@ entry at `content/marketplace/<slug>.json`. No build step, no database.
 2. **Rename it** to `<slug>.json`. The `slug` field inside the file **must** equal
    the filename without `.json` — the loader throws a build error otherwise.
 3. **Fill in the fields** (see the schema below).
-4. Run `pnpm dev` and open `http://localhost:3000/koris/marketplace/<slug>` to
+4. Run `pnpm dev` and open `http://localhost:3000/marketplace/<slug>` to
    check the card and detail page.
 5. `pnpm lint` and `pnpm build` must both pass.
 

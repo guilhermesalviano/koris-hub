@@ -8,12 +8,12 @@ autonomous AI assistant framework. This repo holds:
 - **`/docs`** — the documentation site (currently a hello-world scaffold)
 
 It is a standalone [Next.js](https://nextjs.org) App Router app, statically exported
-(`output: 'export'`) and deployed to GitHub Pages at
-<https://guilhermesalviano.github.io/koris>.
+(`output: 'export'`) and deployed to GitHub Pages on the custom domain
+<https://hub.koaris.com>.
 
 ## Stack
 
-- Next.js 16 (static export, `basePath: '/koris'`)
+- Next.js 16 (static export, custom domain, `basePath: ''`)
 - React 19, TypeScript 7 (`tsc --noEmit` for type-checking — no ESLint)
 - Tailwind CSS v4 via `@tailwindcss/postcss` (`@theme` tokens in `src/app/globals.css`, dark only)
 - Markdown via `react-markdown` + `remark-gfm` + `gray-matter` — no second build tool
