@@ -25,10 +25,13 @@ Run `pnpm lint` and `pnpm build` before considering a change done.
 
 ```
 src/app/            routes: / (landing), /marketplace, /marketplace/[slug],
-                    /docs, /docs/[...slug]; layout.tsx, not-found.tsx, globals.css
+                    /docs, /docs/[...slug]; api/changelog, api/downloads
+                    (force-static GitHub Releases proxies); layout.tsx,
+                    not-found.tsx, globals.css
 src/components/     Navbar, Hero, HowItWorks, Feature, Changelog, Footer, icons,
                     Markdown, MarketplaceCard, ParamTable, DocsSidebar
-src/lib/            constants.ts, changelog.ts, marketplace.ts, docs.ts
+src/lib/            constants.ts, changelog.ts, downloads.ts, marketplace.ts,
+                    docs.ts
 content/marketplace/  <slug>.json catalog entries + schema.ts (typed)
 content/docs/         *.md docs (frontmatter: title, order); index.md per section
 scripts/              generate-catalog.ts (sketch)

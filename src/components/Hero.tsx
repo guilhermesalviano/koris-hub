@@ -1,4 +1,5 @@
-import { REPO_URL, RELEASES_URL } from '@/lib/constants';
+import { REPO_URL } from '@/lib/constants';
+import { DownloadButton } from '@/components/DownloadButton';
 
 export function Hero() {
   return (
@@ -14,14 +15,10 @@ export function Hero() {
         </p>
 
         <div className="flex flex-wrap gap-4">
-          <a
-            href={RELEASES_URL}
-            target="_blank"
-            rel="noopener"
+          <DownloadButton
+            fallbackHref="#how-it-works"
             className="rounded-lg bg-accent px-8 py-4 text-sm font-semibold text-bg transition-transform hover:-translate-y-0.5"
-          >
-            Download
-          </a>
+          />
           <a
             href={`${REPO_URL}#readme`}
             target="_blank"
