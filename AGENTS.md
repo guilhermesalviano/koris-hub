@@ -18,7 +18,6 @@ Independent repo; not part of the `koris` pnpm workspace (it has its own
 - `pnpm build` — static export to `out/`
 - `pnpm lint` — `tsc --noEmit -p tsconfig.json` (no ESLint; strict TS)
 - `pnpm preview` — `serve out/` (does **not** replicate the `/koris` prefix)
-- `pnpm sync:changelog` — refresh `content/changelog.md` from the koris repo
 
 Run `pnpm lint` and `pnpm build` before considering a change done.
 
@@ -32,8 +31,7 @@ src/components/     Navbar, Hero, HowItWorks, Feature, Changelog, Footer, icons,
 src/lib/            constants.ts, changelog.ts, marketplace.ts, docs.ts
 content/marketplace/  <slug>.json catalog entries + schema.ts (typed)
 content/docs/         *.md docs (frontmatter: title, order); index.md per section
-content/changelog.md  vendored snapshot of koris/CHANGELOG.md
-scripts/              sync-changelog.ts, generate-catalog.ts (sketch)
+scripts/              generate-catalog.ts (sketch)
 ```
 
 ## Conventions / gotchas

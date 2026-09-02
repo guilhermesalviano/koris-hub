@@ -36,7 +36,7 @@ const DESKTOP_TARGETS = [
 ];
 
 const SOURCE_SNIPPET = `# Grab the latest source zip from:
-#   ${RELEASES_URL}
+# ${RELEASES_URL}
 
 unzip koris-<version>.zip
 cd koris-<version>

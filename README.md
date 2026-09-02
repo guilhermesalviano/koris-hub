@@ -31,7 +31,6 @@ pnpm dev        # dev server — http://localhost:3000/koris
 pnpm build      # static export to out/
 pnpm preview    # serve out/ (note: does not replicate the /koris base path)
 pnpm lint       # tsc --noEmit
-pnpm sync:changelog   # refresh the vendored changelog snapshot (see below)
 ```
 
 ## Marketplace catalog
@@ -49,10 +48,11 @@ becomes a section via its `index.md`. The left sidebar is generated from the tre
 
 ## Changelog
 
-The landing page's changelog is parsed from `content/changelog.md`, a committed
-snapshot of the `koris` repo's `CHANGELOG.md` (keeps the build hermetic — no network
-in CI). Refresh it with `pnpm sync:changelog` (fetches from GitHub) or
-`pnpm sync:changelog --koris ../koris` (copies from a local checkout).
+The landing page's changelog is built from the `koris` repo's [GitHub
+Releases](https://github.com/guilhermesalviano/koris/releases). `src/lib/changelog.ts`
+fetches the Releases API during `next build`, so the section refreshes on every deploy
+(stable releases only; a fetch failure just omits the section). CI passes a read-only
+`GITHUB_TOKEN` to raise the API rate limit.
 
 ## Deploy
 

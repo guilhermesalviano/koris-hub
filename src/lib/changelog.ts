@@ -1,62 +1,48 @@
-import { readFileSync } from 'fs';
-import { join } from 'path';
+import { RELEASES_API_URL } from './constants';
 
 export interface ChangelogEntry {
-  version: string;
-  date: string | null;
-  summary: string | null;
+  version: string; // tag_name with a leading "v" stripped, e.g. "0.1.4"
+  date: string | null; // published_at, "YYYY-MM-DD"
+  url: string; // release html_url
 }
 
-const VERSION_HEADING = /^## \[(.+?)\](?: - (.+))?\s*$/;
-const SECTION_HEADING = /^### (.+)\s*$/;
-
-// Vendored snapshot of the koris repo's CHANGELOG.md. Refresh it with
-// `pnpm sync:changelog` (see scripts/sync-changelog.ts).
-const CHANGELOG_PATH = join(process.cwd(), 'content/changelog.md');
-
-function parseChangelog(markdown: string): ChangelogEntry[] {
-  const entries: ChangelogEntry[] = [];
-  let current: ChangelogEntry | null = null;
-  let inSection = false;
-
-  for (const rawLine of markdown.split('\n')) {
-    const line = rawLine.trimEnd();
-
-    const versionMatch = line.match(VERSION_HEADING);
-    if (versionMatch) {
-      current = { version: versionMatch[1], date: versionMatch[2] ?? null, summary: null };
-      inSection = false;
-      entries.push(current);
-      continue;
-    }
-
-    if (!current) continue;
-
-    if (SECTION_HEADING.test(line)) {
-      inSection = true;
-      continue;
-    }
-
-    if (line.trim() && !inSection && !current.summary) {
-      current.summary = line.trim();
-    }
-  }
-
-  return entries
-    .filter((entry) => entry.summary)
-    .sort((a, b) => {
-      // Undated entries (e.g. "Unreleased") sort last — nothing to compare chronologically.
-      if (!a.date && !b.date) return 0;
-      if (!a.date) return 1;
-      if (!b.date) return -1;
-      return new Date(a.date).getTime() - new Date(b.date).getTime();
-    });
+interface GitHubRelease {
+  tag_name: string;
+  html_url: string;
+  published_at: string | null;
+  draft: boolean;
+  prerelease: boolean;
 }
 
-export function getChangelogEntries(): ChangelogEntry[] {
+const MAX_ENTRIES = 10;
+
+// Data layer for the `/api/changelog` route handler. Hits the public koris Releases
+// API (no auth needed for public repos) and normalizes it to `ChangelogEntry[]`,
+// newest first, stable releases only. A failed fetch resolves to `[]` so the route
+// still returns valid JSON and the build never breaks.
+export async function fetchChangelogEntries(): Promise<ChangelogEntry[]> {
   try {
-    return parseChangelog(readFileSync(CHANGELOG_PATH, 'utf-8'));
-  } catch {
+    const res = await fetch(`${RELEASES_API_URL}?per_page=30`, {
+      headers: { Accept: 'application/vnd.github+json' },
+    });
+
+    if (!res.ok) {
+      console.warn(`[changelog] GitHub releases fetch failed: ${res.status} ${res.statusText}`);
+      return [];
+    }
+
+    const releases = (await res.json()) as GitHubRelease[];
+
+    return releases
+      .filter((release) => !release.draft && !release.prerelease)
+      .slice(0, MAX_ENTRIES)
+      .map((release) => ({
+        version: release.tag_name.replace(/^v/, ''),
+        date: release.published_at ? release.published_at.slice(0, 10) : null,
+        url: release.html_url,
+      }));
+  } catch (err) {
+    console.warn('[changelog] GitHub releases fetch errored:', err);
     return [];
   }
 }

@@ -11,8 +11,7 @@
     "dev": "next dev",
     "build": "next build",
     "preview": "pnpm dlx serve out",
-    "lint": "tsc --noEmit -p tsconfig.json",
-    "sync:changelog": "tsx scripts/sync-changelog.ts"
+    "lint": "tsc --noEmit -p tsconfig.json"
   },
   "repository": {
     "type": "git",
