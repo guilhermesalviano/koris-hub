@@ -1,5 +1,6 @@
 import { REPO_URL } from '@/lib/constants';
 import { DownloadButton } from '@/components/DownloadButton';
+import Link from 'next/link';
 
 export function Hero() {
   return (
@@ -19,14 +20,12 @@ export function Hero() {
             fallbackHref="#how-it-works"
             className="rounded-lg bg-accent px-8 py-4 text-sm font-semibold text-bg transition-transform hover:-translate-y-0.5"
           />
-          <a
-            href={`${REPO_URL}#readme`}
-            target="_blank"
-            rel="noopener"
+          <Link
+            href="/docs"
             className="rounded-lg border border-border bg-bg-subtle px-8 py-4 text-sm font-semibold text-txt transition-colors hover:border-accent"
           >
             Read the docs
-          </a>
+          </Link>
         </div>
       </div>
     </div>
