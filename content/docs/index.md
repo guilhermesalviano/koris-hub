@@ -1,33 +1,35 @@
 ---
-title: Hello World
+title: Overview
 order: 1
 ---
 
-# Hello World
+# Overview
 
-Welcome to the Koris docs. This is the starting point — a placeholder page to prove
-the docs section works end to end.
+Koris is an autonomous AI-agent framework you run on your own infrastructure. It
+receives messages through pluggable channels, runs them through an LLM, executes
+tools on your behalf, and keeps memory and sessions in a local SQLite database so
+state persists across restarts.
 
-Koris is an autonomous AI assistant framework you run on your own infrastructure:
-pluggable channels, markdown-defined skills, a plugin system, and SQLite-backed
-memory that persists across sessions.
+## Start here
 
-## Where to go next
+- **[Getting Started](/docs/getting-started)** — requirements, install, first run, configuration.
+- **[Concepts](/docs/concepts)** — how a message becomes a reply: sessions, memory, compaction, trust.
+
+## Building blocks
+
+- **[Channels](/docs/channels)** — Telegram, WhatsApp, the terminal UI, and the web dashboard.
+- **[AI Providers](/docs/ai-providers)** — providers, roles, embeddings, queueing.
+- **[Tools](/docs/tools)** — the actions the agent can take beyond replying.
+- **[Skills](/docs/skills)** — Markdown files that teach the agent how to handle a kind of request.
+- **[Plugins](/docs/plugins)** — extend Koris without touching its core.
+- **[Commands](/docs/commands)** — slash commands intercepted before a message reaches the agent.
+
+## Operating Koris
+
+- **[Admin Dashboard](/docs/admin-dashboard)** — the browser surface for chatting and configuration.
+- **[Security](/docs/security)** — running safely on public channels and untrusted input.
+
+## Elsewhere
 
 - **[Marketplace](/marketplace)** — browse the tools, channels, and skills that ship with Koris.
-- **[Adding a marketplace entry](/docs/marketplace/adding-an-entry)** — how this site's catalog is authored.
 - **[Source on GitHub](https://github.com/guilhermesalviano/koris)** — the framework itself.
-
-## Running Koris
-
-```bash
-# grab the latest release, unzip, then:
-pnpm install
-pnpm build && pnpm app      # web dashboard on http://localhost:3000
-```
-
-First run with no `koris.json` drops you into a browser setup wizard — no manual
-config editing.
-
-> This page is intentionally minimal. Real documentation lands here as it's written;
-> the sidebar on the left is the nav scaffold it will grow into.

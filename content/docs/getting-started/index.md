@@ -25,8 +25,8 @@ pnpm app        # web dashboard on http://localhost:3000
 
 `pnpm build` is required before `pnpm app`. To run a different surface:
 
+- `pnpm app` — Web dashboard
 - `pnpm app --tui` — terminal UI
-- `pnpm app telegram` — Telegram mode
 
 ## Configuration
 

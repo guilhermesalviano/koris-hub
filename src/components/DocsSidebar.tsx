@@ -48,7 +48,7 @@ export function DocsSidebar({ tree }: { tree: DocNode[] }) {
           rootActive ? 'bg-bg-subtle text-txt' : 'text-muted hover:text-txt'
         }`}
       >
-        Hello World
+        Overview
       </Link>
       <NodeList nodes={tree} pathname={pathname} />
     </nav>
