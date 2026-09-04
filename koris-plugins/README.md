@@ -10,8 +10,9 @@ purely so the plugin has a single home.
 
 Mirrors the path convention used in `koris`: `koris-plugins/<family>/<slug>/...`,
 matching `sourcePath` in the corresponding
-`content/marketplace/tools/<slug>.json` entry (whose `sourceUrl` should point
-back at this repo for these plugins).
+`content/marketplace/<family>/<slug>.json` entry (whose `sourceUrl` should
+point back at this repo for these plugins). Two families live here:
+`tools/` (below) and `skills/` (see `skills/README.md`).
 
 ## Contents
 

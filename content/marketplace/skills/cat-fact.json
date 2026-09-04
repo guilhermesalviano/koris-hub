@@ -10,8 +10,8 @@
     "cats",
     "catfact.ninja"
   ],
-  "sourcePath": "koris-skills/cat-fact",
-  "sourceUrl": "https://github.com/guilhermesalviano/koris-hub/tree/main/koris-skills/cat-fact",
+  "sourcePath": "koris-plugins/skills/cat-fact",
+  "sourceUrl": "https://github.com/guilhermesalviano/koris-hub/tree/main/koris-plugins/skills/cat-fact",
   "readWhen": [
     "asked random cat facts"
   ]

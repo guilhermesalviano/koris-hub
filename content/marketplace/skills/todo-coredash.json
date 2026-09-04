@@ -11,8 +11,8 @@
     "coredash",
     "productivity"
   ],
-  "sourcePath": "koris-skills/todo-coredash",
-  "sourceUrl": "https://github.com/guilhermesalviano/koris-hub/tree/main/koris-skills/todo-coredash",
+  "sourcePath": "koris-plugins/skills/todo-coredash",
+  "sourceUrl": "https://github.com/guilhermesalviano/koris-hub/tree/main/koris-plugins/skills/todo-coredash",
   "readWhen": [
     "asked about tasks of the day",
     "asked about unchecked tasks of the day",

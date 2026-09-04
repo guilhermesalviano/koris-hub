@@ -11,8 +11,8 @@
     "coredash",
     "schedule"
   ],
-  "sourcePath": "koris-skills/calendar-coredash",
-  "sourceUrl": "https://github.com/guilhermesalviano/koris-hub/tree/main/koris-skills/calendar-coredash",
+  "sourcePath": "koris-plugins/skills/calendar-coredash",
+  "sourceUrl": "https://github.com/guilhermesalviano/koris-hub/tree/main/koris-plugins/skills/calendar-coredash",
   "readWhen": [
     "asked about upcoming meetings or events",
     "asked what is on the schedule for a specific day",

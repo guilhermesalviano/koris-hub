@@ -11,8 +11,8 @@
     "coredash",
     "triage"
   ],
-  "sourcePath": "koris-skills/emails-coredash",
-  "sourceUrl": "https://github.com/guilhermesalviano/koris-hub/tree/main/koris-skills/emails-coredash",
+  "sourcePath": "koris-plugins/skills/emails-coredash",
+  "sourceUrl": "https://github.com/guilhermesalviano/koris-hub/tree/main/koris-plugins/skills/emails-coredash",
   "readWhen": [
     "asked about recent emails",
     "asked about specific email details",
