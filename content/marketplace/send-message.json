@@ -11,8 +11,8 @@
     "whatsapp",
     "outbound"
   ],
-  "sourcePath": "plugins/tools/send-message",
-  "sourceUrl": "https://github.com/guilhermesalviano/koris/tree/main/plugins/tools/send-message",
+  "sourcePath": "koris-plugins/tools/send-message",
+  "sourceUrl": "https://github.com/guilhermesalviano/koris-hub/tree/main/koris-plugins/tools/send-message",
   "toolName": "send_message",
   "params": [
     {

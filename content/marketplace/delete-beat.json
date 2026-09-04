@@ -9,8 +9,8 @@
     "heartbeats",
     "scheduling"
   ],
-  "sourcePath": "plugins/tools/delete-beat",
-  "sourceUrl": "https://github.com/guilhermesalviano/koris/tree/main/plugins/tools/delete-beat",
+  "sourcePath": "koris-plugins/tools/delete-beat",
+  "sourceUrl": "https://github.com/guilhermesalviano/koris-hub/tree/main/koris-plugins/tools/delete-beat",
   "toolName": "delete_beat",
   "params": [
     {

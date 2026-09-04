@@ -10,8 +10,8 @@
     "stickers",
     "memory"
   ],
-  "sourcePath": "plugins/tools/learn-sticker",
-  "sourceUrl": "https://github.com/guilhermesalviano/koris/tree/main/plugins/tools/learn-sticker",
+  "sourcePath": "koris-plugins/tools/learn-sticker",
+  "sourceUrl": "https://github.com/guilhermesalviano/koris-hub/tree/main/koris-plugins/tools/learn-sticker",
   "toolName": "learn_sticker",
   "params": [
     {

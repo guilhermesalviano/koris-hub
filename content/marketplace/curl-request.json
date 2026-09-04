@@ -11,8 +11,8 @@
     "skills",
     "domain-gated"
   ],
-  "sourcePath": "plugins/tools/curl-request",
-  "sourceUrl": "https://github.com/guilhermesalviano/koris/tree/main/plugins/tools/curl-request",
+  "sourcePath": "koris-plugins/tools/curl-request",
+  "sourceUrl": "https://github.com/guilhermesalviano/koris-hub/tree/main/koris-plugins/tools/curl-request",
   "toolName": "curl_request",
   "params": [
     {

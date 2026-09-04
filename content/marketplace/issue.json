@@ -10,8 +10,8 @@
     "issues",
     "confirmation-required"
   ],
-  "sourcePath": "plugins/tools/issue",
-  "sourceUrl": "https://github.com/guilhermesalviano/koris/tree/main/plugins/tools/issue",
+  "sourcePath": "koris-plugins/tools/issue",
+  "sourceUrl": "https://github.com/guilhermesalviano/koris-hub/tree/main/koris-plugins/tools/issue",
   "toolName": "issue",
   "params": [
     {

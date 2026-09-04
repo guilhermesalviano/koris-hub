@@ -10,8 +10,8 @@
     "stickers",
     "outbound"
   ],
-  "sourcePath": "plugins/tools/send-sticker",
-  "sourceUrl": "https://github.com/guilhermesalviano/koris/tree/main/plugins/tools/send-sticker",
+  "sourcePath": "koris-plugins/tools/send-sticker",
+  "sourceUrl": "https://github.com/guilhermesalviano/koris-hub/tree/main/koris-plugins/tools/send-sticker",
   "toolName": "send_sticker",
   "params": [
     {

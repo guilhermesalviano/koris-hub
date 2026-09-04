@@ -10,8 +10,8 @@
     "stickers",
     "memory"
   ],
-  "sourcePath": "plugins/tools/unlearn-sticker",
-  "sourceUrl": "https://github.com/guilhermesalviano/koris/tree/main/plugins/tools/unlearn-sticker",
+  "sourcePath": "koris-plugins/tools/unlearn-sticker",
+  "sourceUrl": "https://github.com/guilhermesalviano/koris-hub/tree/main/koris-plugins/tools/unlearn-sticker",
   "toolName": "unlearn_sticker",
   "params": [
     {

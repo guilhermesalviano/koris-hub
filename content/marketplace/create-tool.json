@@ -11,8 +11,8 @@
     "confirmation-required",
     "disabled-by-default"
   ],
-  "sourcePath": "plugins/tools/create-tool",
-  "sourceUrl": "https://github.com/guilhermesalviano/koris/tree/main/plugins/tools/create-tool",
+  "sourcePath": "koris-plugins/tools/create-tool",
+  "sourceUrl": "https://github.com/guilhermesalviano/koris-hub/tree/main/koris-plugins/tools/create-tool",
   "toolName": "create_tool",
   "params": [
     {

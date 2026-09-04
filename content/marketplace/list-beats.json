@@ -9,8 +9,8 @@
     "heartbeats",
     "scheduling"
   ],
-  "sourcePath": "plugins/tools/list-beats",
-  "sourceUrl": "https://github.com/guilhermesalviano/koris/tree/main/plugins/tools/list-beats",
+  "sourcePath": "koris-plugins/tools/list-beats",
+  "sourceUrl": "https://github.com/guilhermesalviano/koris-hub/tree/main/koris-plugins/tools/list-beats",
   "toolName": "list_beats",
   "params": [],
   "defaultEnabled": true

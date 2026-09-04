@@ -11,8 +11,8 @@
     "ops",
     "confirmation-required"
   ],
-  "sourcePath": "plugins/tools/search-engine-restart",
-  "sourceUrl": "https://github.com/guilhermesalviano/koris/tree/main/plugins/tools/search-engine-restart",
+  "sourcePath": "koris-plugins/tools/search-engine-restart",
+  "sourceUrl": "https://github.com/guilhermesalviano/koris-hub/tree/main/koris-plugins/tools/search-engine-restart",
   "toolName": "restart_search_engine",
   "params": [],
   "requiresConfirmation": true,

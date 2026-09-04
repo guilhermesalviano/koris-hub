@@ -10,8 +10,8 @@
     "scheduling",
     "cron"
   ],
-  "sourcePath": "plugins/tools/update-beat",
-  "sourceUrl": "https://github.com/guilhermesalviano/koris/tree/main/plugins/tools/update-beat",
+  "sourcePath": "koris-plugins/tools/update-beat",
+  "sourceUrl": "https://github.com/guilhermesalviano/koris-hub/tree/main/koris-plugins/tools/update-beat",
   "toolName": "update_beat",
   "params": [
     {
