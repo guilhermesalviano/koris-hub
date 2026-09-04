@@ -1,6 +1,6 @@
 /**
  * SKETCH — re-derive marketplace fields from a local koris checkout and MERGE
- * them into the existing content/marketplace/<slug>.json files.
+ * them into the existing content/marketplace/<family>/<slug>.json files.
  *
  *   pnpm tsx scripts/generate-catalog.ts --koris ../koris [--sha <git-sha>]
  *
@@ -11,12 +11,26 @@
  *
  * Not wired into CI. Intended as an occasional convenience when koris plugins change.
  */
-import { readFileSync, writeFileSync, existsSync, readdirSync } from 'fs';
+import { readFileSync, writeFileSync, existsSync, readdirSync, statSync } from 'fs';
 import { join } from 'path';
 import matter from 'gray-matter';
 
 const CATALOG_DIR = join(process.cwd(), 'content/marketplace');
 const REPO_TREE = 'https://github.com/guilhermesalviano/koris/tree/main';
+
+/** recursively collect every *.json file under dir (entries live in family subfolders) */
+function collectEntryFiles(dir: string): string[] {
+  const out: string[] = [];
+  for (const name of readdirSync(dir)) {
+    const full = join(dir, name);
+    if (statSync(full).isDirectory()) {
+      out.push(...collectEntryFiles(full));
+    } else if (name.endsWith('.json')) {
+      out.push(full);
+    }
+  }
+  return out;
+}
 
 function arg(name: string): string | undefined {
   const i = process.argv.indexOf(name);
@@ -64,9 +78,7 @@ function main() {
   if (!korisDir) throw new Error('--koris <path-to-koris-checkout> is required');
   const sha = arg('--sha');
 
-  for (const file of readdirSync(CATALOG_DIR)) {
-    if (!file.endsWith('.json') || file.startsWith('schema')) continue;
-    const path = join(CATALOG_DIR, file);
+  for (const path of collectEntryFiles(CATALOG_DIR)) {
     const entry = JSON.parse(readFileSync(path, 'utf-8'));
     const slug: string = entry.slug;
 

@@ -4,7 +4,7 @@
   "family": "tool",
   "type": "action",
   "summary": "Change the description, type, or schedule of an existing beat by ID.",
-  "description": "Updates an existing beat. Use **List Beats** first if the ID is unknown. Any of description, type, or cron schedule can be changed independently.",
+  "description": "Updates an existing beat. Use **List Beats** first if the ID is unknown. Any of description, type, cron schedule, or notification channel/target can be changed independently.",
   "tags": [
     "heartbeats",
     "scheduling",
@@ -41,6 +41,22 @@
       "type": "string",
       "required": false,
       "description": "New 5-field cron expression, e.g. \"0 9 * * 1\" (every Monday at 9am)."
+    },
+    {
+      "name": "channel",
+      "type": "string",
+      "required": false,
+      "enum": [
+        "telegram",
+        "whatsapp"
+      ],
+      "description": "New channel for the beat, if it should notify a different chat. Must be provided together with target."
+    },
+    {
+      "name": "target",
+      "type": "string",
+      "required": false,
+      "description": "New recipient address (Telegram chat id or WhatsApp JID) for the beat. Must be provided together with channel."
     }
   ],
   "defaultEnabled": true

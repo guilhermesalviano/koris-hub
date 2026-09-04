@@ -69,6 +69,10 @@ export function create(context: ToolPluginContext): Plugin {
           'WhatsApp cannot attach a caption to a sticker: this always sends it as its own standalone message, separate from any text you also return. If the sticker alone answers the request, return an empty final message instead of also describing it in words.',
         parameters: {
           id: { type: 'string', required: true, description: 'The id of the learned sticker to send, from the "Learned Stickers" list.' },
+          target: {
+            type: 'string',
+            description: 'Optional: override the recipient address (Telegram chat id or WhatsApp JID) instead of the current chat.',
+          },
         },
         handler: (logger, args, execContext) => sendSticker(logger, args, execContext, context.stickerRules, context.channels),
         enabled: (opts) => opts.trusted && context.pluginEnablement.isEnabled('send-sticker'),

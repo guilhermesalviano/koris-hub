@@ -10,8 +10,13 @@ Nothing here is built, imported, or executed by this Next.js app.
 
 Mirrors the path convention used in `koris`: `koris-skills/<slug>/...`
 (skills in `koris` aren't further grouped by family, unlike `plugins/tools/`),
-matching `sourcePath` in the corresponding `content/marketplace/<slug>.json`
-entry (whose `sourceUrl` should point back at this repo for these skills).
+matching `sourcePath` in the corresponding
+`content/marketplace/skills/<slug>.json` entry (whose `sourceUrl` should point
+back at this repo for these skills).
+
+Every `SKILL.md` here is plain GFM Markdown — frontmatter (`name`,
+`description`, `read_when`) plus prose sections (`##` headings, bullet lists,
+fenced code blocks for requests/responses). No custom XML tags.
 
 ## Contents
 
@@ -38,8 +43,8 @@ naming was renamed, not the underlying concept it describes.
 ## Adding another skill here
 
 1. Move its directory in under `koris-skills/<slug>/`.
-2. Update the matching `content/marketplace/<slug>.json`'s `sourcePath` (e.g.
-   `koris-skills/<slug>`) and `sourceUrl` (this repo's GitHub URL for that
-   path) to stop pointing at `koris`.
+2. Update the matching `content/marketplace/skills/<slug>.json`'s
+   `sourcePath` (e.g. `koris-skills/<slug>`) and `sourceUrl` (this repo's
+   GitHub URL for that path) to stop pointing at `koris`.
 3. Note the move in this file and in AGENTS.md's "Relationship to koris"
    section.

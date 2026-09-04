@@ -32,7 +32,8 @@ src/components/     Navbar, Hero, HowItWorks, Feature, Changelog, Footer, icons,
                     Markdown, MarketplaceCard, ParamTable, DocsSidebar
 src/lib/            constants.ts, changelog.ts, downloads.ts, marketplace.ts,
                     docs.ts
-content/marketplace/  <slug>.json catalog entries + schema.ts (typed)
+content/marketplace/  catalog entries as <family-dir>/<slug>.json (tools/, channels/,
+                    skills/) + schema.ts (typed)
 content/docs/         *.md docs (frontmatter: title, order); index.md per section
 scripts/              generate-catalog.ts (sketch)
 koris-plugins/        canonical home for plugin source that has moved out of `koris`
@@ -58,8 +59,10 @@ koris-skills/          same idea as koris-plugins/, for skills; see koris-skills
 - **Markdown**: `react-markdown` + `remark-gfm` in `src/components/Markdown.tsx`.
   No MDX, no second build tool. Keep it that way unless docs genuinely need inline
   React.
-- **Catalog**: JSON files are the source of truth. `src/lib/marketplace.ts`
-  validates `slug === filename` and the `family` enum at load time — a bad entry
+- **Catalog**: JSON files are the source of truth, grouped by family under
+  `content/marketplace/{tools,channels,skills}/`. `src/lib/marketplace.ts`
+  validates `slug === filename`, that the file lives under the folder matching
+  its `family`, and the `family` enum itself, all at load time — a bad entry
   fails the build. `scripts/generate-catalog.ts` only *merges* derived fields.
 - **`@content/*`** tsconfig alias → `./content/*`; `@/*` → `./src/*`.
 

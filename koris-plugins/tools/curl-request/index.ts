@@ -17,6 +17,8 @@ import { toCurlCommand } from './curl-command';
 
 export const TOOL_NAME = 'curl_request' as const;
 
+const HTTP_METHODS = ['GET', 'POST', 'PUT', 'PATCH'] as const;
+
 /**
  * Parse a jq pipe string (e.g. "| jq -r '.result'") into a safe argv array
  * for jq. Returns null when the pipe is not a valid jq invocation or contains
@@ -182,8 +184,7 @@ export async function executeCurl(
     }
   }
 
-  const validMethods = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD', 'OPTIONS'] as const;
-  if (!isAllowedValue(method, validMethods)) {
+  if (!isAllowedValue(method, HTTP_METHODS)) {
     return { toolName: TOOL_NAME, success: false, error: `Invalid HTTP method: ${method}` };
   }
 
@@ -256,8 +257,6 @@ export async function executeCurl(
     return { toolName: TOOL_NAME, success: false, error: errorMsg };
   }
 }
-
-const HTTP_METHODS = ['GET', 'POST', 'PUT', 'PATCH'] as const;
 
 export function create(context: ToolPluginContext): Plugin {
   return {

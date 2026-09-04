@@ -19,6 +19,12 @@
       "type": "string",
       "required": true,
       "description": "The id of the learned sticker to send, from the \"Learned Stickers\" list."
+    },
+    {
+      "name": "target",
+      "type": "string",
+      "required": false,
+      "description": "Override the recipient address (Telegram chat id or WhatsApp JID) instead of the current chat."
     }
   ],
   "defaultEnabled": true

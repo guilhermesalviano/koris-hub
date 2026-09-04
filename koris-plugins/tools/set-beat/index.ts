@@ -128,6 +128,15 @@ export function create(context: ToolPluginContext): Plugin {
               'ONLY use wildcards (*) when the user explicitly requests recurrence: ' +
               '"0 9 * * *" (every day at 9am), "0 9 * * 1" (every Monday at 9am), "0 8 1 * *" (1st of every month at 8am), "*/30 * * * *" (every 30 min).',
           },
+          channel: {
+            type: 'string',
+            enum: CHANNEL_TYPES,
+            description: 'Optional: channel to use instead of the current chat, if this beat should notify a different chat. Must be provided together with target.',
+          },
+          target: {
+            type: 'string',
+            description: 'Optional: recipient address (Telegram chat id or WhatsApp JID) to use instead of the current chat. Must be provided together with channel.',
+          },
         },
         handler: (logger, args) => setBeat(logger, args, context.heartbeats),
         // Excludes the heartbeat sub-agent to avoid a beat recursively scheduling more beats.

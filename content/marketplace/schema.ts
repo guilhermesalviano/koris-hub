@@ -1,7 +1,9 @@
 // Catalog schema for the Koris plugins marketplace.
 //
-// Each entry is one `<slug>.json` file in this directory. `slug` MUST equal the
-// filename (without `.json`) and is also the URL segment at /marketplace/<slug>.
+// Each entry is one `<family-dir>/<slug>.json` file under this directory, grouped
+// by family (see FAMILY_DIRS below), e.g. `tools/issue.json`, `skills/weather.json`.
+// `slug` MUST equal the filename (without `.json`) and is also the URL segment at
+// /marketplace/<slug> — the family folder is not part of the slug or the route.
 // See /docs/marketplace/adding-an-entry for the authoring guide.
 
 export type Family = 'tool' | 'channel' | 'skill';
@@ -12,6 +14,13 @@ export const FAMILY_LABELS: Record<Family, string> = {
   tool: 'Tools',
   channel: 'Channels',
   skill: 'Skills',
+};
+
+/** subdirectory of content/marketplace/ each family's entries live in */
+export const FAMILY_DIRS: Record<Family, string> = {
+  tool: 'tools',
+  channel: 'channels',
+  skill: 'skills',
 };
 
 export type ParamType = 'string' | 'number' | 'boolean' | 'object' | 'array';

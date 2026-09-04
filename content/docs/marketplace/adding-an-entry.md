@@ -6,15 +6,27 @@ order: 1
 # Adding a marketplace entry
 
 The [marketplace](/marketplace) catalog is plain JSON in this repo — one file per
-entry at `content/marketplace/<slug>.json`. No build step, no database.
+entry at `content/marketplace/<family-dir>/<slug>.json`, grouped by family:
+
+```
+content/marketplace/
+  schema.ts
+  tools/       family: "tool"      e.g. tools/issue.json
+  channels/    family: "channel"   e.g. channels/telegram.json
+  skills/      family: "skill"     e.g. skills/weather.json
+```
+
+No build step, no database.
 
 ## Steps
 
 1. **Copy an existing entry** that's close to what you're adding, e.g.
-   `content/marketplace/issue.json` for a tool or `content/marketplace/weather.json`
-   for a skill.
-2. **Rename it** to `<slug>.json`. The `slug` field inside the file **must** equal
-   the filename without `.json` — the loader throws a build error otherwise.
+   `content/marketplace/tools/issue.json` for a tool or
+   `content/marketplace/skills/weather.json` for a skill.
+2. **Rename it** to `<slug>.json` and place it in the folder matching its
+   `family` (see the layout above). The `slug` field inside the file **must**
+   equal the filename without `.json`, and the file **must** live under the
+   folder for its `family` — the loader throws a build error otherwise.
 3. **Fill in the fields** (see the schema below).
 4. Run `pnpm dev` and open `http://localhost:3000/marketplace/<slug>` to
    check the card and detail page.

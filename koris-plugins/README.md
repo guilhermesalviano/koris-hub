@@ -9,8 +9,9 @@ purely so the plugin has a single home.
 ## Layout
 
 Mirrors the path convention used in `koris`: `koris-plugins/<family>/<slug>/...`,
-matching `sourcePath` in the corresponding `content/marketplace/<slug>.json`
-entry (whose `sourceUrl` should point back at this repo for these plugins).
+matching `sourcePath` in the corresponding
+`content/marketplace/tools/<slug>.json` entry (whose `sourceUrl` should point
+back at this repo for these plugins).
 
 ## Contents
 
@@ -31,7 +32,7 @@ and now maintained here going forward:
 - `tools/unlearn-sticker/`
 - `tools/update-beat/`
 
-Each has its matching `content/marketplace/<slug>.json` `sourcePath`/
+Each has its matching `content/marketplace/tools/<slug>.json` `sourcePath`/
 `sourceUrl` pointing here instead of `koris`.
 
 Note: several of these files import shared modules that aren't vendored here
@@ -44,8 +45,8 @@ imports don't break `pnpm lint`/`pnpm build`.
 ## Adding another plugin here
 
 1. Move its directory in under `koris-plugins/<family>/<slug>/`.
-2. Update the matching `content/marketplace/<slug>.json`'s `sourcePath` (e.g.
-   `koris-plugins/tools/<slug>`) and `sourceUrl` (this repo's GitHub URL for
-   that path) to stop pointing at `koris`.
+2. Update the matching `content/marketplace/tools/<slug>.json`'s
+   `sourcePath` (e.g. `koris-plugins/tools/<slug>`) and `sourceUrl` (this
+   repo's GitHub URL for that path) to stop pointing at `koris`.
 3. Note the move in this file and in AGENTS.md's "Relationship to koris"
    section.

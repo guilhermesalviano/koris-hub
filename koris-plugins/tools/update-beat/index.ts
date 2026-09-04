@@ -135,6 +135,15 @@ export function create(context: ToolPluginContext): Plugin {
             type: 'string',
             description: 'New 5-field cron expression for the schedule (optional). Examples: "0 9 * * *" (daily at 9am), "0 9 * * 1" (every Monday at 9am).',
           },
+          channel: {
+            type: 'string',
+            enum: CHANNEL_TYPES,
+            description: 'New channel for the beat (optional), if it should notify a different chat. Must be provided together with target.',
+          },
+          target: {
+            type: 'string',
+            description: 'New recipient address (Telegram chat id or WhatsApp JID) for the beat (optional). Must be provided together with channel.',
+          },
         },
         handler: (logger, args) => updateBeat(logger, args, context.heartbeats),
         enabled: (opts) => opts.trusted && opts.agentName !== 'heartbeat' && context.pluginEnablement.isEnabled('update-beat'),

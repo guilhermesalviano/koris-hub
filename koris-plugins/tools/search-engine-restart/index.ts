@@ -3,9 +3,8 @@ import type { ILogger, Plugin, ToolPluginContext, ToolResult } from '../contract
 import { COMMANDS } from '../contracts';
 import { defineTool } from '../define-tool';
 import { spawnCommand } from '../runtime';
-import { TOOL_NAME } from './constants';
 
-export { TOOL_NAME };
+export const TOOL_NAME = 'restart_search_engine' as const;
 
 const MAX_RESULT_OUTPUT = 20000;
 // The script polls readiness for up to 60s, plus `docker compose down`/`up -d`

@@ -5,7 +5,7 @@ import { Markdown } from '@/components/Markdown';
 import { ParamTable } from '@/components/ParamTable';
 import { HUB_REPO_URL } from '@/lib/constants';
 import { getAllEntries, getEntry } from '@/lib/marketplace';
-import { FAMILY_LABELS } from '@content/marketplace/schema';
+import { FAMILY_DIRS, FAMILY_LABELS } from '@content/marketplace/schema';
 
 export const dynamicParams = false;
 
@@ -36,7 +36,7 @@ export default async function MarketplaceEntryPage({
   const entry = getEntry(slug);
   if (!entry) notFound();
 
-  const editUrl = `${HUB_REPO_URL}/blob/main/content/marketplace/${entry.slug}.json`;
+  const editUrl = `${HUB_REPO_URL}/blob/main/content/marketplace/${FAMILY_DIRS[entry.family]}/${entry.slug}.json`;
 
   return (
     <main className="mx-auto max-w-3xl px-6 py-12 sm:py-16">
