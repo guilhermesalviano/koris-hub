@@ -38,6 +38,7 @@ scripts/              generate-catalog.ts (sketch)
 koris-plugins/        canonical home for plugin source that has moved out of `koris`
                       (reference only, not built/imported by this app); see
                       koris-plugins/README.md
+koris-skills/          same idea as koris-plugins/, for skills; see koris-skills/README.md
 ```
 
 ## Conventions / gotchas
@@ -67,10 +68,11 @@ koris-plugins/        canonical home for plugin source that has moved out of `ko
 The `koris` repo no longer contains a website. It links here from its README /
 AGENTS.md. Some plugin/skill source still lives in `koris` (`plugins/`,
 `skills/`); this repo describes those via `content/marketplace/`. A growing
-set of plugins (see `koris-plugins/README.md` for the current list) have had
-their source removed from `koris` and now live here instead, under
-`koris-plugins/` — for those, `content/marketplace/*.json`
-`sourcePath`/`sourceUrl` point at this repo, not `koris`.
+set of plugins and skills (see `koris-plugins/README.md` and
+`koris-skills/README.md` for the current lists) have had their source removed
+from `koris` and now live here instead, under `koris-plugins/` /
+`koris-skills/` — for those, `content/marketplace/*.json` `sourcePath`/
+`sourceUrl` point at this repo, not `koris`.
 
 <!-- BEGIN:nextjs-agent-rules -->
 

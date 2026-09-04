@@ -30,7 +30,7 @@ export interface CatalogEntry {
   /** display name */
   name: string;
   family: Family;
-  /** finer free-form label, e.g. "action" | "query" | "messaging" | "gateway" | "utility" */
+  /** finer free-form label, e.g. "action" | "query" | "messaging" | "coredash" | "utility" */
   type?: string;
   /** one line, shown on cards */
   summary: string;

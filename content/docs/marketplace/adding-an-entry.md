@@ -29,7 +29,7 @@ The full type lives in `content/marketplace/schema.ts`.
 | `slug` | ✅ | kebab-case; equals the filename and the URL segment |
 | `name` | ✅ | display name |
 | `family` | ✅ | `tool` \| `channel` \| `skill` |
-| `type` | | finer label: `action`, `query`, `messaging`, `gateway`, `utility`, … |
+| `type` | | finer label: `action`, `query`, `messaging`, `coredash`, `utility`, … |
 | `summary` | ✅ | one line, shown on cards |
 | `description` | ✅ | markdown, shown on the detail page |
 | `tags` | ✅ | string array |

@@ -54,9 +54,9 @@ skills and no tools. See [Security](/docs/security) for how trust is decided per
 
 - `weather`
 - `cat-fact`
-- `calendar-gateway`
-- `emails-gateway`
-- `todo-gateway`
+- `calendar-coredash`
+- `emails-coredash`
+- `todo-coredash`
 
 ## Adding a skill
 

@@ -1,18 +1,18 @@
 {
-  "slug": "emails-gateway",
-  "name": "Emails Gateway",
+  "slug": "emails-coredash",
+  "name": "Emails Coredash",
   "family": "skill",
-  "type": "gateway",
+  "type": "coredash",
   "summary": "Triage and read a user's email inbox through a secure internal gateway.",
   "description": "Lets the assistant scan recent correspondence and open full message details through an internal gateway API, without leaving the chat. Calls go through **Curl Request** against the configured `GATEWAY_HOST`.",
   "tags": [
     "email",
     "gmail",
-    "gateway",
+    "coredash",
     "triage"
   ],
-  "sourcePath": "skills/emails-gateway",
-  "sourceUrl": "https://github.com/guilhermesalviano/koris/tree/main/skills/emails-gateway",
+  "sourcePath": "koris-skills/emails-coredash",
+  "sourceUrl": "https://github.com/guilhermesalviano/koris-hub/tree/main/koris-skills/emails-coredash",
   "readWhen": [
     "asked about recent emails",
     "asked about specific email details",

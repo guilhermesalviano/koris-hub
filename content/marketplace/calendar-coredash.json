@@ -1,18 +1,18 @@
 {
-  "slug": "calendar-gateway",
-  "name": "Calendar Gateway",
+  "slug": "calendar-coredash",
+  "name": "Calendar Coredash",
   "family": "skill",
-  "type": "gateway",
+  "type": "coredash",
   "summary": "Read and manage a user's Google Calendar through a secure internal gateway.",
   "description": "Lets the assistant view upcoming events, check availability, and retrieve meeting details from Google Calendar via an internal gateway API. Calls are made with **Curl Request** against the configured `GATEWAY_HOST`.",
   "tags": [
     "calendar",
     "google",
-    "gateway",
+    "coredash",
     "schedule"
   ],
-  "sourcePath": "skills/calendar-gateway",
-  "sourceUrl": "https://github.com/guilhermesalviano/koris/tree/main/skills/calendar-gateway",
+  "sourcePath": "koris-skills/calendar-coredash",
+  "sourceUrl": "https://github.com/guilhermesalviano/koris-hub/tree/main/koris-skills/calendar-coredash",
   "readWhen": [
     "asked about upcoming meetings or events",
     "asked what is on the schedule for a specific day",

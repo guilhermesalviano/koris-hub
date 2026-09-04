@@ -11,8 +11,8 @@
     "wttr.in",
     "open-meteo"
   ],
-  "sourcePath": "skills/weather",
-  "sourceUrl": "https://github.com/guilhermesalviano/koris/tree/main/skills/weather",
+  "sourcePath": "koris-skills/weather",
+  "sourceUrl": "https://github.com/guilhermesalviano/koris-hub/tree/main/koris-skills/weather",
   "readWhen": [
     "user asks about weather, temperature, or forecasts for any location"
   ]
