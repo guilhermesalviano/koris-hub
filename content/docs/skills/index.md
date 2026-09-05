@@ -57,6 +57,7 @@ skills and no tools. See [Security](/docs/security) for how trust is decided per
 - `calendar-coredash`
 - `emails-coredash`
 - `todo-coredash`
+- `koris-help`
 
 ## Adding a skill
 

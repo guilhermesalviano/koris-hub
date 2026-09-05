@@ -1,0 +1,22 @@
+{
+  "slug": "koris-help",
+  "name": "Koris Help",
+  "family": "skill",
+  "type": "utility",
+  "summary": "Teaches Koris to explain its own commands, tools, skills, and trust model in chat.",
+  "description": "A self-referential skill: it doesn't call any external API, it teaches the agent to accurately describe *itself* — the slash commands, the built-in tools, the other skills it has, and how the trust model decides what a given sender can use.\n\nIt draws a hard line between explaining Koris in chat and explaining how to set Koris up: setup, deployment, and code questions are pointed at the docs site instead of answered from memory.\n\nSince skills are only delivered to trusted senders, this skill only ever reaches someone already on a channel's allowlist — it cannot be the first thing a brand-new, unlisted contact sees.",
+  "tags": [
+    "help",
+    "onboarding",
+    "meta",
+    "commands"
+  ],
+  "sourcePath": "koris-plugins/skills/koris-help",
+  "sourceUrl": "https://github.com/guilhermesalviano/koris-hub/tree/main/koris-plugins/skills/koris-help",
+  "readWhen": [
+    "user asks what you can do, or how to use you",
+    "user asks what a specific slash command does",
+    "user asks what tools or skills you have",
+    "a tool call was blocked or unavailable and the user asks why"
+  ]
+}

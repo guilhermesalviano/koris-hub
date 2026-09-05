@@ -20,8 +20,9 @@ fenced code blocks for requests/responses). No custom XML tags.
 
 ## Contents
 
-5 skills, all originally at `koris`'s `skills/<slug>/`, removed there and
-now maintained here going forward:
+6 skills. Five were originally at `koris`'s `skills/<slug>/`, removed there and
+now maintained here going forward; `koris-help` was written here from the
+start and has never lived in `koris`:
 
 - `cat-fact/` — the `cat-fact` skill. Sample/reference skill for this
   pattern.
@@ -32,6 +33,9 @@ now maintained here going forward:
   `emails-gateway`).
 - `todo-coredash/` — the `todo-coredash` skill (renamed from
   `todo-gateway`).
+- `koris-help/` — the `koris-help` skill: teaches the agent to explain its
+  own commands, tools, skills, and trust model in chat. Unlike the others,
+  it calls no external API.
 
 The three `-coredash` skills were renamed from `-gateway`: slug, directory,
 `SKILL.md` front-matter `name`, and the matching `content/marketplace/*.json`
