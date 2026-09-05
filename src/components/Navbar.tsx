@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { BASE_PATH, REPO_URL } from '@/lib/constants';
 
 const NAV_LINKS = [
-  { href: '/#how-it-works', label: 'How it works' },
   { href: '/marketplace', label: 'Marketplace' },
   { href: '/docs', label: 'Docs' },
 ];

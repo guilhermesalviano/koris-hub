@@ -1,9 +1,10 @@
 import { Feature } from '@/components/Feature';
 import { Hero } from '@/components/Hero';
-import { HowItWorks } from '@/components/HowItWorks';
+import { Download } from '@/components/Download';
 import { Changelog } from '@/components/Changelog';
 import { Footer } from '@/components/Footer';
 import { ChatsIcon, CpuIcon, LayersIcon, MemoryIcon, TerminalIcon } from '@/components/icons';
+import { ChatDemo } from '@/components/chat-demo/ChatDemo';
 
 const FEATURES = [
   {
@@ -41,7 +42,15 @@ export default function Home() {
     <main className="mx-auto max-w-5xl px-6 py-12 sm:py-16">
       <Hero />
 
-      <HowItWorks />
+      <section id="demo" className="mt-24 scroll-mt-20">
+        <div className="mb-8 max-w-xl">
+          <h2 className="text-3xl font-bold tracking-tight text-txt sm:text-4xl">See it in action</h2>
+          <p className="mt-3 text-muted">
+            A live, in-browser preview of the admin chat &mdash; sample data, no backend required.
+          </p>
+        </div>
+        <ChatDemo />
+      </section>
 
       <section id="features" className="mt-24 scroll-mt-20">
         <div className="mb-12 max-w-xl">
@@ -54,6 +63,8 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      <Download />
 
       <Changelog />
 

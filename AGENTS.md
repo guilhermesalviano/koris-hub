@@ -28,7 +28,7 @@ src/app/            routes: / (landing), /marketplace, /marketplace/[slug],
                     /docs, /docs/[...slug]; api/changelog, api/downloads
                     (force-static GitHub Releases proxies); layout.tsx,
                     not-found.tsx, globals.css
-src/components/     Navbar, Hero, HowItWorks, Feature, Changelog, Footer, icons,
+src/components/     Navbar, Hero, Download, Feature, Changelog, Footer, icons,
                     Markdown, MarketplaceCard, ParamTable, DocsSidebar
 src/lib/            constants.ts, changelog.ts, downloads.ts, marketplace.ts,
                     docs.ts
