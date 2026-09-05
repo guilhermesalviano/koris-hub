@@ -6,14 +6,12 @@ import styles from './chat-demo.module.css';
 import { CANNED_REPLIES, MOCK_SESSIONS, type DemoMessage } from './mock-data';
 import {
   AttachIcon,
-  AuditIcon,
   ChevronDownIcon,
   HeartbeatsIcon,
   MemoriesIcon,
   OverviewIcon,
   PluginsIcon,
   PlusIcon,
-  QueueIcon,
   SendIcon,
   SettingsIcon,
   SkillsIcon,
@@ -24,8 +22,6 @@ const NAV_ITEMS = [
   { label: 'Memories', icon: MemoriesIcon },
   { label: 'Beats', icon: HeartbeatsIcon },
   { label: 'Skills', icon: SkillsIcon },
-  { label: 'Queue', icon: QueueIcon },
-  { label: 'Audit', icon: AuditIcon },
 ];
 
 const PROVIDERS = [
@@ -84,7 +80,7 @@ function ContextBar({ pct }: { pct: number }) {
   return (
     <div className="w-40 font-mono text-[10px] text-[var(--txt-3)]">
       <div className="flex items-center justify-between">
-        <span>context</span>
+        <span>context usage</span>
         <span className={label}>{pct}%</span>
       </div>
       <div className="mt-1 h-1 overflow-hidden rounded-full bg-[var(--bg-4)]">
@@ -294,10 +290,6 @@ export function ChatDemo() {
             <div className="text-[13px] font-medium text-[var(--txt)]">koris</div>
             <div className="font-mono text-[11px] text-[var(--txt-3)]">Admin panel</div>
           </div>
-        </div>
-        <div className="flex items-center gap-1.5 rounded-full border border-[var(--subtle)] bg-[var(--bg-3)] px-2.5 py-1 font-mono text-[11px] text-[var(--txt-3)]">
-          <div className="h-1.5 w-1.5 rounded-full bg-green-500" />
-          <span className="hidden sm:inline">Online</span>
         </div>
       </header>
 

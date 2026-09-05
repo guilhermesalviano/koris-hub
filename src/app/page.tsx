@@ -43,12 +43,6 @@ export default function Home() {
       <Hero />
 
       <section id="demo" className="mt-24 scroll-mt-20">
-        <div className="mb-8 max-w-xl">
-          <h2 className="text-3xl font-bold tracking-tight text-txt sm:text-4xl">See it in action</h2>
-          <p className="mt-3 text-muted">
-            A live, in-browser preview of the admin chat &mdash; sample data, no backend required.
-          </p>
-        </div>
         <ChatDemo />
       </section>
 
