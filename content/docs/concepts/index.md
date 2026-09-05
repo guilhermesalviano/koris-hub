@@ -56,7 +56,7 @@ under `core/memory/`. Tables:
 | `messages` | short-term history; `role` is `user`, `assistant`, or `system` |
 | `memories` | long-term notes; `type` is `summary`, `fact`, `lesson`, or `reminder` |
 | `images` | base64 attachments referenced by message rows |
-| `learned_skills` | skills synced from the `skills/` folder |
+| `learned_skills` | skills synced from the `plugins/skills/` folder |
 | `heartbeat` | scheduled beats |
 | `plugin_settings` | per-plugin enabled state for every tool and channel |
 

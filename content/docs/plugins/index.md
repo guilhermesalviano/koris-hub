@@ -5,9 +5,11 @@ order: 9
 
 # Plugins
 
-Plugins are how you extend Koris without touching its core. There are two families —
-[channels](/docs/channels) and [tools](/docs/tools) — and they share the same shape and
-the same kernel.
+Plugins are how you extend Koris without touching its core. There are two plugin
+families — [channels](/docs/channels) and [tools](/docs/tools) — that share the same
+shape and the same kernel, described below. `plugins/` also holds
+[skills](/docs/skills), but skills are a different kind of extension — plain Markdown,
+synced by `SkillSyncService` rather than the kernel this page describes.
 
 ## The kernel
 
@@ -35,7 +37,8 @@ The one documented exception is `plugins/tools/create-tool/`, which reaches into
 The scanner loads every subdirectory of a family folder — `plugins/channels/` and
 `plugins/tools/`. Files that sit directly in those folders, such as `contracts.ts`, are
 skipped. Adding a plugin means adding a folder; for tools, `pnpm scaffold:tool <name>`
-creates one for you. No core changes are required.
+creates one for you. No core changes are required. (`plugins/skills/` sits alongside
+these two, but isn't scanned here — see [Skills](/docs/skills) for how it's synced.)
 
 ## On/off state
 

@@ -68,8 +68,8 @@ koris-plugins/        canonical home for plugin and skill source that has moved 
 ## Relationship to koris
 
 The `koris` repo no longer contains a website. It links here from its README /
-AGENTS.md. Some plugin/skill source still lives in `koris` (`plugins/`,
-`skills/`); this repo describes those via `content/marketplace/`. A growing
+AGENTS.md. Some plugin/skill source still lives in `koris` (under `plugins/channels/`,
+`plugins/tools/`, `plugins/skills/`); this repo describes those via `content/marketplace/`. A growing
 set of plugins and skills (see `koris-plugins/README.md` and
 `koris-plugins/skills/README.md` for the current lists) have had their source
 removed from `koris` and now live here instead, under `koris-plugins/tools/` /

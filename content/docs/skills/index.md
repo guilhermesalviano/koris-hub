@@ -12,10 +12,10 @@ are executable handlers the model calls.
 
 ## Anatomy
 
-Each skill is a folder under `skills/` containing a `SKILL.md`:
+Each skill is a folder under `plugins/skills/` containing a `SKILL.md`:
 
 ```
-skills/
+plugins/skills/
   weather/
     SKILL.md
 ```
@@ -38,7 +38,7 @@ specific about when to use the skill and when not to.
 
 ## How skills load
 
-`SkillSyncService` (`core/src/services/skills/skill-sync.ts`) syncs `skills/` into the
+`SkillSyncService` (`core/src/services/skills/skill-sync.ts`) syncs `plugins/skills/` into the
 `learned_skills` table at startup and again on any file change, using a filesystem watch with
 a 500 ms debounce. Rows whose skill folder was removed are pruned on the next sync.
 
@@ -60,7 +60,7 @@ skills and no tools. See [Security](/docs/security) for how trust is decided per
 
 ## Adding a skill
 
-1. Create `skills/<name>/SKILL.md` with `name` and `description` front-matter and a body.
+1. Create `plugins/skills/<name>/SKILL.md` with `name` and `description` front-matter and a body.
 2. Save the file — the watcher picks it up, or restart the app.
 3. From the Admin dashboard's Skills page you can enable or disable individual skills and
    trigger a manual re-sync. See the [Admin dashboard](/docs/admin-dashboard).
