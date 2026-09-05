@@ -9,9 +9,8 @@ import {
   getRequiredStringArg,
 } from '../runtime';
 import { extractLinks, paginate, stripHtml } from './extract';
-import { TOOL_NAME } from './constants';
 
-export { TOOL_NAME };
+export const TOOL_NAME = 'read_url' as const;
 
 const DEFAULT_MAX_CHARS = 8000;
 const MAX_RESULT_OUTPUT = 20000;
