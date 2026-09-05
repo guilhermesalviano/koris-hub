@@ -35,7 +35,9 @@ start and has never lived in `koris`:
   `todo-gateway`).
 - `koris-help/` — the `koris-help` skill: teaches the agent to explain its
   own commands, tools, skills, and trust model in chat. Unlike the others,
-  it calls no external API.
+  its "API" is `hub.koaris.com` itself — it fetches the live docs pages with
+  `read_url`/`curl_request` instead of embedding a static list, since
+  installed tools and skills vary per deployment.
 
 The three `-coredash` skills were renamed from `-gateway`: slug, directory,
 `SKILL.md` front-matter `name`, and the matching `content/marketplace/*.json`
