@@ -4,7 +4,7 @@
   "family": "tool",
   "type": "query",
   "summary": "Web search via a self-hosted SearXNG instance (SerpAPI kept as an inactive fallback).",
-  "description": "Performs a web search with country, language, recency, pagination, and result-type controls.\n\nThe active backend is a self-hosted **SearXNG** instance (`ai.searxng_url`) — free, no per-query cost. The older SerpAPI implementation (`ai.search_api_key`) stays in the code as an inactive fallback.\n\nOn a connection error or HTTP 403 the SearXNG container is usually down — pair this with **Restart Search Engine**.",
+  "description": "Performs a web search with country, language, recency, pagination, and result-type controls.\n\nThe active backend is a self-hosted **SearXNG** instance (`ai.searxng_url`) — free, no per-query cost. The older SerpAPI implementation (`ai.search_api_key`) stays in the code as an inactive fallback.\n\nResults are titles, links and short snippets. When a snippet is not enough, open the result's `link` with **Read URL** to read the page itself.\n\nOn a connection error or HTTP 403 the SearXNG container is usually down — pair this with **Restart Search Engine**.",
   "tags": [
     "search",
     "web",

@@ -28,6 +28,7 @@ heartbeat run.
 | --- | --- |
 | `curl_request` | Makes an HTTP request. Gated by the domain allowlist — see [Security](/docs/security). |
 | `search_engine` | Web search through a self-hosted SearXNG instance (`ai.searxng_url`). |
+| `read_url` | Opens a page and returns its readable text — the follow-up to a `search_engine` result. Gated by the domain allowlist; names the `/allow` command when a host is blocked. |
 | `restart_search_engine` | Recovers `search_engine` from connection or 403 failures. Requires confirmation; runs `scripts/run_search_engine.sh --restart`. |
 | `issue` | GitHub issue tracking. |
 | `set_beat` | Creates a cron-scheduled beat (a [heartbeat](/docs/concepts) agent). |

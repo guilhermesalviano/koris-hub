@@ -16,8 +16,9 @@ point back at this repo for these plugins). Two families live here:
 
 ## Contents
 
-13 tools, all originally at `koris`'s `plugins/tools/<slug>/`, removed there
-and now maintained here going forward:
+14 tools. Thirteen were originally at `koris`'s `plugins/tools/<slug>/`, removed
+there and now maintained here going forward; `read-url` was written here from the
+start and has never lived in `koris`:
 
 - `tools/create-tool/`
 - `tools/curl-request/`
@@ -25,6 +26,7 @@ and now maintained here going forward:
 - `tools/issue/`
 - `tools/learn-sticker/`
 - `tools/list-beats/`
+- `tools/read-url/`
 - `tools/search-engine/`
 - `tools/search-engine-restart/`
 - `tools/send-message/`

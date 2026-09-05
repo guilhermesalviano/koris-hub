@@ -34,6 +34,7 @@ export function create(context: ToolPluginContext): Plugin {
         name: TOOL_NAME,
         description:
           'Perform a web search using Google Search API. Supports country, language, recency, pagination and search type context. ' +
+          'Results are titles, links and short snippets — when a snippet is not enough to answer, open the result\'s "link" with the read_url tool. ' +
           'If this tool fails with a connection error ("Couldn\'t connect to server") or an HTTP 403 error, the local SearXNG service is likely down or misconfigured — tell the human it failed and ask if they want you to run the restart_search_engine tool to fix it (that tool requires its own separate confirmation before running).',
         parameters: {
           query: { type: 'string', required: true, description: 'The search query string.' },

@@ -10,8 +10,8 @@ channels. The controls below limit what the agent can reach and who can drive it
 
 ## Domain allowlist gate
 
-Tools that reach the network — `curl_request` and `search_engine` — are checked
-against an allowlist before they run. The allowlist is `allowed_domains` in
+Tools that reach the network — `curl_request`, `read_url` and `search_engine` — are
+checked against an allowlist before they run. The allowlist is `allowed_domains` in
 `koris.json`. A request to a host that is not on the list returns an error string
 instead of running; an empty allowlist blocks all such requests.
 
@@ -20,6 +20,10 @@ directly — `core/src/app.ts` injects it into each tool as `context.security.ga
 
 Trusted senders can extend the allowlist at runtime with `/allow <domain>`. See
 [Commands](/docs/commands).
+
+`read_url` is built around that command: a page found through search is normally not
+on the allowlist, so instead of a bare error it reports the blocked host and the exact
+`/allow` line that permits it, and is told not to retry until a human has run it.
 
 ## Trust model
 
