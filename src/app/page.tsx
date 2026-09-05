@@ -10,9 +10,7 @@ export default function Home() {
     <main className="mx-auto max-w-5xl px-6 py-12 sm:py-16">
       <Hero />
 
-      <section id="demo" className="mt-24 scroll-mt-20">
-        <ChatDemo />
-      </section>
+      <ChatDemo />
 
       <Extend />
 
