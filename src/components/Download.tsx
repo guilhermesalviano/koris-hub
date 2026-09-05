@@ -50,7 +50,7 @@ function platformNote(p: PlatformDownloads): string {
   return [...parts].join(' · ');
 }
 
-function CopyButton({ text }: { text: string }) {
+export function CopyButton({ text, className = '' }: { text: string; className?: string }) {
   const [copied, setCopied] = useState(false);
   return (
     <button
@@ -64,7 +64,7 @@ function CopyButton({ text }: { text: string }) {
           () => {},
         );
       }}
-      className="rounded-md border border-border bg-bg px-2.5 py-1 text-xs font-semibold text-muted transition-colors hover:border-accent hover:text-accent"
+      className={`rounded-md border border-border bg-bg px-2.5 py-1 text-xs font-semibold text-muted transition-colors hover:border-accent hover:text-accent ${className}`}
     >
       {copied ? 'Copied' : 'Copy'}
     </button>
