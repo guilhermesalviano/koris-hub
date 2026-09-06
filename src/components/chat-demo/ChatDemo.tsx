@@ -1,28 +1,18 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { Fragment, useEffect, useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
 import styles from './chat-demo.module.css';
-import { CANNED_REPLIES, MOCK_SESSIONS, type DemoMessage } from './mock-data';
+import { chatSeparatorLabel, sameDay } from '@/lib/date';
+import { CANNED_REPLIES, MOCK_SESSIONS, type DemoMessage, type DemoSession } from './mock-data';
 import {
   AttachIcon,
   ChevronDownIcon,
-  HeartbeatsIcon,
-  MemoriesIcon,
-  OverviewIcon,
   PluginsIcon,
   PlusIcon,
   SendIcon,
   SettingsIcon,
-  SkillsIcon,
 } from './icons';
-
-const NAV_ITEMS = [
-  { label: 'Overview', icon: OverviewIcon },
-  { label: 'Memories', icon: MemoriesIcon },
-  { label: 'Beats', icon: HeartbeatsIcon },
-  { label: 'Skills', icon: SkillsIcon },
-];
 
 const PROVIDERS = [
   { name: 'ollama', model: 'gemma4:e4b-it-q4_K_M', active: true },
@@ -32,6 +22,52 @@ const PROVIDERS = [
 
 function now(): string {
   return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+}
+
+/**
+ * A mock message's absolute time, placed against the viewer's own clock so the
+ * separators stay truthful long after the page was built. Returns undefined
+ * until `mounted`, since the page is prerendered and a build-time date would
+ * not survive hydration.
+ */
+function resolveAt(message: DemoMessage, mounted: boolean): number | undefined {
+  if (message.at !== undefined) return message.at;
+  if (!mounted || message.daysAgo === undefined) return undefined;
+
+  const date = new Date();
+  date.setDate(date.getDate() - message.daysAgo);
+  date.setHours(0, message.minuteOfDay ?? 0, 0, 0);
+  return date.getTime();
+}
+
+/**
+ * The sidebar's per-chat label, derived from the same resolved times as the
+ * separators so the two never disagree. Falls back to the session's static
+ * label until hydration.
+ */
+function sessionLabel(session: DemoSession, mounted: boolean): string {
+  const last = session.messages[session.messages.length - 1];
+  const at = last ? resolveAt(last, mounted) : undefined;
+  if (at === undefined) return session.timestamp;
+
+  const date = new Date(at);
+  if (sameDay(date, new Date())) return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+  const yesterday = new Date();
+  yesterday.setDate(yesterday.getDate() - 1);
+  if (sameDay(date, yesterday)) return 'Yesterday';
+
+  return date.toLocaleDateString([], { month: 'short', day: 'numeric' });
+}
+
+function DaySeparator({ label }: { label: string }) {
+  return (
+    <div className="flex items-center gap-3 px-1">
+      <div className="h-px flex-1 bg-[var(--subtle)]" />
+      <span className="font-mono text-[11px] text-[var(--txt-3)]">{label}</span>
+      <div className="h-px flex-1 bg-[var(--subtle)]" />
+    </div>
+  );
 }
 
 function TypingDots() {
@@ -155,6 +191,11 @@ export function ChatDemo() {
   const [newChatMessages, setNewChatMessages] = useState<DemoMessage[]>([]);
   const [input, setInput] = useState('');
   const [streaming, setStreaming] = useState(false);
+  // The page is statically prerendered, so mock timestamps are resolved against
+  // the viewer's clock only after hydration.
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => setMounted(true), []);
 
   const nextId = useRef(1000);
   const replyIndex = useRef(0);
@@ -204,8 +245,9 @@ export function ChatDemo() {
     const text = input.trim();
     if (!text || streaming) return;
 
-    const userMsg: DemoMessage = { id: nextId.current++, role: 'user', content: text, timestamp: now() };
-    const pendingMsg: DemoMessage = { id: nextId.current++, role: 'assistant', content: '', timestamp: now(), pending: true };
+    const sentAt = Date.now();
+    const userMsg: DemoMessage = { id: nextId.current++, role: 'user', content: text, timestamp: now(), at: sentAt };
+    const pendingMsg: DemoMessage = { id: nextId.current++, role: 'assistant', content: '', timestamp: now(), at: sentAt, pending: true };
     setMessages((prev) => [...prev, userMsg, pendingMsg]);
     setInput('');
     setStreaming(true);
@@ -280,118 +322,114 @@ export function ChatDemo() {
   );
 
   return (
-    <div className={`${styles.root} flex h-[600px] w-full flex-col overflow-hidden rounded-2xl border border-[var(--subtle)] bg-[var(--bg)]`}>
-      <header className="flex h-14 flex-shrink-0 items-center justify-between gap-2 border-b border-[var(--subtle)] bg-[color-mix(in_srgb,var(--bg)_80%,transparent)] px-4 backdrop-blur-md">
-        <div className="flex min-w-0 items-center gap-2.5">
-          <div className="flex h-[30px] w-[30px] flex-shrink-0 items-center justify-center overflow-hidden rounded-lg bg-[var(--accent)]">
-            <Image src="/logo.png" alt="koris" width={30} height={30} className="h-full w-full object-cover" />
+    <section id="demo" className="mt-24 scroll-mt-20">
+      <div className={`${styles.root} flex h-[600px] w-full flex-col overflow-hidden rounded-2xl border border-[var(--subtle)] bg-[var(--bg)]`}>
+        <header className="flex h-14 flex-shrink-0 items-center justify-between gap-2 border-b border-[var(--subtle)] bg-[color-mix(in_srgb,var(--bg)_80%,transparent)] px-4 backdrop-blur-md">
+          <div className="flex min-w-0 items-center gap-2.5">
+            <div className="flex h-[30px] w-[30px] flex-shrink-0 items-center justify-center overflow-hidden rounded-lg bg-[var(--accent)]">
+              <Image src="/logo.png" alt="koris" width={30} height={30} className="h-full w-full object-cover" />
+            </div>
+            <div className="hidden sm:block">
+              <div className="text-[13px] font-medium text-[var(--txt)]">koris</div>
+              <div className="font-mono text-[11px] text-[var(--txt-3)]">Admin panel</div>
+            </div>
           </div>
-          <div className="hidden sm:block">
-            <div className="text-[13px] font-medium text-[var(--txt)]">koris</div>
-            <div className="font-mono text-[11px] text-[var(--txt-3)]">Admin panel</div>
-          </div>
-        </div>
-      </header>
+        </header>
 
-      <div className="flex min-h-0 flex-1">
-        <aside className="hidden w-56 flex-shrink-0 flex-col border-r border-[var(--subtle)] bg-[var(--bg-2)] md:flex">
-          <nav className="flex-shrink-0 space-y-0.5 p-2 pb-1.5">
-            {NAV_ITEMS.map(({ label, icon: Icon }) => (
+        <div className="flex min-h-0 flex-1">
+          <aside className="hidden w-56 flex-shrink-0 flex-col border-r border-[var(--subtle)] bg-[var(--bg-2)] md:flex">
+            <div className="flex-shrink-0 border-t border-[var(--subtle)]" />
+            <div className="flex min-h-0 flex-1 flex-col">
+              <div className="p-3">
+                <button
+                  type="button"
+                  onClick={handleNewChat}
+                  className="flex w-full items-center justify-center gap-1.5 rounded-lg border border-[var(--strong)] bg-[var(--bg-3)] px-3 py-2 text-[13px] text-[var(--txt)] transition-all duration-150 hover:border-[var(--accent)] hover:bg-[var(--accent-muted)] hover:text-[var(--accent-2)]"
+                >
+                  <PlusIcon className="h-3.5 w-3.5 fill-none stroke-current" />
+                  New chat
+                </button>
+              </div>
+              <div className="px-4 pb-1 pt-1 font-mono text-[10px] uppercase tracking-wider text-[var(--txt-3)]">Chats</div>
+              <div className={`flex-1 space-y-0.5 overflow-y-auto px-2 pb-3 ${styles.scrollThin}`}>
+                {MOCK_SESSIONS.map((session) => {
+                  const isActive = session.id === activeId;
+                  return (
+                    <button
+                      key={session.id}
+                      type="button"
+                      onClick={() => handleSelectSession(session.id)}
+                      className={`w-full rounded-lg border px-3 py-2 text-left transition-colors duration-150 ${
+                        isActive ? 'border-[var(--accent-muted)] bg-[var(--accent-muted)]' : 'border-transparent hover:bg-[var(--bg-3)]'
+                      }`}
+                    >
+                      <div className="truncate text-[13px] text-[var(--txt)]">{session.title}</div>
+                      <div className="mt-1 flex items-center gap-1.5 font-mono text-[10px] text-[var(--txt-3)]">
+                        <span>{sessionLabel(session, mounted)}</span>
+                        <span>·</span>
+                        <span>{session.channel}</span>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+            <div className="flex-shrink-0 space-y-0.5 border-t border-[var(--subtle)] p-2">
               <button
-                key={label}
                 type="button"
                 aria-disabled
                 title="Only available in the full dashboard"
                 className="flex w-full cursor-default items-center gap-2.5 rounded-lg border border-transparent px-3 py-2.5 text-[13px] text-[var(--txt-2)] opacity-60"
               >
-                <Icon className="h-4 w-4 flex-shrink-0 fill-none stroke-current" />
-                <span>{label}</span>
+                <PluginsIcon className="h-4 w-4 flex-shrink-0 fill-none stroke-current" />
+                <span>Plugins</span>
               </button>
-            ))}
-          </nav>
-          <div className="flex-shrink-0 border-t border-[var(--subtle)]" />
-          <div className="flex min-h-0 flex-1 flex-col">
-            <div className="p-3">
               <button
                 type="button"
-                onClick={handleNewChat}
-                className="flex w-full items-center justify-center gap-1.5 rounded-lg border border-[var(--strong)] bg-[var(--bg-3)] px-3 py-2 text-[13px] text-[var(--txt)] transition-all duration-150 hover:border-[var(--accent)] hover:bg-[var(--accent-muted)] hover:text-[var(--accent-2)]"
+                aria-disabled
+                title="Only available in the full dashboard"
+                className="flex w-full cursor-default items-center gap-2.5 rounded-lg border border-transparent px-3 py-2.5 text-[13px] text-[var(--txt-2)] opacity-60"
               >
-                <PlusIcon className="h-3.5 w-3.5 fill-none stroke-current" />
-                New chat
+                <SettingsIcon className="h-4 w-4 flex-shrink-0 fill-none stroke-current" />
+                <span>Configuration</span>
               </button>
             </div>
-            <div className="px-4 pb-1 pt-1 font-mono text-[10px] uppercase tracking-wider text-[var(--txt-3)]">Chats</div>
-            <div className={`flex-1 space-y-0.5 overflow-y-auto px-2 pb-3 ${styles.scrollThin}`}>
-              {MOCK_SESSIONS.map((session) => {
-                const isActive = session.id === activeId;
-                return (
-                  <button
-                    key={session.id}
-                    type="button"
-                    onClick={() => handleSelectSession(session.id)}
-                    className={`w-full rounded-lg border px-3 py-2 text-left transition-colors duration-150 ${
-                      isActive ? 'border-[var(--accent-muted)] bg-[var(--accent-muted)]' : 'border-transparent hover:bg-[var(--bg-3)]'
-                    }`}
-                  >
-                    <div className="truncate text-[13px] text-[var(--txt)]">{session.title}</div>
-                    <div className="mt-1 flex items-center gap-1.5 font-mono text-[10px] text-[var(--txt-3)]">
-                      <span>{session.timestamp}</span>
-                      <span>·</span>
-                      <span>{session.channel}</span>
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-          <div className="flex-shrink-0 space-y-0.5 border-t border-[var(--subtle)] p-2">
-            <button
-              type="button"
-              aria-disabled
-              title="Only available in the full dashboard"
-              className="flex w-full cursor-default items-center gap-2.5 rounded-lg border border-transparent px-3 py-2.5 text-[13px] text-[var(--txt-2)] opacity-60"
-            >
-              <PluginsIcon className="h-4 w-4 flex-shrink-0 fill-none stroke-current" />
-              <span>Plugins</span>
-            </button>
-            <button
-              type="button"
-              aria-disabled
-              title="Only available in the full dashboard"
-              className="flex w-full cursor-default items-center gap-2.5 rounded-lg border border-transparent px-3 py-2.5 text-[13px] text-[var(--txt-2)] opacity-60"
-            >
-              <SettingsIcon className="h-4 w-4 flex-shrink-0 fill-none stroke-current" />
-              <span>Configuration</span>
-            </button>
-          </div>
-        </aside>
+          </aside>
 
-        <main className="flex min-w-0 flex-1 flex-col overflow-hidden">
-          <div className="flex flex-shrink-0 items-center justify-between gap-2 border-b border-[var(--subtle)] px-4 py-2">
-            <span className="truncate font-mono text-[11px] text-[var(--txt-3)]">{activeTitle || 'New chat'}</span>
-            <ContextBar pct={contextPct} />
-          </div>
-
-          {showEmptyState ? (
-            <div className="flex flex-1 flex-col items-center justify-center gap-5 px-4">
-              <h2 className="text-center text-xl font-medium text-[var(--txt)]">What can I help with?</h2>
-              <div className="w-full max-w-2xl">{composer}</div>
+          <main className="flex min-w-0 flex-1 flex-col overflow-hidden">
+            <div className="flex flex-shrink-0 items-center justify-between gap-2 border-b border-[var(--subtle)] px-4 py-2">
+              <span className="truncate font-mono text-[11px] text-[var(--txt-3)]">{activeTitle || 'New chat'}</span>
+              <ContextBar pct={contextPct} />
             </div>
-          ) : (
-            <>
-              <div ref={threadRef} className={`flex flex-1 flex-col gap-5 overflow-y-auto scroll-smooth px-5 py-6 ${styles.scrollThin}`}>
-                {messages.map((m) => (
-                  <Bubble key={m.id} message={m} />
-                ))}
+
+            {showEmptyState ? (
+              <div className="flex flex-1 flex-col items-center justify-center gap-5 px-4">
+                <h2 className="text-center text-xl font-medium text-[var(--txt)]">What can I help with?</h2>
+                <div className="w-full max-w-2xl">{composer}</div>
               </div>
-              <div className="flex-shrink-0 border-t border-[var(--subtle)] bg-[color-mix(in_srgb,var(--bg)_90%,transparent)] px-4 pb-4 pt-3 backdrop-blur-md">
-                {composer}
-              </div>
-            </>
-          )}
-        </main>
+            ) : (
+              <>
+                <div ref={threadRef} className={`flex flex-1 flex-col gap-5 overflow-y-auto scroll-smooth px-5 py-6 ${styles.scrollThin}`}>
+                  {messages.map((m, i) => {
+                    const at = resolveAt(m, mounted);
+                    const prevAt = i > 0 ? resolveAt(messages[i - 1], mounted) : undefined;
+                    const separator = at === undefined ? null : chatSeparatorLabel(at, prevAt);
+                    return (
+                      <Fragment key={m.id}>
+                        {separator && <DaySeparator label={separator} />}
+                        <Bubble message={m} />
+                      </Fragment>
+                    );
+                  })}
+                </div>
+                <div className="flex-shrink-0 border-t border-[var(--subtle)] bg-[color-mix(in_srgb,var(--bg)_90%,transparent)] px-4 pb-4 pt-3 backdrop-blur-md">
+                  {composer}
+                </div>
+              </>
+            )}
+          </main>
+        </div>
       </div>
-    </div>
+    </section>
   );
 }

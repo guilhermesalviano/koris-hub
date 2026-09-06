@@ -40,9 +40,7 @@ export default function Home() {
 
       <Hero />
 
-      <section id="demo" className="mt-24 scroll-mt-20">
-        <ChatDemo />
-      </section>
+      <ChatDemo />
 
       <Extend />
 
