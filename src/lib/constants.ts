@@ -1,3 +1,9 @@
+// Canonical origin of this site — must match public/CNAME. Used for
+// metadataBase, canonical URLs, the sitemap, and JSON-LD `@id`s. No trailing
+// slash; `trailingSlash: true` in next.config.ts means route paths carry their
+// own (e.g. `${SITE_URL}/docs/`).
+export const SITE_URL = 'https://hub.koaris.com';
+
 // The code repository (releases, source, issues).
 export const REPO_URL = 'https://github.com/guilhermesalviano/koris';
 export const RELEASES_URL = `${REPO_URL}/releases/latest`;

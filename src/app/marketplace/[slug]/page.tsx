@@ -3,7 +3,8 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Markdown } from '@/components/Markdown';
 import { ParamTable } from '@/components/ParamTable';
-import { HUB_REPO_URL } from '@/lib/constants';
+import { JsonLd } from '@/components/JsonLd';
+import { HUB_REPO_URL, SITE_URL } from '@/lib/constants';
 import { getAllEntries, getEntry } from '@/lib/marketplace';
 import { FAMILY_DIRS, FAMILY_LABELS } from '@content/marketplace/schema';
 
@@ -21,9 +22,17 @@ export async function generateMetadata({
   const { slug } = await params;
   const entry = getEntry(slug);
   if (!entry) return {};
+
+  const title = `${entry.name} · Koris Marketplace`;
+  const path = `/marketplace/${entry.slug}/`;
+
   return {
-    title: `${entry.name} · Koris Marketplace`,
+    title: entry.name,
     description: entry.summary,
+    keywords: entry.tags,
+    alternates: { canonical: path },
+    openGraph: { type: 'article', title, description: entry.summary, url: path },
+    twitter: { card: 'summary', title, description: entry.summary },
   };
 }
 
@@ -38,8 +47,37 @@ export default async function MarketplaceEntryPage({
 
   const editUrl = `${HUB_REPO_URL}/blob/main/content/marketplace/${FAMILY_DIRS[entry.family]}/${entry.slug}.json`;
 
+  const path = `/marketplace/${entry.slug}/`;
+
   return (
     <main className="mx-auto max-w-3xl px-6 py-12 sm:py-16">
+      <JsonLd
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'SoftwareSourceCode',
+          name: entry.name,
+          alternateName: entry.toolName,
+          description: entry.summary,
+          url: `${SITE_URL}${path}`,
+          codeRepository: entry.sourceUrl,
+          programmingLanguage: entry.family === 'skill' ? 'Markdown' : 'TypeScript',
+          keywords: entry.tags.join(', '),
+          isPartOf: { '@id': `${SITE_URL}/#software` },
+          inLanguage: 'en',
+        }}
+      />
+      <JsonLd
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Koris', item: `${SITE_URL}/` },
+            { '@type': 'ListItem', position: 2, name: 'Marketplace', item: `${SITE_URL}/marketplace/` },
+            { '@type': 'ListItem', position: 3, name: entry.name, item: `${SITE_URL}${path}` },
+          ],
+        }}
+      />
+
       <Link href="/marketplace" className="text-sm text-muted transition-colors hover:text-txt">
         &larr; Marketplace
       </Link>

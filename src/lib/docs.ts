@@ -83,6 +83,34 @@ export function getDoc(slug: string[]): Doc | undefined {
   return undefined;
 }
 
+/**
+ * First real paragraph of a doc body, flattened to a meta-description-sized
+ * plain string. Docs carry no `description` front-matter, so without this every
+ * page ships with only the site-wide fallback — which reads identically on all
+ * of them and tells a crawler (or an AI answer engine) nothing about the page.
+ */
+export function summarize(content: string, maxLength = 160): string {
+  const paragraph = content
+    .replace(/```[\s\S]*?```/g, '') // fenced code
+    .replace(/^#{1,6} .*$/gm, '') // headings
+    .replace(/^\s*[|>-].*$/gm, '') // tables, quotes, list items
+    .split(/\n\s*\n/)
+    .map((block) => block.trim())
+    .find((block) => block.length > 0);
+
+  if (!paragraph) return '';
+
+  const text = paragraph
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1') // links → their text
+    .replace(/[*_`]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+  if (text.length <= maxLength) return text;
+  // Cut on a word boundary so the description doesn't end mid-word.
+  return `${text.slice(0, text.lastIndexOf(' ', maxLength) || maxLength).trimEnd()}…`;
+}
+
 function flatten(nodes: DocNode[]): string[][] {
   return nodes.flatMap((n) => [n.slug, ...flatten(n.children)]);
 }

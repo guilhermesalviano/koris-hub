@@ -1,10 +1,22 @@
 import type { Metadata } from 'next';
 import { MarketplaceCard } from '@/components/MarketplaceCard';
-import { getFamilyGroups } from '@/lib/marketplace';
+import { JsonLd } from '@/components/JsonLd';
+import { SITE_URL } from '@/lib/constants';
+import { getAllEntries, getFamilyGroups } from '@/lib/marketplace';
+
+const DESCRIPTION =
+  'Every tool, channel, and skill that ships with Koris — what each one does, the parameters it takes, and a link to its source.';
 
 export const metadata: Metadata = {
-  title: 'Marketplace · Koris',
-  description: 'Browse the tools, channels, and skills that ship with Koris.',
+  title: 'Marketplace',
+  description: DESCRIPTION,
+  alternates: { canonical: '/marketplace/' },
+  openGraph: {
+    type: 'website',
+    title: 'Marketplace · Koris',
+    description: DESCRIPTION,
+    url: '/marketplace/',
+  },
 };
 
 export default function MarketplacePage() {
@@ -12,6 +24,24 @@ export default function MarketplacePage() {
 
   return (
     <main className="mx-auto max-w-5xl px-6 py-12 sm:py-16">
+      <JsonLd
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'ItemList',
+          name: 'Koris marketplace',
+          description: DESCRIPTION,
+          url: `${SITE_URL}/marketplace/`,
+          numberOfItems: getAllEntries().length,
+          itemListElement: getAllEntries().map((entry, i) => ({
+            '@type': 'ListItem',
+            position: i + 1,
+            name: entry.name,
+            description: entry.summary,
+            url: `${SITE_URL}/marketplace/${entry.slug}/`,
+          })),
+        }}
+      />
+
       <div className="mb-12 max-w-xl">
         <h1 className="text-4xl font-bold tracking-tight text-txt sm:text-5xl">Marketplace</h1>
         <p className="mt-3 text-muted">
