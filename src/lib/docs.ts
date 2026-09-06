@@ -1,8 +1,19 @@
 import { readdirSync, readFileSync, statSync } from 'fs';
 import { join } from 'path';
 import matter from 'gray-matter';
+import { DEFAULT_LOCALE, type Locale } from '@/i18n/locales';
 
 const DOCS_DIR = join(process.cwd(), 'content/docs');
+
+/**
+ * Translations mirror the English tree under content/<locale>/docs/. The route
+ * set is always driven by the English tree (see getAllDocSlugs), so a page
+ * without a translation renders English rather than 404ing — and hreflang stays
+ * symmetric between locales.
+ */
+function docsDir(locale: Locale): string {
+  return locale === DEFAULT_LOCALE ? DOCS_DIR : join(process.cwd(), 'content', locale, 'docs');
+}
 
 export interface DocMeta {
   title: string;
@@ -55,15 +66,31 @@ function walk(dir: string, parentSlug: string[]): DocNode[] {
   return nodes.sort((a, b) => a.order - b.order || a.title.localeCompare(b.title));
 }
 
-export function getDocsTree(): DocNode[] {
-  return walk(DOCS_DIR, []);
+/**
+ * Sidebar tree. Titles come from the requested locale when translated, but the
+ * shape (which pages exist, in what order) always follows the English tree.
+ */
+export function getDocsTree(locale: Locale = DEFAULT_LOCALE): DocNode[] {
+  const tree = walk(DOCS_DIR, []);
+  if (locale === DEFAULT_LOCALE) return tree;
+
+  const localize = (nodes: DocNode[]): DocNode[] =>
+    nodes.map((node) => ({
+      ...node,
+      title: getDoc(node.slug, locale)?.meta.title ?? node.title,
+      children: localize(node.children),
+    }));
+
+  return localize(tree);
 }
 
-export function getDoc(slug: string[]): Doc | undefined {
-  const candidates =
+export function getDoc(slug: string[], locale: Locale = DEFAULT_LOCALE): Doc | undefined {
+  const dirs = locale === DEFAULT_LOCALE ? [DOCS_DIR] : [docsDir(locale), DOCS_DIR];
+  const candidates = dirs.flatMap((dir) =>
     slug.length === 0
-      ? [join(DOCS_DIR, 'index.md')]
-      : [join(DOCS_DIR, ...slug) + '.md', join(DOCS_DIR, ...slug, 'index.md')];
+      ? [join(dir, 'index.md')]
+      : [join(dir, ...slug) + '.md', join(dir, ...slug, 'index.md')],
+  );
 
   for (const file of candidates) {
     try {

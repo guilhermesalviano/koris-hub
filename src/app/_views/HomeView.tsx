@@ -6,8 +6,12 @@ import { Footer } from '@/components/Footer';
 import { ChatDemo } from '@/components/chat-demo/ChatDemo';
 import { JsonLd } from '@/components/JsonLd';
 import { REPO_URL, SITE_URL } from '@/lib/constants';
+import { getDictionary, type Locale } from '@/i18n';
+import { HTML_LANG } from '@/i18n/locales';
 
-export default function Home() {
+export function HomeView({ locale }: { locale: Locale }) {
+  const dict = getDictionary(locale);
+
   return (
     <main className="mx-auto max-w-5xl px-6 py-12 sm:py-16">
       <JsonLd
@@ -25,8 +29,7 @@ export default function Home() {
           offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
           codeRepository: REPO_URL,
           url: `${SITE_URL}/`,
-          description:
-            'Self-hosted, open-source AI agent framework written in TypeScript. Receives messages through pluggable channels (Telegram, WhatsApp, a terminal UI, a web dashboard), runs them through an LLM, executes tools, and persists memory and sessions in a local SQLite database.',
+          description: dict.meta.siteDescription,
           featureList: [
             'Pluggable channels: Telegram, WhatsApp, terminal UI, web dashboard',
             'Persistent memory and sessions in local SQLite',
@@ -38,17 +41,17 @@ export default function Home() {
         }}
       />
 
-      <Hero />
+      <Hero dict={dict} />
 
-      <ChatDemo />
+      <ChatDemo dict={dict} />
 
-      <Extend />
+      <Extend dict={dict} locale={locale} />
 
-      <Download />
+      <Download dict={dict} />
 
-      <Changelog />
+      <Changelog dict={dict} />
 
-      <Footer />
+      <Footer dict={dict} />
     </main>
   );
 }

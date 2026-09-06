@@ -1,12 +1,13 @@
 import type { CatalogParam } from '@content/marketplace/schema';
+import type { Dictionary } from '@/i18n';
 
 function typeLabel(type: CatalogParam['type']): string {
   return Array.isArray(type) ? type.join(' | ') : type;
 }
 
-export function ParamTable({ params }: { params: CatalogParam[] }) {
+export function ParamTable({ params, dict }: { params: CatalogParam[]; dict: Dictionary }) {
   if (params.length === 0) {
-    return <p className="text-sm text-muted">No parameters.</p>;
+    return <p className="text-sm text-muted">{dict.marketplace.noParameters}</p>;
   }
 
   return (
@@ -14,10 +15,10 @@ export function ParamTable({ params }: { params: CatalogParam[] }) {
       <table className="w-full border-collapse text-sm">
         <thead>
           <tr className="border-b border-border text-left text-muted">
-            <th className="py-2 pr-4 font-semibold">Name</th>
-            <th className="py-2 pr-4 font-semibold">Type</th>
-            <th className="py-2 pr-4 font-semibold">Required</th>
-            <th className="py-2 font-semibold">Description</th>
+            <th className="py-2 pr-4 font-semibold">{dict.marketplace.paramName}</th>
+            <th className="py-2 pr-4 font-semibold">{dict.marketplace.paramType}</th>
+            <th className="py-2 pr-4 font-semibold">{dict.marketplace.paramRequired}</th>
+            <th className="py-2 font-semibold">{dict.marketplace.paramDescription}</th>
           </tr>
         </thead>
         <tbody>
@@ -32,7 +33,7 @@ export function ParamTable({ params }: { params: CatalogParam[] }) {
                   </span>
                 )}
               </td>
-              <td className="py-2 pr-4 text-muted">{p.required ? 'yes' : '—'}</td>
+              <td className="py-2 pr-4 text-muted">{p.required ? dict.marketplace.paramYes : '—'}</td>
               <td className="py-2 text-muted">{p.description}</td>
             </tr>
           ))}

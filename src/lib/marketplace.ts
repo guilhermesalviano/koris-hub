@@ -1,5 +1,6 @@
 import { readdirSync, readFileSync, statSync } from 'fs';
 import { basename, join, relative } from 'path';
+import { DEFAULT_LOCALE, type Locale } from '@/i18n/locales';
 import {
   CatalogEntry,
   Family,
@@ -67,8 +68,25 @@ export function getAllEntries(): CatalogEntry[] {
   return entries;
 }
 
-export function getEntry(slug: string): CatalogEntry | undefined {
-  return getAllEntries().find((e) => e.slug === slug);
+/**
+ * Apply a locale's translation over the English prose. Params, tags, and every
+ * structural field stay as authored — only name/summary/description localize.
+ */
+function localizeEntry(entry: CatalogEntry, locale: Locale): CatalogEntry {
+  if (locale === DEFAULT_LOCALE) return entry;
+  const t = entry.i18n?.[locale];
+  if (!t) return entry;
+  return {
+    ...entry,
+    name: t.name ?? entry.name,
+    summary: t.summary ?? entry.summary,
+    description: t.description ?? entry.description,
+  };
+}
+
+export function getEntry(slug: string, locale: Locale = DEFAULT_LOCALE): CatalogEntry | undefined {
+  const entry = getAllEntries().find((e) => e.slug === slug);
+  return entry && localizeEntry(entry, locale);
 }
 
 export interface FamilyGroup {
@@ -77,8 +95,8 @@ export interface FamilyGroup {
   entries: CatalogEntry[];
 }
 
-export function getFamilyGroups(): FamilyGroup[] {
-  const all = getAllEntries();
+export function getFamilyGroups(locale: Locale = DEFAULT_LOCALE): FamilyGroup[] {
+  const all = getAllEntries().map((e) => localizeEntry(e, locale));
   return FAMILY_ORDER.map((family) => ({
     family,
     label: FAMILY_LABELS[family],

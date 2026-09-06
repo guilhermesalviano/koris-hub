@@ -62,6 +62,19 @@ export interface CatalogEntry {
   defaultEnabled?: boolean;
   /** optional: the koris git ref this snapshot was captured from */
   capturedFrom?: string;
+  /**
+   * Translations of the prose fields, keyed by locale. English lives in the
+   * top-level fields; anything absent here falls back to them, so a partly
+   * translated catalog still renders.
+   */
+  i18n?: Record<string, CatalogTranslation | undefined>;
+}
+
+/** Per-locale overrides of an entry's prose. All optional — missing keys fall back to English. */
+export interface CatalogTranslation {
+  name?: string;
+  summary?: string;
+  description?: string;
 }
 
 export const REQUIRED_KEYS: (keyof CatalogEntry)[] = [

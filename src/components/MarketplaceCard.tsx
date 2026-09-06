@@ -1,10 +1,20 @@
 import Link from 'next/link';
 import type { CatalogEntry } from '@content/marketplace/schema';
+import type { Dictionary } from '@/i18n';
+import { localePath, type Locale } from '@/i18n/locales';
 
-export function MarketplaceCard({ entry }: { entry: CatalogEntry }) {
+export function MarketplaceCard({
+  entry,
+  locale,
+  dict,
+}: {
+  entry: CatalogEntry;
+  locale: Locale;
+  dict: Dictionary;
+}) {
   return (
     <Link
-      href={`/marketplace/${entry.slug}`}
+      href={localePath(locale, `/marketplace/${entry.slug}/`)}
       className="flex flex-col rounded-xl border border-border bg-bg-subtle p-6 transition-colors hover:border-accent"
     >
       <div className="mb-2 flex items-center gap-2">
@@ -19,11 +29,11 @@ export function MarketplaceCard({ entry }: { entry: CatalogEntry }) {
       <div className="mt-4 flex flex-wrap gap-2">
         {entry.requiresConfirmation && (
           <span className="rounded-md bg-accent-muted px-2 py-0.5 text-xs font-semibold text-accent">
-            confirmation required
+            {dict.marketplace.confirmationRequired}
           </span>
         )}
         {entry.defaultEnabled === false && (
-          <span className="rounded-md bg-bg px-2 py-0.5 text-xs text-muted">off by default</span>
+          <span className="rounded-md bg-bg px-2 py-0.5 text-xs text-muted">{dict.marketplace.offByDefault}</span>
         )}
         {entry.tags.slice(0, 3).map((tag) => (
           <span key={tag} className="rounded-md bg-bg px-2 py-0.5 text-xs text-muted">

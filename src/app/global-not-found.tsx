@@ -1,9 +1,25 @@
+import type { Metadata } from 'next';
+import { Geist, Geist_Mono } from 'next/font/google';
 import Link from 'next/link';
 import { REPO_URL } from '@/lib/constants';
 import { MemoryIcon } from '@/components/icons';
+import './globals.css';
 
-export default function NotFound() {
+// Multiple root layouts (one per locale) mean there is no single layout to
+// compose a global 404 from, so this file owns the whole document — including
+// the styles and fonts a layout would normally provide.
+const geistSans = Geist({ subsets: ['latin'], variable: '--font-sans', display: 'swap' });
+const geistMono = Geist_Mono({ subsets: ['latin'], variable: '--font-mono', display: 'swap' });
+
+export const metadata: Metadata = {
+  title: '404 — page not found',
+  robots: { index: false, follow: true },
+};
+
+export default function GlobalNotFound() {
   return (
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className="font-sans">
     <main className="mx-auto flex min-h-[70vh] max-w-5xl flex-col items-center justify-center px-6 py-12 text-center sm:py-16">
       <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-accent-muted text-accent">
         <div className="h-7 w-7">
@@ -45,6 +61,8 @@ export default function NotFound() {
       <p className="mt-10 font-mono text-xs text-muted">
         status: 404 &middot; heartbeat still running, don&apos;t worry
       </p>
-    </main>
+        </main>
+      </body>
+    </html>
   );
 }

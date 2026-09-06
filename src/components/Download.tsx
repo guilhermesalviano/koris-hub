@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
+import type { Dictionary } from '@/i18n';
 import { RELEASES_URL } from '@/lib/constants';
 import type { DownloadAsset, LatestDownloads, Platform, PlatformDownloads } from '@/lib/downloads';
 import { detectPlatform } from '@/lib/platform';
@@ -71,7 +72,7 @@ export function CopyButton({ text, className = '' }: { text: string; className?:
   );
 }
 
-export function Download() {
+export function Download({ dict }: { dict: Dictionary }) {
   const [tab, setTab] = useState<TabId>('desktop');
   const [data, setData] = useState<LatestDownloads | null | undefined>(undefined);
   const [detected, setDetected] = useState<Platform | null>(null);
@@ -115,10 +116,9 @@ export function Download() {
     <section id="how-it-works" className="mt-24 scroll-mt-20">
       <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:gap-12">
         <div className="lg:w-72 lg:flex-shrink-0">
-          <h2 className="text-3xl font-bold tracking-tight text-txt sm:text-4xl">Get Koris running</h2>
+          <h2 className="text-3xl font-bold tracking-tight text-txt sm:text-4xl">{dict.download.title}</h2>
           <p className="mt-3 text-muted">
-            Install the desktop app, or build it from source. Either way, the first launch drops you
-            into a browser setup wizard &mdash; no manual config editing.
+            {dict.download.subtitle}
           </p>
         </div>
 
@@ -172,7 +172,7 @@ export function Download() {
                   rel="noopener"
                   className="mt-5 inline-flex rounded-md bg-accent px-4 py-2 text-xs font-semibold text-bg transition-colors hover:brightness-110"
                 >
-                  Download from GitHub
+                  {dict.download.fromGitHub}
                 </a>
               ) : (
                 <ul className="mt-5 divide-y divide-border overflow-hidden rounded-xl border border-border bg-card">
@@ -186,7 +186,7 @@ export function Download() {
                           {p.label}
                           {p.platform === detected && (
                             <span className="rounded-full border border-accent px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-accent">
-                              Your OS
+                              {dict.download.yourOs}
                             </span>
                           )}
                         </p>

@@ -3,13 +3,12 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { CopyButton } from '@/components/Download';
+import type { Dictionary } from '@/i18n';
+import { localePath, type Locale } from '@/i18n/locales';
 
 type TabId = 'skill' | 'tool';
 
-const TABS: { id: TabId; label: string }[] = [
-  { id: 'skill', label: 'Skill' },
-  { id: 'tool', label: 'Tool' },
-];
+const TAB_IDS: TabId[] = ['skill', 'tool'];
 
 const SKILL_SNIPPET = `---
 name: weather
@@ -59,51 +58,50 @@ export function create(context: ToolPluginContext): Plugin {
   };
 }`;
 
-const PANELS: Record<TabId, { path: string; code: string; docHref: string; docLabel: string }> = {
+const PANELS: Record<TabId, { path: string; code: string; docHref: string }> = {
   skill: {
     path: 'plugins/skills/weather/SKILL.md',
     code: SKILL_SNIPPET,
-    docHref: '/docs/skills',
-    docLabel: 'Skills docs',
+    docHref: '/docs/skills/',
   },
   tool: {
     path: 'plugins/tools/get-time/index.ts',
     code: TOOL_SNIPPET,
-    docHref: '/docs/tools',
-    docLabel: 'Tools docs',
+    docHref: '/docs/tools/',
   },
 };
 
-export function Extend() {
+export function Extend({ dict, locale }: { dict: Dictionary; locale: Locale }) {
   const [tab, setTab] = useState<TabId>('skill');
   const panel = PANELS[tab];
+  const tabLabel = (id: TabId) => (id === 'skill' ? dict.extend.tabSkill : dict.extend.tabTool);
+  const docLabel = tab === 'skill' ? dict.extend.docLabelSkill : dict.extend.docLabelTool;
 
   return (
     <section id="extend" className="mt-24 scroll-mt-20">
       <div className="mb-8 max-w-xl">
-        <h2 className="text-3xl font-bold tracking-tight text-txt sm:text-4xl">Extend it in minutes</h2>
+        <h2 className="text-3xl font-bold tracking-tight text-txt sm:text-4xl">{dict.extend.title}</h2>
         <p className="mt-3 text-muted">
-          Teach the agent something new with a Markdown skill it reads, or a TypeScript tool it
-          calls. Neither one touches core code.
+          {dict.extend.subtitle}
         </p>
       </div>
 
       <div className="overflow-hidden rounded-xl border border-border bg-card">
         <div className="flex items-center gap-1 overflow-x-auto border-b border-border bg-bg-subtle px-2 py-2">
-          {TABS.map((t) => {
-            const active = tab === t.id;
+          {TAB_IDS.map((id) => {
+            const active = tab === id;
             return (
               <button
-                key={t.id}
+                key={id}
                 type="button"
-                onClick={() => setTab(t.id)}
+                onClick={() => setTab(id)}
                 aria-pressed={active}
-                aria-label={t.label}
+                aria-label={tabLabel(id)}
                 className={`flex-shrink-0 rounded-lg px-3 py-1.5 font-mono text-xs transition-colors ${
                   active ? 'bg-card text-txt' : 'text-muted hover:text-txt'
                 }`}
               >
-                {PANELS[t.id].path}
+                {PANELS[id].path}
               </button>
             );
           })}
@@ -115,13 +113,12 @@ export function Extend() {
       </div>
 
       <p className="mt-4 text-xs leading-relaxed text-muted">
-        No changes to core needed &mdash; drop the file in and it's picked up automatically. Full
-        guide:{' '}
+        {dict.extend.footnoteLead}{' '}
         <Link
-          href={panel.docHref}
+          href={localePath(locale, panel.docHref)}
           className="font-semibold text-muted underline decoration-border underline-offset-2 transition-colors hover:text-accent"
         >
-          {panel.docLabel}
+          {docLabel}
         </Link>
         .
       </p>

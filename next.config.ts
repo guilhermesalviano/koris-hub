@@ -9,6 +9,11 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
+  experimental: {
+    // Required for app/global-not-found.tsx, which the per-locale root layouts
+    // make necessary — there is no single layout to build a global 404 from.
+    globalNotFound: true,
+  },
   // This repo is nested inside the `koris` checkout; pin the workspace root so
   // Turbopack doesn't walk up to koris/pnpm-workspace.yaml.
   turbopack: {

@@ -4,8 +4,10 @@ import { useEffect, useMemo, useState, type ReactNode } from 'react';
 import { RELEASES_URL } from '@/lib/constants';
 import type { DownloadAsset, LatestDownloads, Platform } from '@/lib/downloads';
 import { PLATFORM_LABELS, detectPlatform } from '@/lib/platform';
+import type { Dictionary } from '@/i18n';
 
 interface Props {
+  dict: Dictionary;
   className?: string;
   // Where to send the visitor when a direct asset can't be resolved (fetch
   // failed, no assets, or SSR before hydration). May be an in-page anchor.
@@ -28,6 +30,7 @@ function pickAsset(
 }
 
 export function DownloadButton({
+  dict,
   className,
   fallbackHref = RELEASES_URL,
   children,
@@ -60,7 +63,9 @@ export function DownloadButton({
 
   const label =
     children ??
-    (showPlatform && matchedOS ? `Download for ${PLATFORM_LABELS[resolved!.platform]}` : 'Download');
+    (showPlatform && matchedOS
+      ? `${dict.download.downloadFor} ${PLATFORM_LABELS[resolved!.platform]}`
+      : dict.download.download);
 
   return (
     <a

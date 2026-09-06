@@ -3,8 +3,9 @@
 import { useEffect, useRef, useState } from 'react';
 import type { ChangelogEntry } from '@/lib/changelog';
 import { REPO_URL } from '@/lib/constants';
+import type { Dictionary } from '@/i18n';
 
-export function Changelog() {
+export function Changelog({ dict }: { dict: Dictionary }) {
   const [entries, setEntries] = useState<ChangelogEntry[] | null>(null);
   const scrollerRef = useRef<HTMLDivElement>(null);
 
@@ -37,8 +38,8 @@ export function Changelog() {
   return (
     <section id="changelog" className="mt-24 scroll-mt-20">
       <div className="mb-12 max-w-xl">
-        <h2 className="text-3xl font-bold tracking-tight text-txt sm:text-4xl">Changelog</h2>
-        <p className="mt-3 text-muted">Every release, straight from GitHub.</p>
+        <h2 className="text-3xl font-bold tracking-tight text-txt sm:text-4xl">{dict.changelog.title}</h2>
+        <p className="mt-3 text-muted">{dict.changelog.subtitle}</p>
       </div>
 
       <div
@@ -83,7 +84,7 @@ export function Changelog() {
           rel="noopener"
           className="flex w-[200px] flex-shrink-0 snap-start flex-col items-start justify-center gap-2 rounded-xl border border-dashed border-border p-6 text-sm font-semibold text-txt transition-colors hover:border-accent"
         >
-          View full changelog
+          {dict.changelog.viewFull}
           <span aria-hidden className="text-accent">
             &rarr;
           </span>

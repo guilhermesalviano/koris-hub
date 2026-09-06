@@ -1,6 +1,7 @@
 'use client';
 
 import { Fragment, useEffect, useMemo, useRef, useState } from 'react';
+import type { Dictionary } from '@/i18n';
 import Image from 'next/image';
 import styles from './chat-demo.module.css';
 import { chatSeparatorLabel, sameDay } from '@/lib/date';
@@ -109,14 +110,14 @@ function Bubble({ message }: { message: DemoMessage }) {
   );
 }
 
-function ContextBar({ pct }: { pct: number }) {
+function ContextBar({ pct, dict }: { pct: number; dict: Dictionary }) {
   const near = pct >= 75;
   const fill = near ? 'bg-amber-500' : 'bg-[var(--accent)]';
   const label = near ? 'text-amber-400' : '';
   return (
     <div className="w-40 font-mono text-[10px] text-[var(--txt-3)]">
       <div className="flex items-center justify-between">
-        <span>context usage</span>
+        <span>{dict.chatDemo.contextUsage}</span>
         <span className={label}>{pct}%</span>
       </div>
       <div className="mt-1 h-1 overflow-hidden rounded-full bg-[var(--bg-4)]">
@@ -126,7 +127,7 @@ function ContextBar({ pct }: { pct: number }) {
   );
 }
 
-function ProviderPicker() {
+function ProviderPicker({ dict }: { dict: Dictionary }) {
   const [open, setOpen] = useState(false);
   const wrapRef = useRef<HTMLDivElement>(null);
   const active = PROVIDERS.find((p) => p.active)!;
@@ -170,20 +171,20 @@ function ProviderPicker() {
               </span>
               {p.active && (
                 <span className="flex-shrink-0 rounded bg-[var(--accent-muted)] px-1.5 py-0.5 font-mono text-[10px] text-[var(--accent-2)]">
-                  active
+                  {dict.chatDemo.active}
                 </span>
               )}
             </div>
           ))}
           <div className="my-1 border-t border-[var(--subtle)]" />
-          <div className="px-3 py-2 text-left text-[13px] text-[var(--txt-3)]">Full switching in the real dashboard</div>
+          <div className="px-3 py-2 text-left text-[13px] text-[var(--txt-3)]">{dict.chatDemo.switchingNote}</div>
         </div>
       )}
     </div>
   );
 }
 
-export function ChatDemo() {
+export function ChatDemo({ dict }: { dict: Dictionary }) {
   const [activeId, setActiveId] = useState<string | null>(MOCK_SESSIONS[0].id);
   const [sessionMessages, setSessionMessages] = useState<Record<string, DemoMessage[]>>(() =>
     Object.fromEntries(MOCK_SESSIONS.map((s) => [s.id, s.messages])),
@@ -294,7 +295,7 @@ export function ChatDemo() {
         <textarea
           ref={textareaRef}
           rows={1}
-          placeholder="Ask something…"
+          placeholder={dict.chatDemo.placeholder}
           autoComplete="off"
           value={input}
           onChange={(e) => setInput(e.target.value)}
@@ -312,7 +313,7 @@ export function ChatDemo() {
         </button>
       </div>
       <div className="mt-1.5 flex items-center justify-between gap-2 px-1 font-mono text-[11px] text-[var(--txt-3)]">
-        <ProviderPicker />
+        <ProviderPicker dict={dict} />
         <div className="flex min-w-0 items-center gap-2">
           <span className="hidden shrink-0 sm:inline">↵ send · ⇧↵ newline</span>
           <span className="shrink-0">{input.length}</span>
@@ -331,7 +332,7 @@ export function ChatDemo() {
             </div>
             <div className="hidden sm:block">
               <div className="text-[13px] font-medium text-[var(--txt)]">koris</div>
-              <div className="font-mono text-[11px] text-[var(--txt-3)]">Admin panel</div>
+              <div className="font-mono text-[11px] text-[var(--txt-3)]">{dict.chatDemo.adminPanel}</div>
             </div>
           </div>
         </header>
@@ -347,10 +348,10 @@ export function ChatDemo() {
                   className="flex w-full items-center justify-center gap-1.5 rounded-lg border border-[var(--strong)] bg-[var(--bg-3)] px-3 py-2 text-[13px] text-[var(--txt)] transition-all duration-150 hover:border-[var(--accent)] hover:bg-[var(--accent-muted)] hover:text-[var(--accent-2)]"
                 >
                   <PlusIcon className="h-3.5 w-3.5 fill-none stroke-current" />
-                  New chat
+                  {dict.chatDemo.newChat}
                 </button>
               </div>
-              <div className="px-4 pb-1 pt-1 font-mono text-[10px] uppercase tracking-wider text-[var(--txt-3)]">Chats</div>
+              <div className="px-4 pb-1 pt-1 font-mono text-[10px] uppercase tracking-wider text-[var(--txt-3)]">{dict.chatDemo.chats}</div>
               <div className={`flex-1 space-y-0.5 overflow-y-auto px-2 pb-3 ${styles.scrollThin}`}>
                 {MOCK_SESSIONS.map((session) => {
                   const isActive = session.id === activeId;
@@ -382,7 +383,7 @@ export function ChatDemo() {
                 className="flex w-full cursor-default items-center gap-2.5 rounded-lg border border-transparent px-3 py-2.5 text-[13px] text-[var(--txt-2)] opacity-60"
               >
                 <PluginsIcon className="h-4 w-4 flex-shrink-0 fill-none stroke-current" />
-                <span>Plugins</span>
+                <span>{dict.chatDemo.plugins}</span>
               </button>
               <button
                 type="button"
@@ -391,20 +392,20 @@ export function ChatDemo() {
                 className="flex w-full cursor-default items-center gap-2.5 rounded-lg border border-transparent px-3 py-2.5 text-[13px] text-[var(--txt-2)] opacity-60"
               >
                 <SettingsIcon className="h-4 w-4 flex-shrink-0 fill-none stroke-current" />
-                <span>Configuration</span>
+                <span>{dict.chatDemo.configuration}</span>
               </button>
             </div>
           </aside>
 
           <main className="flex min-w-0 flex-1 flex-col overflow-hidden">
             <div className="flex flex-shrink-0 items-center justify-between gap-2 border-b border-[var(--subtle)] px-4 py-2">
-              <span className="truncate font-mono text-[11px] text-[var(--txt-3)]">{activeTitle || 'New chat'}</span>
-              <ContextBar pct={contextPct} />
+              <span className="truncate font-mono text-[11px] text-[var(--txt-3)]">{activeTitle || dict.chatDemo.newChat}</span>
+              <ContextBar pct={contextPct} dict={dict} />
             </div>
 
             {showEmptyState ? (
               <div className="flex flex-1 flex-col items-center justify-center gap-5 px-4">
-                <h2 className="text-center text-xl font-medium text-[var(--txt)]">What can I help with?</h2>
+                <h2 className="text-center text-xl font-medium text-[var(--txt)]">{dict.chatDemo.prompt}</h2>
                 <div className="w-full max-w-2xl">{composer}</div>
               </div>
             ) : (
