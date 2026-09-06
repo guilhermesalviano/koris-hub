@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { BASE_PATH, REPO_URL } from '@/lib/constants';
-import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import type { Dictionary } from '@/i18n';
 import { localePath, type Locale } from '@/i18n/locales';
 
@@ -33,17 +32,14 @@ export function Navbar({ locale, dict }: { locale: Locale; dict: Dictionary }) {
           </div>
         </div>
 
-        <div className="flex items-center gap-3">
-          <LanguageSwitcher label={dict.nav.switchLanguage} />
-          <a
+        <a
           href={REPO_URL}
           target="_blank"
           rel="noopener"
           className="rounded-lg border border-border bg-bg-subtle px-4 py-2 text-md font-semibold text-txt transition-colors hover:border-accent"
         >
           {dict.nav.github}
-          </a>
-        </div>
+        </a>
       </nav>
     </header>
   );

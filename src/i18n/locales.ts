@@ -17,10 +17,10 @@ export const OG_LOCALE: Record<Locale, string> = {
   'pt-br': 'pt_BR',
 };
 
-/** Name of each locale, written in that locale — for the language switcher. */
+/** Short label for each locale in the switcher. Rendered uppercase (EN / PT). */
 export const LOCALE_NAME: Record<Locale, string> = {
-  en: 'English',
-  'pt-br': 'Português',
+  en: 'en',
+  'pt-br': 'pt',
 };
 
 /** localStorage key holding an explicit choice, which suppresses auto-detection. */

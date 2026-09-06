@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono } from 'next/font/google';
 import { Navbar } from '@/components/Navbar';
+import { LocaleBar } from '@/components/LocaleBar';
 import { JsonLd } from '@/components/JsonLd';
 import { SITE_URL } from '@/lib/constants';
 import { getDictionary } from '@/i18n';
@@ -38,6 +39,7 @@ export function RootLayoutView({
         />
         <Navbar locale={locale} dict={dict} />
         {children}
+        <LocaleBar label={dict.nav.switchLanguage} />
       </body>
     </html>
   );
