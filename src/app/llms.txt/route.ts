@@ -1,6 +1,7 @@
 import { SITE_URL } from '@/lib/constants';
 import { getAllDocSlugs, getDoc, summarize } from '@/lib/docs';
 import { getFamilyGroups } from '@/lib/marketplace';
+import { localePath } from '@/i18n/locales';
 
 // Static export: this GET handler runs at `next build` and its body is written
 // to out/llms.txt. Generated rather than hand-written so it cannot drift from
@@ -62,6 +63,16 @@ Key facts:
 ## Documentation
 
 ${docs}
+
+## Português (pt-BR)
+
+The whole site is also published in Brazilian Portuguese under
+${SITE_URL}/pt-br/ — same pages, same structure, translated content. Each
+English URL declares its pt-BR counterpart via hreflang, and vice versa.
+
+- [Início](${SITE_URL}${localePath('pt-br', '/')})
+- [Documentação](${SITE_URL}${localePath('pt-br', '/docs/')})
+- [Marketplace](${SITE_URL}${localePath('pt-br', '/marketplace/')})
 
 ## Marketplace
 

@@ -47,5 +47,11 @@
       "description": "Also list up to 30 links found on the page, as absolute URLs (default: false)."
     }
   ],
-  "defaultEnabled": true
+  "defaultEnabled": true,
+  "i18n": {
+    "pt-br": {
+      "summary": "Abre uma página da web e devolve o texto legível — a outra metade do Search Engine.",
+      "description": "Busca uma página e remove o HTML, deixando apenas o texto legível. O **Search Engine** encontra um `link`; o `read_url` o abre — assim o agente responde a partir da própria página, em vez de um trecho de uma linha.\n\nPáginas longas voltam em partes: o resultado termina com um aviso `[truncated at N of M chars …]`, e chamar de novo com aquele `start_char` devolve o trecho seguinte. O `include_links` acrescenta os links da página como URLs absolutas quando o passo seguinte for seguir um deles.\n\nAs URLs de saída passam pelo mesmo gate de `allowed_domains` do **Curl Request**. Um resultado de busca normalmente *não* está na allowlist, então a ferramenta responde com o host bloqueado e o comando exato para liberá-lo — um remetente confiável responde `/allow <domínio>` e o domínio segue liberado daí em diante. O agente é orientado a não tentar de novo antes disso.\n\nDiferente do `curl_request`, ele verifica o TLS, segue no máximo 5 redirecionamentos, limita o download a 5 MB e recusa respostas binárias (PDF, imagens) em vez de despejar bytes. Para chamadas de API que precisam de métodos, cabeçalhos ou corpo personalizados, use o **Curl Request**."
+    }
+  }
 }

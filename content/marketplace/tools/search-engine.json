@@ -70,5 +70,11 @@
       "description": "Search type (default: \"web\")."
     }
   ],
-  "defaultEnabled": true
+  "defaultEnabled": true,
+  "i18n": {
+    "pt-br": {
+      "summary": "Busca na web por uma instância própria do SearXNG (o SerpAPI segue como alternativa inativa).",
+      "description": "Faz uma busca na web com controles de país, idioma, recência, paginação e tipo de resultado.\n\nO backend ativo é uma instância própria do **SearXNG** (`ai.searxng_url`) — gratuita, sem custo por consulta. A implementação antiga com SerpAPI (`ai.search_api_key`) continua no código como alternativa inativa.\n\nOs resultados são títulos, links e trechos curtos. Quando o trecho não bastar, abra o `link` do resultado com o **Read URL** para ler a página inteira.\n\nEm erro de conexão ou HTTP 403, normalmente o container do SearXNG caiu — use junto com o **Restart Search Engine**."
+    }
+  }
 }

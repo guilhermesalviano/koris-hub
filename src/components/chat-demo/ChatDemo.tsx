@@ -2,10 +2,11 @@
 
 import { Fragment, useEffect, useMemo, useRef, useState } from 'react';
 import type { Dictionary } from '@/i18n';
+import type { Locale } from '@/i18n/locales';
 import Image from 'next/image';
 import styles from './chat-demo.module.css';
 import { chatSeparatorLabel, sameDay } from '@/lib/date';
-import { CANNED_REPLIES, MOCK_SESSIONS, type DemoMessage, type DemoSession } from './mock-data';
+import { cannedReplies, mockSessions, type DemoMessage, type DemoSession } from './mock-data';
 import {
   AttachIcon,
   ChevronDownIcon,
@@ -184,7 +185,9 @@ function ProviderPicker({ dict }: { dict: Dictionary }) {
   );
 }
 
-export function ChatDemo({ dict }: { dict: Dictionary }) {
+export function ChatDemo({ dict, locale }: { dict: Dictionary; locale: Locale }) {
+  const MOCK_SESSIONS = mockSessions(locale);
+  const CANNED_REPLIES = cannedReplies(locale);
   const [activeId, setActiveId] = useState<string | null>(MOCK_SESSIONS[0].id);
   const [sessionMessages, setSessionMessages] = useState<Record<string, DemoMessage[]>>(() =>
     Object.fromEntries(MOCK_SESSIONS.map((s) => [s.id, s.messages])),

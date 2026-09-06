@@ -20,5 +20,11 @@
       "description": "The UUID of the beat to delete."
     }
   ],
-  "defaultEnabled": true
+  "defaultEnabled": true,
+  "i18n": {
+    "pt-br": {
+      "summary": "Remove ou cancela um beat pelo ID.",
+      "description": "Exclui um beat pelo ID. Use quando o usuário quiser remover ou cancelar um beat; se o ID não for conhecido, chame antes o **List Beats**."
+    }
+  }
 }

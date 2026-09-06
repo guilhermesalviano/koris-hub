@@ -21,5 +21,11 @@
       "description": "The id of the learned sticker to forget, from the \"Learned Stickers\" list."
     }
   ],
-  "defaultEnabled": true
+  "defaultEnabled": true,
+  "i18n": {
+    "pt-br": {
+      "summary": "Esquece uma figurinha aprendida para que ela pare de ser sugerida ou enviada.",
+      "description": "Esquece uma figurinha aprendida anteriormente. Use quando o usuário pedir para remover, esquecer ou parar de usar uma regra de figurinha, ou disser que uma figurinha aprendida não combina mais. Usa o id da lista \"Learned Stickers\"."
+    }
+  }
 }

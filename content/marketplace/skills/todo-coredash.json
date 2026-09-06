@@ -18,5 +18,11 @@
     "asked about unchecked tasks of the day",
     "asked to 'check' some specific task",
     "asked to review today's priorities"
-  ]
+  ],
+  "i18n": {
+    "pt-br": {
+      "summary": "Gerencie a lista de tarefas do dia do usuário através de um gateway interno seguro.",
+      "description": "Permite que o assistente liste as tarefas do dia, revise o que ficou pendente e marque tarefas como concluídas por meio de uma API de gateway interna. As chamadas passam pelo **Curl Request** contra o `GATEWAY_HOST` configurado."
+    }
+  }
 }

@@ -53,5 +53,11 @@
       "description": "Recipient address (Telegram chat id or WhatsApp JID) to use instead of the current chat. Must be provided together with channel."
     }
   ],
-  "defaultEnabled": true
+  "defaultEnabled": true,
+  "i18n": {
+    "pt-br": {
+      "summary": "Agenda um lembrete ou um \"beat\" em segundo plano com uma expressão cron de 5 campos.",
+      "description": "Salva um lembrete (um aviso agendado para o usuário) ou um `scheduled_beat` (uma execução automática do agente em segundo plano) com uma expressão cron padrão de 5 campos.\n\nO comportamento padrão é um beat **único** — todos os campos ficam fixos; curingas só são usados quando você pedir explicitamente um padrão recorrente (\"todo dia\", \"toda segunda\").\n\nNão fica disponível para o próprio sub-agente de heartbeat, então um beat não pode agendar outros beats recursivamente."
+    }
+  }
 }

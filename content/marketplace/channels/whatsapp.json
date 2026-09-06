@@ -13,5 +13,11 @@
   ],
   "sourcePath": "plugins/channels/whatsapp",
   "sourceUrl": "https://github.com/guilhermesalviano/koris/tree/main/plugins/channels/whatsapp",
-  "defaultEnabled": false
+  "defaultEnabled": false,
+  "i18n": {
+    "pt-br": {
+      "summary": "Conecte o agente ao WhatsApp via Baileys — texto, imagens e figurinhas.",
+      "description": "Plugin de canal do WhatsApp construído sobre o Baileys. O pareamento é feito escaneando um QR code na primeira execução; o estado de autenticação fica salvo localmente.\n\nSuporta imagens recebidas, whitelist por JID e as ferramentas de figurinha (**Learn / Send / Unlearn Sticker**). Desativado por padrão — ative pelo dashboard e faça o pareamento."
+    }
+  }
 }

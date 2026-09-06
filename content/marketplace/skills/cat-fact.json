@@ -14,5 +14,11 @@
   "sourceUrl": "https://github.com/guilhermesalviano/koris-hub/tree/main/koris-plugins/skills/cat-fact",
   "readWhen": [
     "asked random cat facts"
-  ]
+  ],
+  "i18n": {
+    "pt-br": {
+      "summary": "Curiosidades aleatórias sobre gatos e informações de raças, do catfact.ninja — grátis, sem chave de API.",
+      "description": "Busca uma curiosidade aleatória sobre gatos (ou informações de raça) em `catfact.ninja`. Uma skill de exemplo minimalista — um único endpoint acessado pelo **Curl Request**."
+    }
+  }
 }

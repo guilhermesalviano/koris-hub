@@ -35,5 +35,11 @@
     }
   ],
   "requiresConfirmation": true,
-  "defaultEnabled": false
+  "defaultEnabled": false,
+  "i18n": {
+    "pt-br": {
+      "summary": "Cria o esqueleto de uma ferramenta nova pela conversa — nome, descrição e lista de parâmetros.",
+      "description": "Gera o esqueleto de um novo plugin de ferramenta (pasta + `index.ts` + teste) a partir de um nome, uma descrição e uma lista de parâmetros, usando o mesmo gerador do `pnpm scaffold:tool`.\n\n**Exige confirmação.** Ele grava arquivos-fonte novos no servidor; depois de compilados e publicados, viram código executável que o agente pode chamar. O modelo precisa mostrar o nome, a descrição e os parâmetros pretendidos e esperar uma confirmação explícita em uma mensagem seguinte.\n\nA ferramenta gerada **não** fica utilizável na hora — o carregador de plugins só descobre plugins na inicialização do processo, então é preciso rodar `pnpm build` e reiniciar para que ela possa ser chamada.\n\nDesativada por padrão; ative no painel de Plugins do dashboard."
+    }
+  }
 }

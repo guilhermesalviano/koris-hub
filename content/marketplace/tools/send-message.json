@@ -38,5 +38,11 @@
       "description": "Exact message body to send."
     }
   ],
-  "defaultEnabled": true
+  "defaultEnabled": true,
+  "i18n": {
+    "pt-br": {
+      "summary": "Inicia uma mensagem para alguém no Telegram ou no WhatsApp.",
+      "description": "Abre uma nova conversa de saída por um canal. O `channel` é inferido quando o agente já está conversando a partir de um chat do Telegram ou do WhatsApp; caso contrário, informe explicitamente.\n\nO `content` é enviado exatamente como está, no corpo da mensagem."
+    }
+  }
 }

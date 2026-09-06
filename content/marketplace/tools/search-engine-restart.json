@@ -16,5 +16,11 @@
   "toolName": "restart_search_engine",
   "params": [],
   "requiresConfirmation": true,
-  "defaultEnabled": true
+  "defaultEnabled": true,
+  "i18n": {
+    "pt-br": {
+      "summary": "Reinicia o container Docker local do SearXNG quando a busca na web para de responder.",
+      "description": "Roda `docker compose down` e depois `up` para o container local do SearXNG usado pelo **Search Engine**.\n\nUse quando o `search_engine` falhar com erro de conexão ou HTTP 403 — os dois normalmente significam que o container caiu ou está rodando com uma configuração desatualizada.\n\nExige Docker no host e leva até uns 2 minutos. **Exige confirmação:** o modelo precisa avisar que a busca falhou e obter um \"sim\" explícito antes de parar e recriar o container."
+    }
+  }
 }

@@ -43,7 +43,7 @@ export function HomeView({ locale }: { locale: Locale }) {
 
       <Hero dict={dict} />
 
-      <ChatDemo dict={dict} />
+      <ChatDemo dict={dict} locale={locale} />
 
       <Extend dict={dict} locale={locale} />
 

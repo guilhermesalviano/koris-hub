@@ -15,5 +15,11 @@
   "sourceUrl": "https://github.com/guilhermesalviano/koris-hub/tree/main/koris-plugins/skills/weather",
   "readWhen": [
     "user asks about weather, temperature, or forecasts for any location"
-  ]
+  ],
+  "i18n": {
+    "pt-br": {
+      "summary": "Condições atuais e previsões curtas do wttr.in / Open-Meteo — sem chave de API.",
+      "description": "Obtém o clima atual e previsões de curto prazo via `wttr.in` ou Open-Meteo, sem precisar de chave de API. Não serve para dados históricos, alertas de tempo severo ou análise meteorológica detalhada. As consultas passam pelo **Curl Request**."
+    }
+  }
 }

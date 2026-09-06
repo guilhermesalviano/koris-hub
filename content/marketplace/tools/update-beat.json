@@ -59,5 +59,11 @@
       "description": "New recipient address (Telegram chat id or WhatsApp JID) for the beat. Must be provided together with channel."
     }
   ],
-  "defaultEnabled": true
+  "defaultEnabled": true,
+  "i18n": {
+    "pt-br": {
+      "summary": "Altera a descrição, o tipo ou o agendamento de um beat existente pelo ID.",
+      "description": "Atualiza um beat existente. Use antes o **List Beats** se o ID não for conhecido. Descrição, tipo, agendamento cron ou canal/destino de notificação podem ser alterados de forma independente."
+    }
+  }
 }

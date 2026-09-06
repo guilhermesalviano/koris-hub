@@ -27,5 +27,11 @@
       "description": "Override the recipient address (Telegram chat id or WhatsApp JID) instead of the current chat."
     }
   ],
-  "defaultEnabled": true
+  "defaultEnabled": true,
+  "i18n": {
+    "pt-br": {
+      "summary": "Envia uma figurinha já aprendida cuja descrição combina com o momento.",
+      "description": "Envia uma figurinha aprendida no chat atual como parte da resposta. Use apenas uma cuja descrição em \"Learned Stickers\" combine claramente com a situação; nunca invente um id.\n\nEla é sempre enviada como uma mensagem própria e separada. Se a figurinha sozinha já responder ao pedido, o modelo devolve uma mensagem final vazia em vez de também descrevê-la em palavras."
+    }
+  }
 }

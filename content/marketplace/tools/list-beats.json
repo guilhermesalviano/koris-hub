@@ -13,5 +13,11 @@
   "sourceUrl": "https://github.com/guilhermesalviano/koris-hub/tree/main/koris-plugins/tools/list-beats",
   "toolName": "list_beats",
   "params": [],
-  "defaultEnabled": true
+  "defaultEnabled": true,
+  "i18n": {
+    "pt-br": {
+      "summary": "Lista todos os lembretes salvos e beats agendados, com os IDs.",
+      "description": "Lista todos os beats salvos e agendados. Chame antes do **Update Beat** ou do **Delete Beat** quando o ID de destino ainda não for conhecido."
+    }
+  }
 }

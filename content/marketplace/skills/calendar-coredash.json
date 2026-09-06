@@ -18,5 +18,11 @@
     "asked what is on the schedule for a specific day",
     "asked for event locations or attendee lists",
     "asked to check availability"
-  ]
+  ],
+  "i18n": {
+    "pt-br": {
+      "summary": "Consulte e gerencie o Google Calendar do usuário através de um gateway interno seguro.",
+      "description": "Permite que o assistente veja eventos futuros, verifique disponibilidade e obtenha detalhes de reuniões no Google Calendar por meio de uma API de gateway interna. As chamadas usam o **Curl Request** contra o `GATEWAY_HOST` configurado."
+    }
+  }
 }

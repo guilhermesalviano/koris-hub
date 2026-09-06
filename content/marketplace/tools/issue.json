@@ -40,5 +40,11 @@
     }
   ],
   "requiresConfirmation": true,
-  "defaultEnabled": true
+  "defaultEnabled": true,
+  "i18n": {
+    "pt-br": {
+      "summary": "Abre uma issue no GitHub — pela API quando configurada, ou como texto formatado para colar.",
+      "description": "Cria uma issue no GitHub. Com `owner`/`repo` e um token configurados, ela é publicada pela API do GitHub; caso contrário, a ferramenta devolve o texto da issue formatado para criação manual.\n\nNormalmente você descreve o problema em texto livre — o modelo deriva daí o `title` (um resumo curto) e o `body` (a descrição mais completa), sem inventar detalhes.\n\n**Exige confirmação:** esta é uma ação que altera estado; o modelo precisa mostrar o título, o corpo, o owner e o repo derivados e esperar uma confirmação explícita em uma mensagem seguinte."
+    }
+  }
 }

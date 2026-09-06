@@ -21,5 +21,11 @@
       "description": "The situation in which this sticker should be reused later."
     }
   ],
-  "defaultEnabled": true
+  "defaultEnabled": true,
+  "i18n": {
+    "pt-br": {
+      "summary": "Memoriza uma figurinha citada no WhatsApp para reutilizá-la em situações parecidas.",
+      "description": "Memoriza uma figurinha para uso posterior. Só é acionada quando a mensagem do usuário é uma resposta que cita uma figurinha (por exemplo, citando uma e dizendo \"use esta quando eu estiver feliz\").\n\nO WhatsApp não permite legenda em figurinha, então o ensino é sempre feito citando-a em uma resposta de texto separada. Falha se a mensagem respondida não citava uma figurinha."
+    }
+  }
 }

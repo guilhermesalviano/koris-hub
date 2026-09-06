@@ -19,5 +19,11 @@
     "user asks what a specific slash command does",
     "user asks what tools or skills you have",
     "a tool call was blocked or unavailable and the user asks why"
-  ]
+  ],
+  "i18n": {
+    "pt-br": {
+      "summary": "Ensina o Koris a explicar os próprios comandos, ferramentas, skills e modelo de confiança na conversa.",
+      "description": "Uma skill autorreferente: ensina o agente a descrever com precisão a *si mesmo* — os comandos de barra, as ferramentas embutidas, as outras skills que ele tem e como o modelo de confiança decide o que cada remetente pode usar.\n\nQuais ferramentas e skills existem (e quais estão ativas) muda de instalação para instalação e ao longo do tempo. Por isso, em vez de embutir uma lista estática, esta skill busca a página de documentação atual em `hub.koaris.com` com o **Read URL** (ou o **Curl Request**, como alternativa) sempre que é acionada. O modelo de confiança em si é tratado como estável e respondido direto, por ser comportamento do core e não de um plugin.\n\nEla separa com clareza explicar o Koris na conversa de explicar como instalar o Koris: perguntas sobre instalação, deploy e código são direcionadas ao site da documentação, em vez de respondidas de memória.\n\nComo skills só são entregues a remetentes confiáveis, esta skill só chega a quem já está na allowlist de um canal — ela nunca é a primeira coisa que um contato novo e não listado vê. Ela também precisa de `hub.koaris.com` na lista de domínios permitidos para conseguir buscar qualquer coisa; se não estiver, a skill orienta o usuário a rodar `/allow hub.koaris.com`."
+    }
+  }
 }

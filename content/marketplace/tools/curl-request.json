@@ -67,5 +67,11 @@
       "description": "Optional: pipe the response through a command, e.g. \"| jq '.fact'\"."
     }
   ],
-  "defaultEnabled": true
+  "defaultEnabled": true,
+  "i18n": {
+    "pt-br": {
+      "summary": "Executa requisições HTTP com curl — o transporte que a maioria das skills usa para acessar suas APIs.",
+      "description": "Executa requisições HTTP usando `curl`. Esta é a camada de transporte sobre a qual a maioria das skills é construída: a skill descreve o endpoint e o `curl_request` faz a chamada.\n\nAs URLs de saída são verificadas contra a lista `allowed_domains` do `koris.json` pelo gate de segurança, e a ferramenta só é oferecida a remetentes confiáveis.\n\nUse apenas os parâmetros que a skill exigir explicitamente — não invente transformações extras de shell."
+    }
+  }
 }

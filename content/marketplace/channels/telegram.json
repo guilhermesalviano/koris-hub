@@ -12,5 +12,11 @@
   ],
   "sourcePath": "plugins/channels/telegram",
   "sourceUrl": "https://github.com/guilhermesalviano/koris/tree/main/plugins/channels/telegram",
-  "defaultEnabled": false
+  "defaultEnabled": false,
+  "i18n": {
+    "pt-br": {
+      "summary": "Converse com o agente por um bot do Telegram — texto, imagens, menções em grupo e aprovações.",
+      "description": "Plugin de canal do Telegram. Defina um token de bot (`CHANNELS_TELEGRAM_BOT_TOKEN` ou `bot_token` em `plugins/channels/telegram/config.yml`) e uma whitelist de remetentes; quem não estiver na lista pode, opcionalmente, falar com o agente como remetente não confiável (sem ferramentas nem skills).\n\nSuporta imagens recebidas, filtro de menções em grupo, divisão de respostas longas e um fluxo de aprovação para ações sensíveis. Desativado por padrão — ative e informe o token pelo dashboard."
+    }
+  }
 }
