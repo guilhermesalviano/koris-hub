@@ -1,6 +1,6 @@
 {
   "slug": "unlearn-sticker",
-  "name": "Unlearn Sticker",
+  "name": "Unlearn Sticker (WhatsApp)",
   "family": "tool",
   "type": "action",
   "summary": "Forget a learned sticker so it stops being suggested or sent.",

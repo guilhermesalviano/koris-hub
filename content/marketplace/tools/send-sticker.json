@@ -1,6 +1,6 @@
 {
   "slug": "send-sticker",
-  "name": "Send Sticker",
+  "name": "Send Sticker (WhatsApp)",
   "family": "tool",
   "type": "action",
   "summary": "Send a previously learned sticker whose description matches the current moment.",
