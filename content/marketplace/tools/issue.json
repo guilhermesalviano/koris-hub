@@ -1,10 +1,10 @@
 {
   "slug": "issue",
-  "name": "Issue",
+  "name": "Issue (GitHub)",
   "family": "tool",
   "type": "action",
   "summary": "File a GitHub issue — via the API when configured, otherwise as formatted text to paste.",
-  "description": "Creates a GitHub issue. With `owner`/`repo` and a token configured it posts through the GitHub API; otherwise it returns formatted issue text for manual creation.\n\nYou usually describe the problem in free-form text — the model derives the `title` (a short summary) and `body` (the fuller description) from that, without inventing details.\n\n**Requires confirmation:** this is a state-changing action; the model must show you the derived title/body/owner/repo and wait for an explicit follow-up confirmation.",
+  "description": "Creates a GitHub issue. With `owner`/`repo` and a token configured it posts through the GitHub API; otherwise it returns formatted issue text for manual creation.\n\nYou usually describe the problem in free-form text — the model derives the `title` (a short summary) and `body` (the fuller description) from that, without inventing details.\n\nEvery issue this creates ends with a trailing line — `_Filed by Koris_`, linking back to the project — so anyone reading the issue can tell it was created by Koris rather than a person.\n\n**Requires confirmation:** this is a state-changing action; the model must show you the derived title/body/owner/repo and wait for an explicit follow-up confirmation.",
   "tags": [
     "github",
     "issues",
@@ -44,7 +44,7 @@
   "i18n": {
     "pt-br": {
       "summary": "Abre uma issue no GitHub — pela API quando configurada, ou como texto formatado para colar.",
-      "description": "Cria uma issue no GitHub. Com `owner`/`repo` e um token configurados, ela é publicada pela API do GitHub; caso contrário, a ferramenta devolve o texto da issue formatado para criação manual.\n\nNormalmente você descreve o problema em texto livre — o modelo deriva daí o `title` (um resumo curto) e o `body` (a descrição mais completa), sem inventar detalhes.\n\n**Exige confirmação:** esta é uma ação que altera estado; o modelo precisa mostrar o título, o corpo, o owner e o repo derivados e esperar uma confirmação explícita em uma mensagem seguinte."
+      "description": "Cria uma issue no GitHub. Com `owner`/`repo` e um token configurados, ela é publicada pela API do GitHub; caso contrário, a ferramenta devolve o texto da issue formatado para criação manual.\n\nNormalmente você descreve o problema em texto livre — o modelo deriva daí o `title` (um resumo curto) e o `body` (a descrição mais completa), sem inventar detalhes.\n\nToda issue criada termina com uma linha — `_Filed by Koris_`, com link de volta para o projeto — para que quem ler a issue saiba que ela foi criada pelo Koris, não por uma pessoa.\n\n**Exige confirmação:** esta é uma ação que altera estado; o modelo precisa mostrar o título, o corpo, o owner e o repo derivados e esperar uma confirmação explícita em uma mensagem seguinte."
     }
   }
 }
