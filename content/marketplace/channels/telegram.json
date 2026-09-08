@@ -13,10 +13,20 @@
   "sourcePath": "koris-plugins/channels/telegram",
   "sourceUrl": "https://github.com/guilhermesalviano/koris-hub/tree/main/koris-plugins/channels/telegram",
   "defaultEnabled": false,
+  "hints": {
+    "uninstalled": "Connect your agent to a Telegram bot with text, photos, and approvals. Click Download to install from Koris Hub.",
+    "inactive": "Telegram channel is installed locally. Click Activate above to enable it and configure your bot credentials.",
+    "allowUnlisted": "Reply to senders not on the whitelist, as untrusted (no tools or learned skills)."
+  },
   "i18n": {
     "pt-br": {
       "summary": "Converse com o agente por um bot do Telegram — texto, imagens, menções em grupo e aprovações.",
-      "description": "Plugin de canal do Telegram. Defina um token de bot (`CHANNELS_TELEGRAM_BOT_TOKEN` ou `bot_token` em `plugins/channels/telegram/config.yml`) e uma whitelist de remetentes; quem não estiver na lista pode, opcionalmente, falar com o agente como remetente não confiável (sem ferramentas nem skills).\n\nSuporta imagens recebidas, filtro de menções em grupo, divisão de respostas longas e um fluxo de aprovação para ações sensíveis. Desativado por padrão — ative e informe o token pelo dashboard."
+      "description": "Plugin de canal do Telegram. Defina um token de bot (`CHANNELS_TELEGRAM_BOT_TOKEN` ou `bot_token` em `plugins/channels/telegram/config.yml`) e uma whitelist de remetentes; quem não estiver na lista pode, opcionalmente, falar com o agente como remetente não confiável (sem ferramentas nem skills).\n\nSuporta imagens recebidas, filtro de menções em grupo, divisão de respostas longas e um fluxo de aprovação para ações sensíveis. Desativado por padrão — ative e informe o token pelo dashboard.",
+      "hints": {
+        "uninstalled": "Conecte seu agente a um bot do Telegram com texto, fotos e aprovações. Clique em Baixar para instalar a partir do Koris Hub.",
+        "inactive": "O canal do Telegram está instalado localmente. Clique em Ativar acima para habilitá-lo e configurar as credenciais do seu bot.",
+        "allowUnlisted": "Responder a remetentes fora da lista de permissões como não confiáveis (sem ferramentas ou skills aprendidas)."
+      }
     }
   }
 }

@@ -81,6 +81,7 @@ export const en = {
     toolName: 'tool name:',
     parameters: 'Parameters',
     readWhen: 'Read when',
+    setupGuidance: 'Setup & Configuration Guidance',
     viewSource: 'View source',
     improveEntry: 'Improve this entry',
     noParameters: 'No parameters.',

@@ -5,14 +5,26 @@ import { ParamTable } from '@/components/ParamTable';
 import { JsonLd } from '@/components/JsonLd';
 import { HUB_REPO_URL, SITE_URL } from '@/lib/constants';
 import { getEntry } from '@/lib/marketplace';
-import { FAMILY_DIRS, FAMILY_LABELS } from '@content/marketplace/schema';
+import { FAMILY_DIRS, FAMILY_LABELS, type ChannelHints } from '@content/marketplace/schema';
 import { getDictionary, type Locale } from '@/i18n';
 import { HTML_LANG, localePath } from '@/i18n/locales';
+
+const HINT_ORDER: (keyof ChannelHints)[] = [
+  'uninstalled',
+  'inactive',
+  'active',
+  'pairing',
+  'botNumber',
+  'whitelist',
+  'allowUnlisted',
+];
 
 export function MarketplaceEntryView({ locale, slug }: { locale: Locale; slug: string }) {
   const entry = getEntry(slug, locale);
   if (!entry) notFound();
   const dict = getDictionary(locale);
+
+  const hintKeys = entry.hints ? HINT_ORDER.filter((k) => entry.hints![k]) : [];
 
   const editUrl = `${HUB_REPO_URL}/blob/main/content/marketplace/${FAMILY_DIRS[entry.family]}/${entry.slug}.json`;
 
@@ -84,6 +96,19 @@ export function MarketplaceEntryView({ locale, slug }: { locale: Locale; slug: s
       </header>
 
       <Markdown>{entry.description}</Markdown>
+
+      {hintKeys.length > 0 && (
+        <section className="mt-10">
+          <h2 className="mb-4 text-2xl font-bold tracking-tight text-txt">{dict.marketplace.setupGuidance}</h2>
+          <div className="rounded-lg border border-border bg-bg-subtle p-4">
+            <ul className="space-y-2 text-sm text-muted">
+              {hintKeys.map((k) => (
+                <li key={k}>{entry.hints![k]}</li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
 
       {entry.params && (
         <section className="mt-10">

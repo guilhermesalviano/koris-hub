@@ -33,6 +33,28 @@ export interface CatalogParam {
   enum?: string[];
 }
 
+/**
+ * Channels only: short setup / lifecycle guidance strings, surfaced on the
+ * detail page and reused verbatim by koris's setup wizard. Every field is
+ * optional — render only the ones present.
+ */
+export interface ChannelHints {
+  /** Guidance shown before download/installation */
+  uninstalled?: string;
+  /** Guidance shown when installed but inactive */
+  inactive?: string;
+  /** General runtime guidance when active */
+  active?: string;
+  /** QR code pairing instructions (WhatsApp) */
+  pairing?: string;
+  /** Bot phone number guidance */
+  botNumber?: string;
+  /** Unlisted sender policy note */
+  allowUnlisted?: string;
+  /** Whitelist input note */
+  whitelist?: string;
+}
+
 export interface CatalogEntry {
   /** kebab-case id; equals the filename and the /marketplace/<slug> segment */
   slug: string;
@@ -62,6 +84,8 @@ export interface CatalogEntry {
   defaultEnabled?: boolean;
   /** optional: the koris git ref this snapshot was captured from */
   capturedFrom?: string;
+  /** channels only: setup / lifecycle guidance strings */
+  hints?: ChannelHints;
   /**
    * Translations of the prose fields, keyed by locale. English lives in the
    * top-level fields; anything absent here falls back to them, so a partly
@@ -75,6 +99,8 @@ export interface CatalogTranslation {
   name?: string;
   summary?: string;
   description?: string;
+  /** channels only: per-locale overrides of individual hint strings */
+  hints?: ChannelHints;
 }
 
 export const REQUIRED_KEYS: (keyof CatalogEntry)[] = [

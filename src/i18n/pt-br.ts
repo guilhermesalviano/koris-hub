@@ -86,6 +86,7 @@ export const ptBr: Dictionary = {
     toolName: 'nome da ferramenta:',
     parameters: 'Parâmetros',
     readWhen: 'Quando usar',
+    setupGuidance: 'Guia de Configuração e Instalação',
     viewSource: 'Ver código-fonte',
     improveEntry: 'Melhorar esta entrada',
     noParameters: 'Sem parâmetros.',

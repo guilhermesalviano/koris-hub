@@ -81,6 +81,7 @@ function localizeEntry(entry: CatalogEntry, locale: Locale): CatalogEntry {
     name: t.name ?? entry.name,
     summary: t.summary ?? entry.summary,
     description: t.description ?? entry.description,
+    hints: t.hints ? { ...entry.hints, ...t.hints } : entry.hints,
   };
 }
 
