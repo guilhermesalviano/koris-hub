@@ -4,6 +4,11 @@ out
 next-env.d.ts
 *.tsbuildinfo
 
+# Channel plugin bundles are built from the vendored TS source by
+# scripts/build-channels.ts (CI: .github/workflows/build-channels.yml) and
+# published as `channels-latest` release assets — never hand-committed.
+koris-plugins/channels/*/index.js
+
 .env
 .env.local
 

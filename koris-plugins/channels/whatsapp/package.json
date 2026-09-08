@@ -1,0 +1,6 @@
+{
+  "name": "@koris-plugins/channel-whatsapp",
+  "version": "0.1.0",
+  "description": "Autonomous WhatsApp channel adapter using @whiskeysockets/baileys and QR terminal with support for multi-device auth, media, voice notes, stickers, and mention filtering.",
+  "main": "index.js"
+}

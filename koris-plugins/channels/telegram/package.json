@@ -1,0 +1,6 @@
+{
+  "name": "@koris-plugins/channel-telegram",
+  "version": "0.1.0",
+  "description": "Autonomous Telegram bot channel adapter using @guilhermesalviano/telegram-bot with support for streaming, commands, approvals, and media attachments.",
+  "main": "index.js"
+}

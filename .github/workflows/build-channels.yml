@@ -1,0 +1,69 @@
+name: Build channel bundles
+
+# The `.ts` source under koris-plugins/channels/<slug>/ is committed; the bundled
+# index.js is not (see .gitignore). This rebuilds each bundle with
+# scripts/build-channels.ts and publishes them as assets on the rolling
+# `channels-latest` prerelease, which is where `koris`'s `pnpm hub:pull` fetches
+# a channel's index.js from (the .ts / .yml / package.json still come from the
+# repo folder, exactly like tools and skills).
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'koris-plugins/channels/**'
+      - 'scripts/build-channels.ts'
+      - '.github/workflows/build-channels.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-channels
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Bundle and publish
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24.x'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build channel bundles
+        run: pnpm build:channels
+
+      - name: Stage assets
+        run: |
+          set -eu
+          mkdir -p dist-channels
+          for dir in koris-plugins/channels/*/; do
+            slug=$(basename "$dir")
+            [ -f "$dir/index.js" ] || { echo "missing $dir/index.js"; exit 1; }
+            cp "$dir/index.js" "dist-channels/$slug-index.js"
+          done
+          ls -la dist-channels
+
+      - name: Publish to channels-latest release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: channels-latest
+          name: Channel bundles (latest)
+          body: >
+            Auto-built CJS bundles of the koris-hub channel plugins, from
+            ${{ github.sha }}. Consumed by `koris` via `pnpm hub:pull`.
+          prerelease: true
+          files: dist-channels/*-index.js

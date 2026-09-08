@@ -10,6 +10,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:channels": "tsx scripts/build-channels.ts",
     "preview": "pnpm dlx serve out",
     "lint": "tsc --noEmit -p tsconfig.json"
   },
@@ -32,11 +33,15 @@
     "gray-matter": "^4.0.3"
   },
   "devDependencies": {
+    "@guilhermesalviano/telegram-bot": "^0.1.2",
     "@tailwindcss/postcss": "^4.3.3",
     "@tailwindcss/typography": "^0.5.15",
     "@types/node": "^26.4.0",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.5",
+    "@whiskeysockets/baileys": "7.0.0-rc14",
+    "esbuild": "^0.28.2",
+    "qrcode-terminal": "^0.12.0",
     "tailwindcss": "^4.3.3",
     "tsx": "^4.23.12",
     "typescript": "^7.0.2"

@@ -10,8 +10,8 @@
     "telegram",
     "bot"
   ],
-  "sourcePath": "plugins/channels/telegram",
-  "sourceUrl": "https://github.com/guilhermesalviano/koris/tree/main/plugins/channels/telegram",
+  "sourcePath": "koris-plugins/channels/telegram",
+  "sourceUrl": "https://github.com/guilhermesalviano/koris-hub/tree/main/koris-plugins/channels/telegram",
   "defaultEnabled": false,
   "i18n": {
     "pt-br": {

@@ -35,10 +35,12 @@ src/lib/            constants.ts, changelog.ts, downloads.ts, marketplace.ts,
 content/marketplace/  catalog entries as <family-dir>/<slug>.json (tools/, channels/,
                     skills/) + schema.ts (typed)
 content/docs/         *.md docs (frontmatter: title, order); index.md per section
-scripts/              generate-catalog.ts (sketch)
-koris-plugins/        canonical home for plugin and skill source that has moved out of
-                      `koris` (reference only, not built/imported by this app); see
-                      koris-plugins/README.md and koris-plugins/skills/README.md
+scripts/              generate-catalog.ts (sketch), build-channels.ts (esbuild →
+                      koris-plugins/channels/*/index.js, git-ignored)
+koris-plugins/        canonical home for tool / skill / channel source that has moved
+                      out of `koris` (reference only, not built/imported by this app —
+                      except `pnpm build:channels`); see koris-plugins/README.md,
+                      koris-plugins/skills/README.md, koris-plugins/channels/README.md
 ```
 
 ## Conventions / gotchas
@@ -68,13 +70,20 @@ koris-plugins/        canonical home for plugin and skill source that has moved 
 ## Relationship to koris
 
 The `koris` repo no longer contains a website. It links here from its README /
-AGENTS.md. Some plugin/skill source still lives in `koris` (under `plugins/channels/`,
+AGENTS.md. Some plugin/skill source still lives in `koris` (under
 `plugins/tools/`, `plugins/skills/`); this repo describes those via `content/marketplace/`. A growing
-set of plugins and skills (see `koris-plugins/README.md` and
-`koris-plugins/skills/README.md` for the current lists) have had their source
-removed from `koris` and now live here instead, under `koris-plugins/tools/` /
-`koris-plugins/skills/` — for those, `content/marketplace/*.json` `sourcePath`/
+set of plugins, skills, and channels (see `koris-plugins/README.md`,
+`koris-plugins/skills/README.md`, and `koris-plugins/channels/README.md` for the current lists) have had their source
+removed from `koris` and now live here instead, under `koris-plugins/tools/`,
+`koris-plugins/skills/`, and `koris-plugins/channels/` — for those, `content/marketplace/*.json` `sourcePath`/
 `sourceUrl` point at this repo, not `koris`.
+
+`koris` pulls these on demand via `pnpm hub:pull` (`koris/scripts/hub-sync.ts`),
+which reads files straight from this repo's tree. Channels additionally need
+their built `index.js` — git-ignored here, published to the `channels-latest`
+release by `.github/workflows/build-channels.yml` — and a `channel` family entry
+in `koris`'s `hub-sync.ts` (not there yet: today `hub:pull` only handles
+`tool`/`skill`).
 
 <!-- BEGIN:nextjs-agent-rules -->
 

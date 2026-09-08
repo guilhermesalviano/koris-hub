@@ -11,8 +11,8 @@
     "baileys",
     "stickers"
   ],
-  "sourcePath": "plugins/channels/whatsapp",
-  "sourceUrl": "https://github.com/guilhermesalviano/koris/tree/main/plugins/channels/whatsapp",
+  "sourcePath": "koris-plugins/channels/whatsapp",
+  "sourceUrl": "https://github.com/guilhermesalviano/koris-hub/tree/main/koris-plugins/channels/whatsapp",
   "defaultEnabled": false,
   "i18n": {
     "pt-br": {
