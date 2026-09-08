@@ -1,0 +1,29 @@
+{
+  "slug": "humanize-dev-linkedin",
+  "name": "Humanize Dev LinkedIn",
+  "family": "skill",
+  "type": "writing",
+  "summary": "Rewrites dev project updates into authentic, high-signal LinkedIn posts without AI cringe.",
+  "description": "Transforms AI-generated or rough drafts of developer project updates into authentic, technically grounded LinkedIn posts that engineers actually respect.\n\nStrips out the common tells of synthetic writing on LinkedIn — corporate PR fluff (*\"thrilled to announce\"*), motivational broetry (one-line suspense fragments), emoji-bullet clutter, fake engagement bait (*\"drop a comment below! 👇\"*), and hollow buzzwords. Instead, it anchors the post on four engineering fundamentals: the initial itch or problem, the concrete technical mechanism, the hardest roadblock or trade-off, and clean links to code or artifacts.\n\nIncludes specific anti-pattern catalogs, before/after transformations, and templates for itch-scratching tools, debugging post-mortems, and performance benchmarks.",
+  "tags": [
+    "writing",
+    "linkedin",
+    "developer",
+    "humanizer",
+    "social"
+  ],
+  "sourcePath": "koris-plugins/skills/humanize-dev-linkedin",
+  "sourceUrl": "https://github.com/guilhermesalviano/koris-hub/tree/main/koris-plugins/skills/humanize-dev-linkedin",
+  "readWhen": [
+    "user wants to write, polish, or humanize a LinkedIn post about a dev project or tool",
+    "asked to report or showcase personal coding projects on LinkedIn",
+    "drafting a post-mortem, benchmark result, or release announcement for LinkedIn"
+  ],
+  "i18n": {
+    "pt-br": {
+      "name": "Humanizar Dev LinkedIn",
+      "summary": "Reescreve posts de projetos no LinkedIn com tom autêntico e foco técnico, sem clichês de IA.",
+      "description": "Transforma rascunhos ou textos gerados por IA sobre projetos de software em publicações autênticas e técnicas para o LinkedIn que desenvolvedores realmente respeitam.\n\nRemove os vícios mais comuns de escrita sintética no LinkedIn: jargões corporativos (*\"muito feliz em anunciar\"*), \"broetry\" motivacional (frases soltas com quebras forçadas para gerar falso suspense), excesso de emojis como marcadores, iscas de engajamento forçadas (*\"comente aqui embaixo! 👇\"*) e adjetivos vazios. Em vez disso, ancora o texto em quatro pilares de engenharia: o problema real, o mecanismo técnico concreto, os trade-offs e limites honestos, e links diretos para o código ou demo.\n\nInclui catálogo de anti-padrões com exemplos de antes/depois e modelos para ferramentas pessoais, post-mortems de bugs e otimizações de performance."
+    }
+  }
+}

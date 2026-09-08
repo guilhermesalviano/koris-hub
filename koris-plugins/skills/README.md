@@ -20,9 +20,9 @@ fenced code blocks for requests/responses). No custom XML tags.
 
 ## Contents
 
-6 skills. Five were originally at `koris`'s `skills/<slug>/`, removed there and
-now maintained here going forward; `koris-help` was written here from the
-start and has never lived in `koris`:
+7 skills. Five were originally at `koris`'s `skills/<slug>/`, removed there and
+now maintained here going forward; `koris-help` and `humanize-dev-linkedin`
+were written here from the start and have never lived in `koris`:
 
 - `cat-fact/` — the `cat-fact` skill. Sample/reference skill for this
   pattern.
@@ -38,6 +38,9 @@ start and has never lived in `koris`:
   its "API" is `hub.koaris.com` itself — it fetches the live docs pages with
   `read_url`/`curl_request` instead of embedding a static list, since
   installed tools and skills vary per deployment.
+- `humanize-dev-linkedin/` — the `humanize-dev-linkedin` skill: rewrites
+  developer project updates into authentic, high-signal LinkedIn posts
+  without AI cringe, broetry, or engagement bait.
 
 The three `-coredash` skills were renamed from `-gateway`: slug, directory,
 `SKILL.md` front-matter `name`, and the matching `content/marketplace/*.json`
