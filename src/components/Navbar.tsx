@@ -12,19 +12,19 @@ export function Navbar({ locale, dict }: { locale: Locale; dict: Dictionary }) {
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-bg/80 backdrop-blur-md">
-      <nav className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-        <div className="flex gap-6">
-          <Link href={localePath(locale, "/")} className="flex items-center gap-2">
+      <nav className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3 sm:px-6 sm:py-4">
+        <div className="flex items-center gap-4 sm:gap-6">
+          <Link href={localePath(locale, "/")} className="flex items-center gap-2 shrink-0">
             <Image src={`${BASE_PATH}/logo.png`} alt="" width={28} height={28} className="rounded-md" />
             <span className="text-md font-semibold tracking-tight text-txt">koris</span>
           </Link>
 
-          <div className="hidden items-center gap-4 sm:flex">
+          <div className="flex items-center gap-3 sm:gap-4">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={localePath(locale, link.href)}
-                className="text-md text-muted transition-colors hover:text-txt"
+                className="whitespace-nowrap text-sm font-medium text-muted transition-colors hover:text-txt sm:text-md"
               >
                 {link.label}
               </Link>
@@ -36,7 +36,7 @@ export function Navbar({ locale, dict }: { locale: Locale; dict: Dictionary }) {
           href={REPO_URL}
           target="_blank"
           rel="noopener"
-          className="rounded-lg border border-border bg-bg-subtle px-4 py-2 text-md font-semibold text-txt transition-colors hover:border-accent"
+          className="shrink-0 rounded-lg border border-border bg-bg-subtle px-3 py-1.5 text-sm font-semibold text-txt transition-colors hover:border-accent sm:px-4 sm:py-2 sm:text-md"
         >
           {dict.nav.github}
         </a>
