@@ -55,6 +55,20 @@ export interface ChannelHints {
   whitelist?: string;
 }
 
+/**
+ * Channels only: one editable config input, so koris's setup wizard can render
+ * a channel's form from the catalog instead of hard-coding it. `name` is the
+ * config key written to the channel's `config.yml`.
+ */
+export interface ChannelConfigField {
+  name: string;
+  label: string;
+  type: 'text' | 'password' | 'boolean' | 'number';
+  placeholder?: string;
+  description?: string;
+  required?: boolean;
+}
+
 export interface CatalogEntry {
   /** kebab-case id; equals the filename and the /marketplace/<slug> segment */
   slug: string;
@@ -86,6 +100,8 @@ export interface CatalogEntry {
   capturedFrom?: string;
   /** channels only: setup / lifecycle guidance strings */
   hints?: ChannelHints;
+  /** channels only: editable config inputs for the setup wizard form */
+  configFields?: ChannelConfigField[];
   /**
    * Translations of the prose fields, keyed by locale. English lives in the
    * top-level fields; anything absent here falls back to them, so a partly

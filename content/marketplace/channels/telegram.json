@@ -18,6 +18,27 @@
     "inactive": "Telegram channel is installed locally. Click Activate above to enable it and configure your bot credentials.",
     "allowUnlisted": "Reply to senders not on the whitelist, as untrusted (no tools or learned skills)."
   },
+  "configFields": [
+    {
+      "name": "bot_token",
+      "label": "Bot Token",
+      "type": "password",
+      "required": true,
+      "placeholder": "123456789:AA..."
+    },
+    {
+      "name": "whitelist",
+      "label": "Whitelist (comma-separated chat IDs)",
+      "type": "text",
+      "placeholder": "123456,789012"
+    },
+    {
+      "name": "allow_unlisted_senders",
+      "label": "Allow unlisted senders",
+      "type": "boolean",
+      "description": "Reply to senders not on the whitelist, as untrusted (no tools or learned skills)."
+    }
+  ],
   "i18n": {
     "pt-br": {
       "summary": "Converse com o agente por um bot do Telegram — texto, imagens, menções em grupo e aprovações.",

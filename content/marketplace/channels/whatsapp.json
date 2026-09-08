@@ -21,6 +21,27 @@
     "botNumber": "Digits only. Leave blank to auto-detect it from the linked WhatsApp session.",
     "allowUnlisted": "Reply to senders not on the whitelist, as untrusted (no tools or learned skills)."
   },
+  "configFields": [
+    {
+      "name": "bot_number",
+      "label": "Bot number (for group mentions)",
+      "type": "text",
+      "placeholder": "5511999998888",
+      "description": "Digits only. Leave blank to auto-detect from the linked WhatsApp session."
+    },
+    {
+      "name": "whitelist",
+      "label": "Whitelist (comma-separated numbers)",
+      "type": "text",
+      "placeholder": "5511999999999"
+    },
+    {
+      "name": "allow_unlisted_senders",
+      "label": "Allow unlisted senders",
+      "type": "boolean",
+      "description": "Reply to senders not on the whitelist, as untrusted (no tools or learned skills)."
+    }
+  ],
   "i18n": {
     "pt-br": {
       "summary": "Conecte o agente ao WhatsApp via Baileys — texto, imagens e figurinhas.",
