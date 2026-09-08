@@ -5,6 +5,13 @@ import { getRequiredStringArg, getOptionalStringArg } from '../runtime';
 
 export const TOOL_NAME = 'issue' as const;
 
+const ATTRIBUTION = '_Filed by [Koris](https://github.com/guilhermesalviano/koris)_';
+
+/** Appends the attribution line every issue this tool creates carries. */
+function withAttribution(body: string | null): string {
+  return body ? `${body}\n\n---\n${ATTRIBUTION}` : ATTRIBUTION;
+}
+
 export async function executeIssue(
   logger: ILogger,
   args: Record<string, unknown>,
@@ -17,6 +24,7 @@ export async function executeIssue(
   }
 
   const body = getOptionalStringArg(args, 'body');
+  const finalBody = withAttribution(body);
   const owner = getOptionalStringArg(args, 'owner') || defaultOwner || undefined;
   const repo = getOptionalStringArg(args, 'repo');
 
@@ -33,7 +41,7 @@ export async function executeIssue(
     return {
       toolName: TOOL_NAME,
       success: true,
-      result: `Issue title: "${title}"\n\n${body || ''}\n\n---` +
+      result: `Issue title: "${title}"\n\n${finalBody}\n\n---` +
         `\n*GitHub API not configured - issue text generated above. ` +
         `To enable actual issue creation, set github.token in koris.json or the GITHUB_TOKEN environment variable.`,
     };
@@ -42,7 +50,7 @@ export async function executeIssue(
   const apiUrl = `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/issues`;
   const payload = JSON.stringify({
     title,
-    body,
+    body: finalBody,
   });
 
   try {
@@ -101,6 +109,7 @@ export function create(context: ToolPluginContext): Plugin {
         description:
           'Create a GitHub issue. If GitHub API is configured with owner/repo and a token, creates the issue via the GitHub API. Otherwise returns formatted issue text for manual creation. ' +
           "The human will usually describe the issue in free-form text, not as an explicit title/body — derive both from that description yourself: title is a short, clear summary (a few words); body is the fuller description, expanded from what the human said, without inventing details they didn't mention. " +
+          'The created issue automatically gets a trailing line noting it was filed by Koris — do not add your own attribution or signature to the body. ' +
           `REQUIRES CONFIRMATION: this is a state-changing action. ${confirmationNote} Only call this tool after the human has explicitly confirmed in a follow-up message.`,
         parameters: {
           title: {
