@@ -19,6 +19,12 @@ const HINT_ORDER: (keyof ChannelHints)[] = [
   'allowUnlisted',
 ];
 
+const CHAT_COMMAND_FAMILIES = {
+  tool: 'tools',
+  channel: 'channels',
+  skill: 'skills',
+} as const;
+
 export function MarketplaceEntryView({ locale, slug }: { locale: Locale; slug: string }) {
   const entry = getEntry(slug, locale);
   if (!entry) notFound();
@@ -27,6 +33,9 @@ export function MarketplaceEntryView({ locale, slug }: { locale: Locale; slug: s
   const hintKeys = entry.hints ? HINT_ORDER.filter((k) => entry.hints![k]) : [];
 
   const editUrl = `${HUB_REPO_URL}/blob/main/content/marketplace/${FAMILY_DIRS[entry.family]}/${entry.slug}.json`;
+  const terminalCommand = `pnpm hub:pull ${entry.slug}`;
+  const chatCommand = `/${CHAT_COMMAND_FAMILIES[entry.family]} download ${entry.slug}`;
+  const downloadPath = `plugins/${FAMILY_DIRS[entry.family]}/${entry.slug}/`;
 
   const path = localePath(locale, `/marketplace/${entry.slug}/`);
 
@@ -96,6 +105,35 @@ export function MarketplaceEntryView({ locale, slug }: { locale: Locale; slug: s
       </header>
 
       <Markdown>{entry.description}</Markdown>
+
+      <section className="mt-10">
+        <h2 className="mb-4 text-2xl font-bold tracking-tight text-txt">{dict.marketplace.downloadTitle}</h2>
+        <div className="rounded-lg border border-border bg-bg-subtle p-4 sm:p-5">
+          <p className="text-sm text-muted">{dict.marketplace.downloadFromRepo}</p>
+          <pre className="mt-3 overflow-x-auto rounded-md bg-bg px-4 py-3 font-mono text-sm leading-relaxed text-accent">
+            {terminalCommand}
+          </pre>
+
+          <p className="mt-5 text-sm text-muted">{dict.marketplace.downloadFromChat}</p>
+          <pre className="mt-3 overflow-x-auto rounded-md bg-bg px-4 py-3 font-mono text-sm leading-relaxed text-accent">
+            {chatCommand}
+          </pre>
+
+          <p className="mt-5 text-sm text-muted">
+            {dict.marketplace.downloadOverwrite} <code className="font-mono text-accent">--force</code>{' '}
+            {dict.marketplace.downloadOverwriteSuffix}
+          </p>
+          <p className="mt-3 text-sm text-muted">
+            {dict.marketplace.downloadLocation}{' '}
+            <code className="font-mono text-accent">{downloadPath}</code>
+          </p>
+          <p className="mt-3 text-xs text-muted">
+            {entry.family === 'channel'
+              ? dict.marketplace.downloadChannelNote
+              : dict.marketplace.downloadToolsSkillsNote}
+          </p>
+        </div>
+      </section>
 
       {hintKeys.length > 0 && (
         <section className="mt-10">
