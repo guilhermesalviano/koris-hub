@@ -4,7 +4,7 @@
   "family": "mcp",
   "type": "coredash",
   "summary": "Connect Koris to Coredash MCP server via Streamable HTTP for personal dashboard tools.",
-  "description": "Connects Koris to the **Coredash** personal assistant dashboard using the Model Context Protocol (MCP) over Streamable HTTP (`/api/mcp`).\n\nOnce connected, Koris discovers all tools exposed by the Coredash server and makes them available to the agent with the `coredash__<tool>` prefix. Configuration is managed via environment variables (`COREDASH_MCP_URL`, `COREDASH_MCP_BEARER_TOKEN`) or in `plugins/mcps/coredash/config.yml`.\n\nMCP servers are disabled by default. Enable via the admin dashboard Plugins panel or `/mcps enable coredash` in trusted chat.",
+  "description": "[CoreDash](https://github.com/guilhermesalviano/coredash) is a lightweight, self-hosted personal dashboard for personal automation, system monitoring, habit tracking, and home-lab workflows.\n\nConnects Koris to the **Coredash** personal assistant dashboard using the Model Context Protocol (MCP) over Streamable HTTP (`/api/mcp`).\n\nOnce connected, Koris discovers all tools exposed by the Coredash server and makes them available to the agent with the `coredash__<tool>` prefix. Configuration is managed via environment variables (`COREDASH_MCP_URL`, `COREDASH_MCP_BEARER_TOKEN`) or in `plugins/mcps/coredash/config.yml`.\n\nMCP servers are disabled by default. Enable via the admin dashboard Plugins panel or `/mcps enable coredash` in trusted chat.",
   "tags": [
     "mcp",
     "coredash",
@@ -36,7 +36,7 @@
     "pt-br": {
       "name": "Coredash MCP",
       "summary": "Conecte o Koris ao servidor MCP Coredash via Streamable HTTP para ferramentas de dashboard pessoal.",
-      "description": "Conecta o Koris ao dashboard de assistente pessoal **Coredash** usando o Model Context Protocol (MCP) via Streamable HTTP (`/api/mcp`).\n\nUma vez conectado, o Koris descobre todas as ferramentas expostas pelo servidor Coredash e as disponibiliza para o agente com o prefixo `coredash__<tool>`. A configuração é gerenciada por variáveis de ambiente (`COREDASH_MCP_URL`, `COREDASH_MCP_BEARER_TOKEN`) ou em `plugins/mcps/coredash/config.yml`.\n\nServidores MCP ficam desativados por padrão. Ative pelo painel de Plugins no dashboard admin ou via `/mcps enable coredash` no chat confiável."
+      "description": "O [CoreDash](https://github.com/guilhermesalviano/coredash) é um painel pessoal leve e auto-hospedado para automação pessoal, monitoramento de sistema, acompanhamento de hábitos e fluxos de home-lab.\n\nConecta o Koris ao dashboard de assistente pessoal **Coredash** usando o Model Context Protocol (MCP) via Streamable HTTP (`/api/mcp`).\n\nUma vez conectado, o Koris descobre todas as ferramentas expostas pelo servidor Coredash e as disponibiliza para o agente com o prefixo `coredash__<tool>`. A configuração é gerenciada por variáveis de ambiente (`COREDASH_MCP_URL`, `COREDASH_MCP_BEARER_TOKEN`) ou em `plugins/mcps/coredash/config.yml`.\n\nServidores MCP ficam desativados por padrão. Ative pelo painel de Plugins no dashboard admin ou via `/mcps enable coredash` no chat confiável."
     }
   }
 }

@@ -41,7 +41,7 @@ disabled at runtime without restarting the server:
 
 1 MCP server:
 
-- `coredash/` — Connects Koris to the Coredash personal assistant dashboard,
+- `coredash/` — Connects Koris to the [Coredash](https://github.com/guilhermesalviano/coredash) personal assistant dashboard (a lightweight, self-hosted personal dashboard for personal automation, system monitoring, habit tracking, and home-lab workflows),
   enabling tools for calendar, tasks, emails, and system operations.
 
 ## How `koris` consumes these
