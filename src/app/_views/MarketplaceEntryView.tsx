@@ -22,6 +22,7 @@ const HINT_ORDER: (keyof ChannelHints)[] = [
 const CHAT_COMMAND_FAMILIES = {
   tool: 'tools',
   channel: 'channels',
+  mcp: 'mcps',
   skill: 'skills',
 } as const;
 
@@ -152,6 +153,34 @@ export function MarketplaceEntryView({ locale, slug }: { locale: Locale; slug: s
         <section className="mt-10">
           <h2 className="mb-4 text-2xl font-bold tracking-tight text-txt">{dict.marketplace.parameters}</h2>
           <ParamTable params={entry.params} dict={dict} />
+        </section>
+      )}
+
+      {entry.configFields && entry.configFields.length > 0 && (
+        <section className="mt-10">
+          <h2 className="mb-4 text-2xl font-bold tracking-tight text-txt">{dict.marketplace.configFields}</h2>
+          <div className="overflow-x-auto">
+            <table className="w-full border-collapse text-sm">
+              <thead>
+                <tr className="border-b border-border text-left text-muted">
+                  <th className="py-2 pr-4 font-semibold">{dict.marketplace.paramName}</th>
+                  <th className="py-2 pr-4 font-semibold">{dict.marketplace.paramType}</th>
+                  <th className="py-2 pr-4 font-semibold">{dict.marketplace.paramRequired}</th>
+                  <th className="py-2 font-semibold">{dict.marketplace.paramDescription}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {entry.configFields.map((field) => (
+                  <tr key={field.name} className="border-b border-border/60 align-top">
+                    <td className="py-2 pr-4 font-mono text-accent">{field.name}</td>
+                    <td className="py-2 pr-4 font-mono text-xs text-muted">{field.type}</td>
+                    <td className="py-2 pr-4 text-muted">{field.required ? dict.marketplace.paramYes : '—'}</td>
+                    <td className="py-2 text-muted">{field.description ?? field.label}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </section>
       )}
 

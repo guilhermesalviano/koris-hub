@@ -23,6 +23,10 @@ aposentado em exatamente um lugar.
 | `/clear` | | Encerra esta sessão e começa outra, vazia. Nada é levado adiante. |
 | `/compact` | | Resume esta sessão na memória e começa uma nova, semeada com o resumo. |
 | `/allow` | `/allow <domínio>` | Adiciona um domínio ao `allowed_domains`. Apenas remetentes confiáveis. |
+| `/tools` | `/tools [remote \| download <nome> \| enable <nome> \| disable <nome>]` | Gerencia plugins de ferramentas. Apenas remetentes confiáveis. |
+| `/channels` | `/channels [remote \| download <nome> \| enable <nome> \| disable <nome>]` | Gerencia adaptadores de canal. Apenas remetentes confiáveis. |
+| `/skills` | `/skills [remote \| download <nome>]` | Gerencia skills em Markdown. Apenas remetentes confiáveis. |
+| `/mcps` | `/mcps [remote \| download <nome> \| enable <nome> \| disable <nome>]` | Gerencia servidores MCP. Apenas remetentes confiáveis. |
 | `/exit` | | Como sair da sessão. Listado apenas na TUI. |
 
 `/reset` é um apelido para `/clear`. `/quit` e `/bye` são apelidos para `/exit`.

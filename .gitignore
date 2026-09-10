@@ -9,3 +9,8 @@ next-env.d.ts
 .env.local
 
 .DS_Store
+
+# Plugin runtime configs & channel build artifacts
+**/config.yml
+!**/*.example.yml
+koris-plugins/channels/*/index.js

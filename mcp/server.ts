@@ -5,7 +5,7 @@ import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'
 import { getAllEntries, getEntry } from '../src/lib/marketplace';
 import type { CatalogEntry, Family } from '../content/marketplace/schema';
 
-const FAMILIES = ['tool', 'channel', 'skill'] as const satisfies readonly Family[];
+const FAMILIES = ['tool', 'channel', 'skill', 'mcp'] as const satisfies readonly Family[];
 const CATALOG_URI = 'koris://marketplace/catalog';
 
 type SearchInput = {
@@ -71,10 +71,10 @@ export function createServer(): McpServer {
     {
       title: 'Search Koris Marketplace',
       description:
-        'Find Koris tools, channels, and skills by free-text query, family, or exact tags. This only searches the catalog; it does not execute plugins.',
+        'Find Koris tools, channels, skills, and MCP servers by free-text query, family, or exact tags. This only searches the catalog; it does not execute plugins.',
       inputSchema: {
         query: z.string().optional().describe('Words to find in names, descriptions, tags, or triggers.'),
-        family: z.enum(FAMILIES).optional().describe('Limit results to a tool, channel, or skill.'),
+        family: z.enum(FAMILIES).optional().describe('Limit results to a tool, channel, skill, or mcp server.'),
         tags: z.array(z.string()).optional().describe('Require all of these exact tags.'),
       },
       annotations: {
@@ -132,7 +132,7 @@ export function createServer(): McpServer {
     CATALOG_URI,
     {
       title: 'Koris Marketplace Catalog',
-      description: 'The complete read-only catalog of Koris tools, channels, and skills.',
+      description: 'The complete read-only catalog of Koris tools, channels, skills, and MCP servers.',
       mimeType: 'application/json',
     },
     async () => ({

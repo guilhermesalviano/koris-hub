@@ -14,6 +14,7 @@ content/marketplace/
   tools/       family: "tool"      e.g. tools/issue.json
   channels/    family: "channel"   e.g. channels/telegram.json
   skills/      family: "skill"     e.g. skills/weather.json
+  mcps/        family: "mcp"       e.g. mcps/coredash.json
 ```
 
 No build step, no database.
@@ -40,7 +41,7 @@ The full type lives in `content/marketplace/schema.ts`.
 | --- | --- | --- |
 | `slug` | ✅ | kebab-case; equals the filename and the URL segment |
 | `name` | ✅ | display name |
-| `family` | ✅ | `tool` \| `channel` \| `skill` |
+| `family` | ✅ | `tool` \| `channel` \| `mcp` \| `skill` |
 | `type` | | finer label: `action`, `query`, `messaging`, `coredash`, `utility`, … |
 | `summary` | ✅ | one line, shown on cards |
 | `description` | ✅ | markdown, shown on the detail page |

@@ -94,7 +94,8 @@ export const ptBr: Dictionary = {
     downloadOverwriteSuffix: 'para substituí-lo.',
     downloadLocation: 'Os arquivos baixados vão para',
     downloadChannelNote: 'Canais são baixados como artefatos compilados da release channels-latest.',
-    downloadToolsSkillsNote: 'Ferramentas e skills são baixadas da branch main.',
+    downloadToolsSkillsNote: 'Ferramentas, skills e servidores MCP são baixados da branch main.',
+    configFields: 'Campos de Configuração',
     viewSource: 'Ver código-fonte',
     improveEntry: 'Melhorar esta entrada',
     noParameters: 'Sem parâmetros.',
@@ -122,9 +123,9 @@ export const ptBr: Dictionary = {
       'Documentação do Koris — instale e configure o agente de IA auto-hospedado, conecte canais no Telegram ou WhatsApp e estenda com ferramentas e skills.',
     marketplaceTitle: 'Marketplace',
     marketplaceDescription:
-      'Todas as ferramentas, canais e skills que acompanham o Koris — o que cada um faz, os parâmetros que aceita e um link para o código-fonte.',
+      'Todas as ferramentas, canais, skills e servidores MCP que acompanham o Koris — o que cada um faz, os parâmetros que aceita e um link para o código-fonte.',
     marketplaceIntroLead:
-      'As ferramentas, canais e skills que acompanham o Koris hoje. Cada um vive no repositório',
+      'As ferramentas, canais, skills e servidores MCP que acompanham o Koris hoje. Cada um vive no repositório',
     marketplaceIntroTail: '— este é um índice navegável, não um instalador.',
     notFoundTitle: '404 — página não encontrada',
   },

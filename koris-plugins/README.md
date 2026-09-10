@@ -11,8 +11,9 @@ purely so the plugin has a single home.
 Mirrors the path convention used in `koris`: `koris-plugins/<family>/<slug>/...`,
 matching `sourcePath` in the corresponding
 `content/marketplace/<family>/<slug>.json` entry (whose `sourceUrl` should
-point back at this repo for these plugins). Three families live here:
-`tools/` (below), `skills/` (see `skills/README.md`), and `channels/` (see `channels/README.md`).
+point back at this repo for these plugins). Four families live here:
+`tools/` (below), `skills/` (see `skills/README.md`), `channels/` (see `channels/README.md`),
+and `mcps/` (see `mcps/README.md`).
 
 ## Contents
 
@@ -56,6 +57,16 @@ hand-committed. See `channels/README.md` for what it inlines vs. leaves external
 
 Each has its matching `content/marketplace/channels/<slug>.json` `sourcePath`/
 `sourceUrl` pointing here instead of `koris`.
+
+### MCP Servers
+
+1 MCP server. Maintained as TypeScript source, pulled by `koris` on demand
+via `pnpm hub:pull <slug>` or `/mcps download <slug>`:
+
+- `mcps/coredash/`
+
+Each has its matching `content/marketplace/mcps/<slug>.json` `sourcePath`/
+`sourceUrl` pointing here instead of `koris`. See `mcps/README.md`.
 
 Note: many of these files import shared modules that aren't vendored here —
 tools reach for `../contracts`, `../define-tool`, `../runtime`, `../cron`,

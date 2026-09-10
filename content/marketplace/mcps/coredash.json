@@ -1,0 +1,42 @@
+{
+  "slug": "coredash",
+  "name": "Coredash MCP",
+  "family": "mcp",
+  "type": "coredash",
+  "summary": "Connect Koris to Coredash MCP server via Streamable HTTP for personal dashboard tools.",
+  "description": "Connects Koris to the **Coredash** personal assistant dashboard using the Model Context Protocol (MCP) over Streamable HTTP (`/api/mcp`).\n\nOnce connected, Koris discovers all tools exposed by the Coredash server and makes them available to the agent with the `coredash__<tool>` prefix. Configuration is managed via environment variables (`COREDASH_MCP_URL`, `COREDASH_MCP_BEARER_TOKEN`) or in `plugins/mcps/coredash/config.yml`.\n\nMCP servers are disabled by default. Enable via the admin dashboard Plugins panel or `/mcps enable coredash` in trusted chat.",
+  "tags": [
+    "mcp",
+    "coredash",
+    "dashboard",
+    "streamable-http",
+    "tools"
+  ],
+  "sourcePath": "koris-plugins/mcps/coredash",
+  "sourceUrl": "https://github.com/guilhermesalviano/koris-hub/tree/main/koris-plugins/mcps/coredash",
+  "defaultEnabled": false,
+  "configFields": [
+    {
+      "name": "url",
+      "label": "Server URL",
+      "type": "text",
+      "required": true,
+      "placeholder": "http://mac.local:3000/api/mcp",
+      "description": "Streamable HTTP endpoint URL of the Coredash MCP server."
+    },
+    {
+      "name": "bearer_token",
+      "label": "Bearer Token",
+      "type": "password",
+      "placeholder": "Optional bearer token",
+      "description": "Optional authentication token for the MCP server."
+    }
+  ],
+  "i18n": {
+    "pt-br": {
+      "name": "Coredash MCP",
+      "summary": "Conecte o Koris ao servidor MCP Coredash via Streamable HTTP para ferramentas de dashboard pessoal.",
+      "description": "Conecta o Koris ao dashboard de assistente pessoal **Coredash** usando o Model Context Protocol (MCP) via Streamable HTTP (`/api/mcp`).\n\nUma vez conectado, o Koris descobre todas as ferramentas expostas pelo servidor Coredash e as disponibiliza para o agente com o prefixo `coredash__<tool>`. A configuração é gerenciada por variáveis de ambiente (`COREDASH_MCP_URL`, `COREDASH_MCP_BEARER_TOKEN`) ou em `plugins/mcps/coredash/config.yml`.\n\nServidores MCP ficam desativados por padrão. Ative pelo painel de Plugins no dashboard admin ou via `/mcps enable coredash` no chat confiável."
+    }
+  }
+}

@@ -6,13 +6,14 @@
 // /marketplace/<slug> — the family folder is not part of the slug or the route.
 // See /docs/marketplace/adding-an-entry for the authoring guide.
 
-export type Family = 'tool' | 'channel' | 'skill';
+export type Family = 'tool' | 'channel' | 'mcp' | 'skill';
 
-export const FAMILY_ORDER: Family[] = ['tool', 'channel', 'skill'];
+export const FAMILY_ORDER: Family[] = ['tool', 'channel', 'mcp', 'skill'];
 
 export const FAMILY_LABELS: Record<Family, string> = {
   tool: 'Tools',
   channel: 'Channels',
+  mcp: 'MCP Servers',
   skill: 'Skills',
 };
 
@@ -20,6 +21,7 @@ export const FAMILY_LABELS: Record<Family, string> = {
 export const FAMILY_DIRS: Record<Family, string> = {
   tool: 'tools',
   channel: 'channels',
+  mcp: 'mcps',
   skill: 'skills',
 };
 
@@ -56,9 +58,9 @@ export interface ChannelHints {
 }
 
 /**
- * Channels only: one editable config input, so koris's setup wizard can render
- * a channel's form from the catalog instead of hard-coding it. `name` is the
- * config key written to the channel's `config.yml`.
+ * Channels and MCP servers: editable config inputs, so koris's setup wizard
+ * can render forms from the catalog instead of hard-coding them. `name` is
+ * the config key written to the plugin's `config.yml`.
  */
 export interface ChannelConfigField {
   name: string;

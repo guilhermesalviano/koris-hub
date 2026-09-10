@@ -22,6 +22,10 @@ command is added or retired in exactly one place.
 | `/clear` | | End this session and start a fresh, empty one. Nothing is carried forward. |
 | `/compact` | | Summarise this session into memory, then start a fresh one seeded with the summary. |
 | `/allow` | `/allow <domain>` | Add a domain to `allowed_domains`. Trusted senders only. |
+| `/tools` | `/tools [remote \| download <name> \| enable <name> \| disable <name>]` | Manage tool plugins. Trusted senders only. |
+| `/channels` | `/channels [remote \| download <name> \| enable <name> \| disable <name>]` | Manage channel adapters. Trusted senders only. |
+| `/skills` | `/skills [remote \| download <name>]` | Manage Markdown skills. Trusted senders only. |
+| `/mcps` | `/mcps [remote \| download <name> \| enable <name> \| disable <name>]` | Manage MCP server plugins. Trusted senders only. |
 | `/exit` | | How to leave the session. Listed on the TUI only. |
 
 `/reset` is an alias for `/clear`. `/quit` and `/bye` are aliases for `/exit`.
