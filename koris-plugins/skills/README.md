@@ -20,19 +20,13 @@ fenced code blocks for requests/responses). No custom XML tags.
 
 ## Contents
 
-7 skills. Five were originally at `koris`'s `skills/<slug>/`, removed there and
+4 skills. Two were originally at `koris`'s `skills/<slug>/`, removed there and
 now maintained here going forward; `koris-help` and `humanize-dev-linkedin`
 were written here from the start and have never lived in `koris`:
 
 - `cat-fact/` — the `cat-fact` skill. Sample/reference skill for this
   pattern.
 - `weather/` — the `weather` skill.
-- `calendar-coredash/` — the `calendar-coredash` skill (renamed from
-  `calendar-gateway`).
-- `emails-coredash/` — the `emails-coredash` skill (renamed from
-  `emails-gateway`).
-- `todo-coredash/` — the `todo-coredash` skill (renamed from
-  `todo-gateway`).
 - `koris-help/` — the `koris-help` skill: teaches the agent to explain its
   own commands, tools, skills, and trust model in chat. Unlike the others,
   its "API" is `hub.koaris.com` itself — it fetches the live docs pages with
@@ -42,12 +36,6 @@ were written here from the start and have never lived in `koris`:
   developer project updates into authentic, high-signal LinkedIn posts
   without AI cringe, broetry, or engagement bait.
 
-The three `-coredash` skills were renamed from `-gateway`: slug, directory,
-`SKILL.md` front-matter `name`, and the matching `content/marketplace/*.json`
-`slug`/`name`/`type`/`tags` were all updated accordingly. Prose that uses
-"gateway" as a generic architecture term (e.g. "internal gateway API", the
-`GATEWAY_HOST` env var) was intentionally left as-is — only the skill's own
-naming was renamed, not the underlying concept it describes.
 
 ## Adding another skill here
 

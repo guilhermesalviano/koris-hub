@@ -54,10 +54,8 @@ skills and no tools. See [Security](/docs/security) for how trust is decided per
 
 - `weather`
 - `cat-fact`
-- `calendar-coredash`
-- `emails-coredash`
-- `todo-coredash`
 - `koris-help`
+- `humanize-dev-linkedin`
 
 ## Adding a skill
 

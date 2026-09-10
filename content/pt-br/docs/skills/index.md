@@ -56,10 +56,8 @@ uma resposta simples, sem skills e sem ferramentas. Veja
 
 - `weather`
 - `cat-fact`
-- `calendar-coredash`
-- `emails-coredash`
-- `todo-coredash`
 - `koris-help`
+- `humanize-dev-linkedin`
 
 ## Adicionando uma skill
 
