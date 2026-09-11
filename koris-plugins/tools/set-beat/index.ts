@@ -107,12 +107,12 @@ export function create(context: ToolPluginContext): Plugin {
       const definition = defineTool({
         name: TOOL_NAME,
         description:
-          'Save a reminder or scheduled beat for the user. DEFAULT BEHAVIOR: always create a one-time beat by pinning the exact minute, hour, day-of-month, and month — NEVER use * for day-of-month or month unless the user explicitly asks for a recurring schedule (e.g. "every day", "every Monday", "every month"). Only use wildcard (*) fields when the user clearly requests a recurring pattern.',
+          'Schedule the agent to message the user at a specific time (a "beat"). Use this whenever the user asks to be reminded, notified, alerted or pinged later (e.g. "remind me…", "me lembra…", "me avisa…"). It is the only tool that makes the agent reach out on its own. Tools that add items to external todo/task lists (e.g. `*__create_todo`) do NOT notify the user; use those only when the user explicitly asks to add a task/todo to that list. DEFAULT BEHAVIOR: always create a one-time beat by pinning the exact minute, hour, day-of-month, and month — NEVER use * for day-of-month or month unless the user explicitly asks for a recurring schedule (e.g. "every day", "every Monday", "every month"). Only use wildcard (*) fields when the user clearly requests a recurring pattern.',
         parameters: {
           beat: {
             type: 'string',
             required: true,
-            description: 'Clear description of what the user wants to be reminded about or the beat to schedule.',
+            description: 'What to tell the user when the beat fires (e.g. "Alimentar os cachorros").',
           },
           type: {
             type: 'string',

@@ -146,4 +146,10 @@ describe('create', () => {
     const definition = register(() => true);
     expect(definition.enabled({ trusted: true })).toBe(true);
   });
+
+  it('description routes reminder requests here and says external todo tools do not notify', () => {
+    const definition = register(() => true);
+    expect(definition.schema.description).toMatch(/remind/i);
+    expect(definition.schema.description).toContain('do NOT notify the user');
+  });
 });
