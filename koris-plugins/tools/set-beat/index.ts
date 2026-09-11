@@ -107,17 +107,17 @@ export function create(context: ToolPluginContext): Plugin {
       const definition = defineTool({
         name: TOOL_NAME,
         description:
-          'Schedule the agent to message the user at a specific time (a "beat"). Use this whenever the user asks to be reminded, notified, alerted or pinged later (e.g. "remind me…", "me lembra…", "me avisa…"). It is the only tool that makes the agent reach out on its own. Tools that add items to external todo/task lists (e.g. `*__create_todo`) do NOT notify the user; use those only when the user explicitly asks to add a task/todo to that list. DEFAULT BEHAVIOR: always create a one-time beat by pinning the exact minute, hour, day-of-month, and month — NEVER use * for day-of-month or month unless the user explicitly asks for a recurring schedule (e.g. "every day", "every Monday", "every month"). Only use wildcard (*) fields when the user clearly requests a recurring pattern.',
+          'Schedule an action to happen at a specific time (a "beat") — for reminders that message the user, but also for background tasks. Use this whenever the user asks to be reminded, notified, alerted or pinged later (e.g. "remind me…", "me lembra…", "me avisa…") or asks the agent to do something at a later time ("me avise amanhã para…", "amanhã me cobra remarcar a consulta"). When the beat fires the agent is not invoked to generate anything on the spot: for "reminder" beats your job is to write the final message text that will be delivered by another code execution; for "scheduled_beat" beats you define the task/tool call to be executed. It is the only tool that makes the agent act on its own on schedule. Tools that add items to external todo/task lists (e.g. `*__create_todo`) do NOT notify the user nor get executed by the agent; use those only when the user explicitly asks to add a task/todo to that list. DEFAULT BEHAVIOR: always create a one-time beat by pinning the exact minute, hour, day-of-month, and month — NEVER use * for day-of-month or month unless the user explicitly asks for a recurring schedule (e.g. "every day", "every Monday", "every month"). Only use wildcard (*) fields when the user clearly requests a recurring pattern.',
         parameters: {
           beat: {
             type: 'string',
             required: true,
-            description: 'What to tell the user when the beat fires (e.g. "Alimentar os cachorros").',
+            description: 'What to deliver or run when the beat fires. For "reminder": the exact final message text to show the user (e.g. "Alimentar os cachorros"), since the agent will not be invoked to compose it at delivery time. For "scheduled_beat": the task or tool call to execute (e.g. an instruction describing the job for the scheduled run).',
           },
           type: {
             type: 'string',
             enum: ['reminder', 'scheduled_beat'],
-            description: 'Type of the beat (optional, defaults to "reminder"): "reminder" for one-time or recurring reminders to the user, "scheduled_beat" for automated background beats to be executed by the agent.',
+            description: 'Type of the beat (optional, defaults to "reminder"): "reminder" for one-time or recurring beats that deliver a message to the user, "scheduled_beat" for automated background beats that run a task/tool call (e.g. querying something and reporting back).',
           },
           cron_expression: {
             type: 'string',
