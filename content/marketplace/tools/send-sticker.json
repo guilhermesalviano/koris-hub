@@ -2,6 +2,7 @@
   "slug": "send-sticker",
   "name": "Send Sticker (WhatsApp)",
   "family": "tool",
+  "group": "stickers",
   "type": "action",
   "summary": "Send a previously learned sticker whose description matches the current moment.",
   "description": "Sends a learned sticker in the current chat as part of replying. Only use one whose \"Learned Stickers\" description clearly matches the situation; never invent an id.\n\nIt is always sent as its own standalone message. If the sticker alone answers the request, the model returns an empty final message rather than also describing it in words.",

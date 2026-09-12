@@ -2,6 +2,7 @@
   "slug": "set-beat",
   "name": "Set Beat",
   "family": "tool",
+  "group": "beats",
   "type": "action",
   "summary": "Schedule a reminder or a background \"beat\" with a 5-field cron expression.",
   "description": "Saves a reminder (a scheduled nudge to the user) or a `scheduled_beat` (an automated background agent run) with a standard 5-field cron expression.\n\nDefault behavior is a **one-time** beat — every field is pinned; wildcards are used only when you explicitly ask for a recurring pattern (\"every day\", \"every Monday\").\n\nNot available to the heartbeat sub-agent itself, so a beat cannot recursively schedule more beats.",

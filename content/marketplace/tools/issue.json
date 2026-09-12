@@ -2,6 +2,7 @@
   "slug": "issue",
   "name": "Issue (GitHub)",
   "family": "tool",
+  "group": "github",
   "type": "action",
   "summary": "File a GitHub issue — via the API when configured, otherwise as formatted text to paste.",
   "description": "Creates a GitHub issue. With `owner`/`repo` and a token configured it posts through the GitHub API; otherwise it returns formatted issue text for manual creation.\n\nYou usually describe the problem in free-form text — the model derives the `title` (a short summary) and `body` (the fuller description) from that, without inventing details.\n\nEvery issue this creates ends with a trailing line — `_Filed by Koris_`, linking back to the project — so anyone reading the issue can tell it was created by Koris rather than a person.\n\n**Requires confirmation:** this is a state-changing action; the model must show you the derived title/body/owner/repo and wait for an explicit follow-up confirmation.",

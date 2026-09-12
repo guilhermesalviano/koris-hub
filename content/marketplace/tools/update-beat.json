@@ -2,6 +2,7 @@
   "slug": "update-beat",
   "name": "Update Beat",
   "family": "tool",
+  "group": "beats",
   "type": "action",
   "summary": "Change the description, type, or schedule of an existing beat by ID.",
   "description": "Updates an existing beat. Use **List Beats** first if the ID is unknown. Any of description, type, cron schedule, or notification channel/target can be changed independently.",

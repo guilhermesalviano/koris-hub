@@ -2,6 +2,7 @@
   "slug": "list-beats",
   "name": "List Beats",
   "family": "tool",
+  "group": "beats",
   "type": "query",
   "summary": "List every saved reminder and scheduled beat, with IDs.",
   "description": "Lists all saved beats and scheduled beats. Call it before **Update Beat** or **Delete Beat** when the target ID is not already known.",

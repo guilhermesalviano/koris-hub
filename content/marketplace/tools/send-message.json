@@ -2,6 +2,7 @@
   "slug": "send-message",
   "name": "Send Message",
   "family": "tool",
+  "group": "messaging",
   "type": "action",
   "summary": "Start a new outbound message to someone on Telegram or WhatsApp.",
   "description": "Opens a new outbound conversation through a channel. `channel` is inferred when the agent is already messaging from a Telegram or WhatsApp chat; otherwise provide it explicitly.\n\n`content` is sent verbatim as the message body.",

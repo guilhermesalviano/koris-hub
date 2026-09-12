@@ -2,6 +2,7 @@
   "slug": "unlearn-sticker",
   "name": "Unlearn Sticker (WhatsApp)",
   "family": "tool",
+  "group": "stickers",
   "type": "action",
   "summary": "Forget a learned sticker so it stops being suggested or sent.",
   "description": "Forgets a previously learned sticker. Call it when the user asks to remove, forget, or stop using a sticker rule, or says a learned sticker no longer fits. Uses the id from the \"Learned Stickers\" list.",

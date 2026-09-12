@@ -2,6 +2,7 @@
   "slug": "read-url",
   "name": "Read URL",
   "family": "tool",
+  "group": "web",
   "type": "query",
   "summary": "Open a web page and return its readable text — the other half of Search Engine.",
   "description": "Fetches a page and strips the HTML down to readable text. **Search Engine** finds a `link`; `read_url` opens it — so the agent can answer from the page itself instead of a one-line snippet.\n\nLong pages come back one slice at a time: the result ends with a `[truncated at N of M chars …]` note, and calling again with that `start_char` returns the next slice. `include_links` adds the page's links as absolute URLs when the next step is to follow one.\n\nOutbound URLs go through the same `allowed_domains` gate as **Curl Request**. A search result is normally *not* on the allowlist, so the tool answers with the blocked host and the exact command to permit it — a trusted sender replies `/allow <domain>` and the domain stays allowed from then on. The agent is told not to retry until that happens.\n\nUnlike `curl_request` it verifies TLS, follows at most 5 redirects, caps the download at 5 MB, and refuses binary responses (PDF, images) rather than dumping bytes. For API calls that need custom methods, headers, or a request body, use **Curl Request** instead.",

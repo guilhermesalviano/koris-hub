@@ -2,6 +2,7 @@
   "slug": "learn-sticker",
   "name": "Learn Sticker (WhatsApp)",
   "family": "tool",
+  "group": "stickers",
   "type": "action",
   "summary": "Remember a quoted WhatsApp sticker so it can be reused in matching situations later.",
   "description": "Remembers a sticker for later reuse. Only fires when the user's message is a reply that quotes a sticker (e.g. quoting one and saying \"use this when I'm happy\").\n\nWhatsApp cannot caption a sticker, so teaching is always done by quoting it in a separate text reply. Fails if the answered message did not quote a sticker.",

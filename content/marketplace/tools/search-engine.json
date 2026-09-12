@@ -2,6 +2,7 @@
   "slug": "search-engine",
   "name": "Search Engine",
   "family": "tool",
+  "group": "search",
   "type": "query",
   "summary": "Web search via a self-hosted SearXNG instance.",
   "description": "Performs a web search with country, language, recency, pagination, and result-type controls.\n\nThe backend is a self-hosted **SearXNG** instance (`ai.searxng_url`) — free, no per-query cost.\n\nResults are titles, links and short snippets. When a snippet is not enough, open the result's `link` with **Read URL** to read the page itself.\n\nOn a connection error or HTTP 403 the SearXNG container is usually down — pair this with **Restart Search Engine**.",
