@@ -14,7 +14,6 @@ const HINT_ORDER: (keyof ChannelHints)[] = [
   'inactive',
   'active',
   'pairing',
-  'botNumber',
   'whitelist',
   'allowUnlisted',
 ];

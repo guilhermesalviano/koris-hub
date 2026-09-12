@@ -40,7 +40,7 @@ export const liveChannel: LiveChannelDescriptor = {
     configureWhatsAppRuntime({ channelHandler }) as unknown as Record<string, unknown>,
   start: ({ channelHandler, gateway, logger }) => {
     const cfg = configureWhatsAppRuntime({ channelHandler });
-    return WhatsAppChannelFactory.start({ authFolder: cfg.authFolder, botNumber: cfg.botNumber, gateway, logger });
+    return WhatsAppChannelFactory.start({ authFolder: cfg.authFolder, gateway, logger });
   },
   loadConfig: () => loadWhatsAppConfig() as unknown as Record<string, unknown>,
   writeConfigPatch: (patch) => writeWhatsAppConfigPatch(patch),
@@ -59,6 +59,5 @@ export function create(context: PluginContext, configOverride?: WhatsAppPluginCo
   return createWhatsAppPlugin({
     isEnabled: () => context.pluginEnablement.isEnabled('whatsapp'),
     authFolder: cfg.authFolder,
-    botNumber: cfg.botNumber,
   });
 }

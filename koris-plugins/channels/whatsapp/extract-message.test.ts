@@ -258,4 +258,107 @@ describe('extract-message', () => {
       }))).toBeNull();
     });
   });
+  describe('getQuotedMessageInfo', () => {
+    it('reads the quote from an extendedTextMessage contextInfo', () => {
+      const msg = makeMsg({
+        message: {
+          extendedTextMessage: {
+            text: 'and tuesday?',
+            contextInfo: {
+              stanzaId: 'Q1',
+              participant: '5511999998888@s.whatsapp.net',
+              quotedMessage: { conversation: 'monday is free' },
+            },
+          },
+        },
+      });
+      expect(getQuotedMessageInfo(msg)).toEqual({
+        quotedMessage: { conversation: 'monday is free' },
+        stanzaId: 'Q1',
+        participant: '5511999998888@s.whatsapp.net',
+      });
+    });
+
+    it('reads the quote from an imageMessage contextInfo (replying with a photo)', () => {
+      const msg = makeMsg({
+        message: {
+          imageMessage: {
+            caption: 'like this?',
+            contextInfo: {
+              stanzaId: 'Q2',
+              participant: '5511999998888@lid',
+              quotedMessage: { conversation: 'send me a screenshot' },
+            },
+          },
+        },
+      });
+      expect(getQuotedMessageInfo(msg)).toEqual({
+        quotedMessage: { conversation: 'send me a screenshot' },
+        stanzaId: 'Q2',
+        participant: '5511999998888@lid',
+      });
+    });
+
+    it('reads the quote from an audioMessage contextInfo (replying with a voice note)', () => {
+      const msg = makeMsg({
+        message: {
+          audioMessage: {
+            ptt: true,
+            contextInfo: {
+              stanzaId: 'Q3',
+              participant: '5511999998888@s.whatsapp.net',
+              quotedMessage: { conversation: 'what do you think?' },
+            },
+          },
+        },
+      });
+      expect(getQuotedMessageInfo(msg)?.stanzaId).toBe('Q3');
+    });
+
+    it('returns null when nothing is quoted', () => {
+      expect(getQuotedMessageInfo(makeMsg({ message: { conversation: 'hi' } }))).toBeNull();
+      expect(getQuotedMessageInfo(makeMsg({ message: { imageMessage: { caption: 'hi' } } }))).toBeNull();
+      expect(getQuotedMessageInfo(makeMsg())).toBeNull();
+    });
+
+    it('omits stanzaId and participant when the contextInfo has neither', () => {
+      const msg = makeMsg({
+        message: { imageMessage: { contextInfo: { quotedMessage: { conversation: 'x' } } } },
+      });
+      expect(getQuotedMessageInfo(msg)).toEqual({
+        quotedMessage: { conversation: 'x' },
+        stanzaId: undefined,
+        participant: undefined,
+      });
+    });
+  });
+
+  describe('quoted extractors reach past extendedTextMessage', () => {
+    it('extractQuotedImage works when the reply itself is an image', () => {
+      const msg = makeMsg({
+        message: {
+          imageMessage: {
+            caption: 'same as this',
+            contextInfo: {
+              stanzaId: 'Q4',
+              quotedMessage: { imageMessage: { caption: 'the original', mimetype: 'image/png' } },
+            },
+          },
+        },
+      });
+      expect(extractQuotedImage(msg)).toMatchObject({ caption: 'the original', mimetype: 'image/png', stanzaId: 'Q4' });
+    });
+
+    it('extractQuotedText works when the reply itself is a voice note', () => {
+      const msg = makeMsg({
+        message: {
+          audioMessage: {
+            ptt: true,
+            contextInfo: { quotedMessage: { conversation: 'the original text' } },
+          },
+        },
+      });
+      expect(extractQuotedText(msg)).toBe('the original text');
+    });
+  });
 });

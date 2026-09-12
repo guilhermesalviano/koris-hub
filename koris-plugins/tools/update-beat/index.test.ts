@@ -118,6 +118,45 @@ describe('updateBeat', () => {
     expect(result.success).toBe(false);
     expect(result.error).toBe('db fail');
   });
+
+  describe('one-time beats', () => {
+    const oneTimeBeat = { ...existingBeat, cronExpression: '30 9 15 6 *', runOnce: true } as HeartbeatRecord;
+
+    beforeEach(() => {
+      gateway = makeGateway({ getById: vi.fn().mockReturnValue(oneTimeBeat) });
+    });
+
+    it('moves a one-time beat to another pinned date and keeps it one-time', async () => {
+      const result = await updateBeat(logger, { id: 'hb-1', cron_expression: '0 10 20 6 *' }, gateway);
+      expect(result.success).toBe(true);
+      expect(gateway.update).toHaveBeenCalledWith('hb-1', expect.objectContaining({ cronExpression: '0 10 20 6 *', runOnce: undefined }));
+    });
+
+    it('rejects a repeating cron on a one-time beat and points to recurring: true', async () => {
+      const result = await updateBeat(logger, { id: 'hb-1', cron_expression: '0 10 * * *' }, gateway);
+      expect(result.success).toBe(false);
+      expect(result.error).toContain('recurring: true');
+      expect(gateway.update).not.toHaveBeenCalled();
+    });
+
+    it('turns a one-time beat into a recurring one', async () => {
+      const result = await updateBeat(logger, { id: 'hb-1', cron_expression: '0 10 * * *', recurring: true }, gateway);
+      expect(result.success).toBe(true);
+      expect(gateway.update).toHaveBeenCalledWith('hb-1', expect.objectContaining({ runOnce: false }));
+    });
+  });
+
+  it('rejects turning a repeating beat into a one-time one without a pinned date', async () => {
+    const result = await updateBeat(logger, { id: 'hb-1', recurring: false }, gateway);
+    expect(result.success).toBe(false);
+    expect(result.error).toContain('one-time');
+  });
+
+  it('turns a recurring beat into a one-time one with a pinned date', async () => {
+    const result = await updateBeat(logger, { id: 'hb-1', cron_expression: '30 9 15 6 *', recurring: false }, gateway);
+    expect(result.success).toBe(true);
+    expect(gateway.update).toHaveBeenCalledWith('hb-1', expect.objectContaining({ runOnce: true }));
+  });
 });
 
 describe('create', () => {

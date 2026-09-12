@@ -18,17 +18,9 @@
     "uninstalled": "Connect your agent to WhatsApp via Baileys with QR code pairing. Click Download to install from Koris Hub.",
     "inactive": "WhatsApp channel is installed locally. Click Activate above to enable it and pair your device.",
     "pairing": "WhatsApp pairing uses a QR code. Check the server's terminal output for a QR code to scan with WhatsApp on your phone.",
-    "botNumber": "Digits only. Leave blank to auto-detect it from the linked WhatsApp session.",
     "allowUnlisted": "Reply to senders not on the whitelist, as untrusted (no tools or learned skills)."
   },
   "configFields": [
-    {
-      "name": "bot_number",
-      "label": "Bot number (for group mentions)",
-      "type": "text",
-      "placeholder": "5511999998888",
-      "description": "Digits only. Leave blank to auto-detect from the linked WhatsApp session."
-    },
     {
       "name": "whitelist",
       "label": "Whitelist (comma-separated numbers)",
@@ -50,7 +42,6 @@
         "uninstalled": "Conecte seu agente ao WhatsApp via Baileys com pareamento por código QR. Clique em Baixar para instalar a partir do Koris Hub.",
         "inactive": "O canal do WhatsApp está instalado localmente. Clique em Ativar acima para habilitá-lo e parear seu dispositivo.",
         "pairing": "O pareamento do WhatsApp utiliza um código QR. Verifique a saída do terminal do servidor para escanear o QR code com o WhatsApp em seu telefone.",
-        "botNumber": "Apenas dígitos. Deixe em branco para detectar automaticamente a partir da sessão vinculada do WhatsApp.",
         "allowUnlisted": "Responder a remetentes fora da lista de permissões como não confiáveis (sem ferramentas ou skills aprendidas)."
       }
     }

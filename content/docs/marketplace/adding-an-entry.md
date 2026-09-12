@@ -51,7 +51,7 @@ The full type lives in `content/marketplace/schema.ts`.
 | `toolName` | tools | the LLM-facing name, e.g. `issue` |
 | `params` | tools | `{ name, type, required, description, enum? }[]` |
 | `readWhen` | skills | the `read_when` triggers from `SKILL.md` |
-| `hints` | channels | guidance strings `{ uninstalled?, inactive?, active?, pairing?, botNumber?, allowUnlisted?, whitelist? }`; per-locale overrides go in `i18n.<locale>.hints` |
+| `hints` | channels | guidance strings `{ uninstalled?, inactive?, active?, pairing?, allowUnlisted?, whitelist? }`; per-locale overrides go in `i18n.<locale>.hints` |
 | `configFields` | channels | setup-wizard form inputs `{ name, label, type, placeholder?, description?, required? }[]`; `type` is `text` \| `password` \| `boolean` \| `number` |
 | `requiresConfirmation` | | `true` if the plugin needs explicit user confirmation |
 | `defaultEnabled` | | enablement state in a fresh koris install |

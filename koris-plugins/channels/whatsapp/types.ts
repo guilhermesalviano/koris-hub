@@ -3,7 +3,6 @@ import type { AudioTranscriber, ILogger, IMessageGateway, ImageAttachment, Stick
 
 export interface WhatsAppChannelStartOptions {
   authFolder: string;
-  botNumber: string;
   gateway: IMessageGateway;
   logger: ILogger;
   audioTranscriber?: AudioTranscriber;
@@ -12,7 +11,19 @@ export interface WhatsAppChannelStartOptions {
 export interface WhatsAppPluginOptions {
   isEnabled: () => boolean;
   authFolder: string;
-  botNumber: string;
+}
+
+/**
+ * The subset of a Baileys `Contact` the bot's own identity is read from —
+ * satisfied by both stored `creds.me` and the live `sock.user`.
+ */
+export interface BotIdentitySource {
+  id?: string | null;
+  lid?: string | null;
+  phoneNumber?: string | null;
+  name?: string | null;
+  verifiedName?: string | null;
+  notify?: string | null;
 }
 
 export interface WhatsAppInboundOptions {
@@ -48,7 +59,7 @@ export interface GroupParticipantLite {
 }
 
 export interface SocketLike {
-  user?: { id?: string | null; lid?: string | null; phoneNumber?: string | null };
+  user?: BotIdentitySource;
   signalRepository?: { lidMapping?: { getLIDForPN(pn: string): Promise<string | null> } };
   onWhatsApp?(...phoneNumbers: string[]): Promise<{ jid: string; exists: boolean }[] | undefined>;
   sendMessage(

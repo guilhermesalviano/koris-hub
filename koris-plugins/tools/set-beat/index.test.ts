@@ -64,7 +64,7 @@ describe('setBeat', () => {
   });
 
   it('allows hourly schedules without a specific hour', async () => {
-    const result = await setBeat(logger, { beat: 'do', cron_expression: '0 * * * *' }, gateway);
+    const result = await setBeat(logger, { beat: 'do', cron_expression: '0 * * * *', recurring: true }, gateway);
     expect(result.success).toBe(true);
   });
 
@@ -74,7 +74,7 @@ describe('setBeat', () => {
   });
 
   it('saves the beat and returns success for valid input', async () => {
-    const result = await setBeat(logger, { beat: 'send report', cron_expression: '0 9 * * 1' }, gateway);
+    const result = await setBeat(logger, { beat: 'send report', cron_expression: '0 9 * * 1', recurring: true }, gateway);
     expect(result.success).toBe(true);
     expect(result.toolName).toBe('set_beat');
     expect(gateway.create).toHaveBeenCalledTimes(1);
@@ -82,15 +82,15 @@ describe('setBeat', () => {
   });
 
   it('returns success with scheduled_beat type', async () => {
-    const result = await setBeat(logger, { beat: 'sync data', cron_expression: '0 2 * * *', type: 'scheduled_beat' }, gateway);
+    const result = await setBeat(logger, { beat: 'sync data', cron_expression: '0 2 * * *', type: 'scheduled_beat', recurring: true }, gateway);
     expect(result.success).toBe(true);
   });
 
   it('result contains the saved heartbeat as JSON', async () => {
-    const result = await setBeat(logger, { beat: 'ping', cron_expression: '0 9 * * *' }, gateway);
+    const result = await setBeat(logger, { beat: 'ping', cron_expression: '30 9 15 6 *' }, gateway);
     const parsed = JSON.parse(result.result!);
     expect(parsed.beat).toBe('ping');
-    expect(parsed.cronExpression).toBe('0 9 * * *');
+    expect(parsed.cronExpression).toBe('30 9 15 6 *');
   });
 
   it('returns error for invalid channel', async () => {
@@ -109,6 +109,7 @@ describe('setBeat', () => {
     const result = await setBeat(logger, {
       beat: 'send report',
       cron_expression: '0 9 * * 1',
+      recurring: true,
       channel: 'whatsapp',
       target: '5511@s.whatsapp.net',
     }, gateway);
@@ -120,10 +121,37 @@ describe('setBeat', () => {
 
   it('returns error when gateway.create throws', async () => {
     gateway = makeGateway({ create: vi.fn(() => { throw new Error('db fail'); }) });
-    const result = await setBeat(logger, { beat: 'x', cron_expression: '0 9 * * *' }, gateway);
+    const result = await setBeat(logger, { beat: 'x', cron_expression: '0 9 15 6 *' }, gateway);
     expect(result.success).toBe(false);
     expect(result.error).toBe('db fail');
   });
+
+  it('creates a one-time beat by default when the cron pins an exact date', async () => {
+    const result = await setBeat(logger, { beat: 'call mom', cron_expression: '30 9 15 6 *' }, gateway);
+    expect(result.success).toBe(true);
+    const saved = (gateway.create as ReturnType<typeof vi.fn>).mock.calls[0][0];
+    expect(saved.runOnce).toBe(true);
+  });
+
+  it.each(['0 9 * * *', '0 9 * * 1', '0 8 1 * *', '0 9 15 6 1', '0 9 1,15 6 *', '0 9 31 2 *'])(
+    'rejects "%s" for a one-time beat and points to recurring: true',
+    async (cron) => {
+      const result = await setBeat(logger, { beat: 'do', cron_expression: cron }, gateway);
+      expect(result.success).toBe(false);
+      expect(result.error).toContain('recurring: true');
+      expect(gateway.create).not.toHaveBeenCalled();
+    },
+  );
+
+  it.each(['0 9 * * *', '0 9 * * 1', '0 8 1 * *', '0 9 25 12 *'])(
+    'saves "%s" as a recurring beat when recurring is true',
+    async (cron) => {
+      const result = await setBeat(logger, { beat: 'do', cron_expression: cron, recurring: true }, gateway);
+      expect(result.success).toBe(true);
+      const saved = (gateway.create as ReturnType<typeof vi.fn>).mock.calls[0][0];
+      expect(saved.runOnce).toBe(false);
+    },
+  );
 });
 
 describe('create', () => {

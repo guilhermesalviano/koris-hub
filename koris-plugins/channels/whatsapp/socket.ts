@@ -10,14 +10,15 @@ import {
   extractQuotedSticker,
   extractQuotedText,
   extractText,
+  getQuotedMessageInfo,
 } from './extract-message';
 import { applyMentionNames, rememberContactName } from './contact-names';
 import { resolveGroupName } from './group-name';
 import { downloadAudioBuffer, downloadImageBase64, downloadQuotedAudioBuffer, downloadQuotedImageBase64, toStickerReference } from './media';
-import { extractMentionedJids, isBotMentioned, jidToNumber } from './mention';
+import { botNameToken, extractMentionedJids, isAddressedToBot, jidToNumber } from './mention';
 import { isWhitelistedSender } from './sender';
-import { whatsappState } from './state';
-import type { ExtractedAudio, ExtractedImage, ExtractedQuotedAudio, ExtractedQuotedImage, ExtractedSticker, SocketLike, WhatsAppChannelStartOptions } from './types';
+import { botIdentity, whatsappState } from './state';
+import type { BotIdentitySource, ExtractedAudio, ExtractedImage, ExtractedQuotedAudio, ExtractedQuotedImage, ExtractedSticker, SocketLike, WhatsAppChannelStartOptions } from './types';
 
 function firstJidMatching(suffix: string, ...jids: (string | null | undefined)[]): string {
   for (const jid of jids) {
@@ -31,15 +32,12 @@ function firstJidMatching(suffix: string, ...jids: (string | null | undefined)[]
 
 /**
  * Learns the bot's own identities from a Baileys `Contact` (live `sock.user` or
- * stored `creds.me`): its phone number (`@s.whatsapp.net`) and its LID (`@lid`).
- * A mention in a LID-addressed group names the bot by LID, never by phone
- * number, so both are needed. An explicit `bot_number` from config is never
- * overwritten; the LID has no config and is always adopted once seen.
+ * stored `creds.me`): its phone number (`@s.whatsapp.net`), its LID (`@lid`),
+ * and its display-name addressing token. A mention in a LID-addressed group
+ * names the bot by LID, never by phone number, so both ids are needed. This is
+ * the only writer of the bot's identity — none of it is configurable.
  */
-function adoptBotIdentity(
-  source: { id?: string | null; lid?: string | null; phoneNumber?: string | null } | undefined,
-  logger: ILogger,
-): void {
+function adoptBotIdentity(source: BotIdentitySource | undefined, logger: ILogger): void {
   if (!source) return;
 
   if (!whatsappState.botNumber) {
@@ -55,6 +53,14 @@ function adoptBotIdentity(
     if (lid) {
       whatsappState.botLid = lid;
       logger.info(`WhatsApp bot LID auto-detected: ${lid}`);
+    }
+  }
+
+  if (!whatsappState.botName) {
+    const name = botNameToken(source.name ?? source.verifiedName ?? source.notify);
+    if (name) {
+      whatsappState.botName = name;
+      logger.info(`WhatsApp bot name token adopted: "${name}"`);
     }
   }
 }
@@ -155,9 +161,10 @@ export async function startBaileysSocket(options: WhatsAppChannelStartOptions): 
 
       const text = image?.caption ?? rawText ?? '';
       const isGroup = jid.endsWith('@g.us');
-      const botIds = [whatsappState.botNumber, whatsappState.botLid];
       const mentionedJids = extractMentionedJids(msg);
-      const mentionsBot = isGroup && isBotMentioned(text, mentionedJids, botIds);
+      const quotedParticipant = getQuotedMessageInfo(msg)?.participant;
+      const mentionsBot =
+        isGroup && isAddressedToBot({ text, mentionedJids, quotedParticipant }, botIdentity());
       if (isGroup && !mentionsBot) continue;
 
       void handleInboundMessage(options, sock, jid, senderName, text, mentionedJids, image, sticker, quotedText, quotedImage, isWhitelisted, mentionsBot, externalId ?? undefined, audio, quotedAudio).catch((err: Error) => {
@@ -254,8 +261,7 @@ async function handleInboundMessage(
   // resolveGroupName also seeds the contact-name cache from group participants,
   // so run it before rewriting `@<number>` mention tokens to `@<name>`.
   const groupName = jid.endsWith('@g.us') ? await resolveGroupName(sock, jid, options.logger) : undefined;
-  const botIds = [whatsappState.botNumber, whatsappState.botLid];
-  const namedText = applyMentionNames(currentText, mentionedJids, botIds);
+  const namedText = applyMentionNames(currentText, mentionedJids, botIdentity().ids);
   await channel.handleMessage(options.gateway, jid, senderName, namedText, images, {
     isWhitelistedSender,
     mentionsBot,

@@ -1,14 +1,10 @@
 import type { WAMessage } from '@whiskeysockets/baileys';
 import type { ExtractedAudio, ExtractedImage, ExtractedQuotedAudio, ExtractedQuotedImage, ExtractedSticker, QuotedMessageInfo } from './types';
 
-export function getQuotedMessageInfo(msg: WAMessage): QuotedMessageInfo | null {
-  if (!msg.message || typeof msg.message !== 'object') return null;
+function readQuotedInfo(container: unknown): QuotedMessageInfo | null {
+  if (!container || typeof container !== 'object') return null;
 
-  const content = msg.message as Record<string, unknown>;
-  const extendedText = content['extendedTextMessage'];
-  if (!extendedText || typeof extendedText !== 'object') return null;
-
-  const contextInfo = (extendedText as Record<string, unknown>)['contextInfo'];
+  const contextInfo = (container as Record<string, unknown>)['contextInfo'];
   if (!contextInfo || typeof contextInfo !== 'object') return null;
 
   const info = contextInfo as Record<string, unknown>;
@@ -20,6 +16,22 @@ export function getQuotedMessageInfo(msg: WAMessage): QuotedMessageInfo | null {
     stanzaId: typeof info['stanzaId'] === 'string' ? info['stanzaId'] : undefined,
     participant: typeof info['participant'] === 'string' ? info['participant'] : undefined,
   };
+}
+
+/**
+ * A reply carries its quoted message on the `contextInfo` of whatever the reply
+ * itself is, so an image or voice-note reply has no `extendedTextMessage` at
+ * all. Walk the same containers `extractMentionedJids` does.
+ */
+export function getQuotedMessageInfo(msg: WAMessage): QuotedMessageInfo | null {
+  if (!msg.message || typeof msg.message !== 'object') return null;
+
+  const content = msg.message as Record<string, unknown>;
+  return (
+    readQuotedInfo(content['extendedTextMessage']) ??
+    readQuotedInfo(content['imageMessage']) ??
+    readQuotedInfo(content['audioMessage'])
+  );
 }
 
 export function extractText(msg: { message?: unknown }): string | null {

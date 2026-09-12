@@ -49,8 +49,6 @@ export interface ChannelHints {
   active?: string;
   /** QR code pairing instructions (WhatsApp) */
   pairing?: string;
-  /** Bot phone number guidance */
-  botNumber?: string;
   /** Unlisted sender policy note */
   allowUnlisted?: string;
   /** Whitelist input note */

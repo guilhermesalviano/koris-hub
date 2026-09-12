@@ -11,7 +11,7 @@ type Listener = (data: unknown) => void;
 const listeners = new Map<string, Listener>();
 
 const fakeSock = {
-  user: { id: '5511999998888:7@s.whatsapp.net', lid: '199999999998888:7@lid' },
+  user: { id: '5511999998888:7@s.whatsapp.net', lid: '199999999998888:7@lid', name: 'Koris' },
   sendMessage: vi.fn().mockResolvedValue(undefined),
   sendPresenceUpdate: vi.fn().mockResolvedValue(undefined),
   groupMetadata: vi.fn().mockResolvedValue({ subject: 'Family' }),
@@ -77,30 +77,39 @@ function waMessage(overrides: Partial<WAMessage> = {}): WAMessage {
 
 const BOT_NUMBER = '5511999998888';
 
-async function start(replyText: string, opts: { allowUntrusted?: boolean; whitelist?: string; botNumber?: string; audioTranscriber?: AudioTranscriber } = {}) {
+/** Baileys reports the linked account on `connection === 'open'`. */
+function openConnection(): void {
+  const connUpdate = listeners.get('connection.update');
+  if (!connUpdate) throw new Error('connection.update listener was never registered');
+  connUpdate({ connection: 'open' });
+}
+
+async function start(replyText: string, opts: { allowUntrusted?: boolean; whitelist?: string; audioTranscriber?: AudioTranscriber; connect?: boolean } = {}) {
   const { factory, calls } = makeChannelHandlerFactory(replyText);
-  const botNumber = opts.botNumber ?? BOT_NUMBER;
   configureWhatsAppRuntime({
     channelHandler: factory,
     config: {
       authFolder: '.test-wa-auth',
       whitelist: opts.whitelist ?? '',
-      botNumber,
       allowUnlistedSenders: opts.allowUntrusted ?? true,
     },
     audioTranscriber: opts.audioTranscriber,
   });
 
   const gateway: IMessageGateway = { handle: vi.fn() };
+  const logger = makeLogger();
   await WhatsAppChannelFactory.start({
     authFolder: '.test-wa-auth',
-    botNumber,
     gateway,
-    logger: makeLogger(),
+    logger,
     audioTranscriber: opts.audioTranscriber,
   });
 
-  return { calls, gateway };
+  // The bot's identity is only ever learned from the live session — there is no
+  // config input for it — so open the connection before any message arrives.
+  if (opts.connect !== false) openConnection();
+
+  return { calls, gateway, logger };
 }
 
 async function emitUpsert(messages: WAMessage[]) {
@@ -118,8 +127,10 @@ describe('whatsapp plugin', () => {
     listeners.clear();
     _resetWhatsAppDedupeForTesting();
     _resetContactNamesForTesting();
-    // session-derived LID leaks across tests otherwise (module singleton)
+    // session-derived identity leaks across tests otherwise (module singleton)
+    whatsappState.botNumber = '';
     whatsappState.botLid = '';
+    whatsappState.botName = '';
     whatsappState.audioTranscriber = undefined;
   });
 
@@ -259,13 +270,15 @@ describe('whatsapp plugin', () => {
     expect(calls[0].message).toMatchObject({ isGroup: true, mentionsBot: true });
   });
 
-  it('auto-detects the bot number from the live socket when config leaves it blank', async () => {
-    const { calls } = await start('pong', { botNumber: '' });
+  it('learns the bot number, LID and name token from the live session', async () => {
+    const { calls, logger } = await start('pong');
 
-    // Baileys reports the linked account on `connection === 'open'`.
-    const connUpdate = listeners.get('connection.update');
-    if (!connUpdate) throw new Error('connection.update listener was never registered');
-    connUpdate({ connection: 'open' });
+    expect(whatsappState.botNumber).toBe(BOT_NUMBER);
+    expect(whatsappState.botLid).toBe('199999999998888');
+    expect(whatsappState.botName).toBe('koris');
+    expect(logger.info).toHaveBeenCalledWith(`WhatsApp bot number auto-detected: ${BOT_NUMBER}`);
+    expect(logger.info).toHaveBeenCalledWith('WhatsApp bot LID auto-detected: 199999999998888');
+    expect(logger.info).toHaveBeenCalledWith('WhatsApp bot name token adopted: "koris"');
 
     await emitUpsert([
       waMessage({
@@ -279,12 +292,7 @@ describe('whatsapp plugin', () => {
   });
 
   it('recognizes a mention by the bot LID in a LID-addressed group and strips the token', async () => {
-    const { calls } = await start('pong', { botNumber: '5562999998888' });
-
-    // Baileys surfaces the bot's LID on `connection === 'open'`.
-    const connUpdate = listeners.get('connection.update');
-    if (!connUpdate) throw new Error('connection.update listener was never registered');
-    connUpdate({ connection: 'open' });
+    const { calls } = await start('pong');
 
     await emitUpsert([
       waMessage({
@@ -300,6 +308,102 @@ describe('whatsapp plugin', () => {
 
     expect(calls).toHaveLength(1);
     expect(calls[0].message).toMatchObject({ isGroup: true, mentionsBot: true, text: 'eai mano' });
+  });
+
+  it('answers a group reply to one of its own messages with no @-mention', async () => {
+    const { calls } = await start('pong');
+
+    await emitUpsert([
+      waMessage({
+        key: { remoteJid: '1234-5678@g.us', fromMe: false, id: 'MSG3e' },
+        message: {
+          extendedTextMessage: {
+            text: 'and what about tuesday?',
+            contextInfo: {
+              stanzaId: 'BOT-MSG-1',
+              participant: `${BOT_NUMBER}@s.whatsapp.net`,
+              quotedMessage: { conversation: 'monday is free' },
+            },
+          },
+        },
+      }),
+    ]);
+
+    expect(calls).toHaveLength(1);
+    expect(calls[0].message).toMatchObject({ isGroup: true, mentionsBot: true, text: 'and what about tuesday?' });
+  });
+
+  it('answers a group image reply to one of its own messages (contextInfo lives on the imageMessage)', async () => {
+    const { calls } = await start('got it');
+
+    await emitUpsert([
+      waMessage({
+        key: { remoteJid: '1234-5678@g.us', fromMe: false, id: 'MSG3f' },
+        message: {
+          imageMessage: {
+            caption: 'like this?',
+            mimetype: 'image/jpeg',
+            contextInfo: {
+              stanzaId: 'BOT-MSG-2',
+              participant: `${BOT_NUMBER}@s.whatsapp.net`,
+              quotedMessage: { conversation: 'send me a screenshot' },
+            },
+          },
+        },
+      }),
+    ]);
+
+    expect(calls).toHaveLength(1);
+    expect(calls[0].message).toMatchObject({ isGroup: true, mentionsBot: true, text: 'like this?' });
+  });
+
+  it('ignores a group reply to somebody else', async () => {
+    const { calls } = await start('should not be sent');
+
+    await emitUpsert([
+      waMessage({
+        key: { remoteJid: '1234-5678@g.us', fromMe: false, id: 'MSG3g' },
+        message: {
+          extendedTextMessage: {
+            text: 'hah true',
+            contextInfo: {
+              stanzaId: 'OTHER-MSG-1',
+              participant: '5500000000000@s.whatsapp.net',
+              quotedMessage: { conversation: 'lol' },
+            },
+          },
+        },
+      }),
+    ]);
+
+    expect(calls).toHaveLength(0);
+  });
+
+  it('answers a group message that addresses it by its display name, and strips the name', async () => {
+    const { calls } = await start('pong');
+
+    await emitUpsert([
+      waMessage({
+        key: { remoteJid: '1234-5678@g.us', fromMe: false, id: 'MSG3h' },
+        message: { conversation: 'Koris, what is on my agenda?' },
+      }),
+    ]);
+
+    expect(calls).toHaveLength(1);
+    expect(calls[0].message).toMatchObject({ isGroup: true, mentionsBot: true, text: 'what is on my agenda?' });
+  });
+
+  it('ignores a group message that merely talks about the bot by name', async () => {
+    const { calls } = await start('should not be sent');
+
+    await emitUpsert([
+      waMessage({
+        key: { remoteJid: '1234-5678@g.us', fromMe: false, id: 'MSG3i' },
+        message: { conversation: "I'll ask Koris about it later" },
+      }),
+    ]);
+
+    expect(calls).toHaveLength(0);
   });
 
   it('rewrites a third-party @-mention to @<name> from a previously-seen pushName, bot token stripped', async () => {
@@ -423,9 +527,9 @@ describe('whatsapp plugin', () => {
 
   it('detaches all listeners before ending the socket on stop(), so end() cannot trigger a reconnect', async () => {
     const { factory } = makeChannelHandlerFactory('n/a');
-    configureWhatsAppRuntime({ channelHandler: factory, config: { authFolder: '.test-wa-auth', whitelist: '', botNumber: '5511999998888', allowUnlistedSenders: true } });
+    configureWhatsAppRuntime({ channelHandler: factory, config: { authFolder: '.test-wa-auth', whitelist: '', allowUnlistedSenders: true } });
     const gateway = { handle: vi.fn() };
-    const { stop } = await WhatsAppChannelFactory.start({ authFolder: '.test-wa-auth', botNumber: '5511999998888', gateway, logger: makeLogger() });
+    const { stop } = await WhatsAppChannelFactory.start({ authFolder: '.test-wa-auth', gateway, logger: makeLogger() });
 
     stop();
 
@@ -450,7 +554,7 @@ describe('whatsapp plugin', () => {
         channelHandler: makeChannelHandlerFactory('n/a').factory,
         pluginEnablement: { isEnabled: () => true },
       },
-      { authFolder: '.test-wa-auth', whitelist: '', botNumber: '5511999998888', allowUnlistedSenders: true },
+      { authFolder: '.test-wa-auth', whitelist: '', allowUnlistedSenders: true },
     );
     plugin.setup(fakeRegistry);
 
@@ -473,7 +577,7 @@ describe('whatsapp plugin', () => {
         channelHandler: makeChannelHandlerFactory('n/a').factory,
         pluginEnablement: { isEnabled: () => false },
       },
-      { authFolder: '.test-wa-auth', whitelist: '', botNumber: '5511999998888', allowUnlistedSenders: true },
+      { authFolder: '.test-wa-auth', whitelist: '', allowUnlistedSenders: true },
     );
     plugin.setup(fakeRegistry);
 
@@ -686,7 +790,7 @@ describe('whatsapp plugin', () => {
         pluginEnablement: { isEnabled: () => true },
         audioTranscriber,
       },
-      { authFolder: '.test-wa-auth', whitelist: '', botNumber: '5511999998888', allowUnlistedSenders: true },
+      { authFolder: '.test-wa-auth', whitelist: '', allowUnlistedSenders: true },
     );
 
     expect(whatsappState.audioTranscriber).toBe(audioTranscriber);

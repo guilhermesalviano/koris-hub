@@ -2,9 +2,9 @@ import type { WAMessage } from '@whiskeysockets/baileys';
 import { splitMessage } from '../contracts';
 import type { ImageAttachment, IMessageGateway, StickerReference } from '../contracts';
 import { resolveWhatsAppJid } from './jid';
-import { isBotMentioned, stripBotMention } from './mention';
+import { isAddressedToBot, stripBotAddressing } from './mention';
 import { NOT_AUTHORIZED_MESSAGE, TYPING_INTERVAL_MS, WHATSAPP_MESSAGE_LIMIT } from './constants';
-import { whatsappState } from './state';
+import { botIdentity, whatsappState } from './state';
 import type { IWhatsAppChannel, SocketLike, WhatsAppInboundOptions } from './types';
 
 export class WhatsAppChannel implements IWhatsAppChannel {
@@ -26,12 +26,11 @@ export class WhatsAppChannel implements IWhatsAppChannel {
       return;
     }
 
-    const botIds = [whatsappState.botNumber, whatsappState.botLid];
+    const identity = botIdentity();
 
     const handler = whatsappState.channelHandler.create({
       channel: 'whatsapp',
       gateway,
-      mentionId: whatsappState.botNumber,
       reply: {
         sendText: (target: string, reply: string) => this.sendText(target, reply),
         sendAudio: (target: string, audio: Buffer, opts?: { mimeType?: string; seconds?: number }) =>
@@ -44,10 +43,11 @@ export class WhatsAppChannel implements IWhatsAppChannel {
     });
 
     const isGroup = jid.endsWith('@g.us');
-    // socket.ts runs the authoritative check (mentionedJid + text) and passes it
-    // through; fall back to a text-only check for callers that don't (index.ts).
-    const mentionsBot = isGroup && (options?.mentionsBot ?? isBotMentioned(text, [], botIds));
-    const cleanedText = stripBotMention(text, botIds);
+    // socket.ts runs the authoritative check (mentionedJid + quoted author +
+    // text) and passes it through; fall back to a text-only check for callers
+    // that don't (index.ts).
+    const mentionsBot = isGroup && (options?.mentionsBot ?? isAddressedToBot({ text, mentionedJids: [] }, identity));
+    const cleanedText = stripBotAddressing(text, identity);
     await this.withTypingIndicator(jid, () =>
       handler.handle(jid, {
         text: cleanedText,
@@ -60,7 +60,6 @@ export class WhatsAppChannel implements IWhatsAppChannel {
         isGroup,
         mentionsBot,
         isTrustedSender,
-        mentionId: whatsappState.botNumber,
         groupName: options?.groupName,
       }),
     );

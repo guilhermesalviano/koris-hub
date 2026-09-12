@@ -2,7 +2,7 @@ import type { ILogger, IHeartbeatGateway, Plugin, ToolPluginContext, ToolResult 
 import { COMMANDS } from '../contracts';
 import { defineTool } from '../define-tool';
 import { getOptionalStringArg, getRequiredStringArg, isAllowedValue } from '../runtime';
-import { hasSpecificHour, isEveryMinute, isValidCronExpression } from '../cron';
+import { hasSpecificHour, isEveryMinute, isOneTimeCron, isValidCronExpression } from '../cron';
 
 export const TOOL_NAME = 'update_beat' as const;
 
@@ -31,12 +31,13 @@ export async function updateBeat(
   const rawType = getOptionalStringArg(args, 'type') ?? undefined;
   const channel = normalizeOptional(args, 'channel');
   const target = normalizeOptional(args, 'target');
+  const recurring = typeof args.recurring === 'boolean' ? args.recurring : undefined;
 
-  if (!beat && !cronExpression && !rawType && channel === undefined && target === undefined) {
+  if (!beat && !cronExpression && !rawType && channel === undefined && target === undefined && recurring === undefined) {
     return {
       toolName: TOOL_NAME,
       success: false,
-      error: 'At least one of "beat", "type", "cron_expression", "channel", or "target" must be provided.',
+      error: 'At least one of "beat", "type", "cron_expression", "recurring", "channel", or "target" must be provided.',
     };
   }
 
@@ -89,8 +90,19 @@ export async function updateBeat(
   }
 
   try {
-    if (!heartbeats.getById(id)) {
+    const existing = heartbeats.getById(id);
+    if (!existing) {
       return { toolName: TOOL_NAME, success: false, error: `Beat not found: ${id}` };
+    }
+
+    const runOnce = recurring === undefined ? existing.runOnce : !recurring;
+    const effectiveCron = cronExpression ?? existing.cronExpression;
+    if (runOnce && !isOneTimeCron(effectiveCron)) {
+      return {
+        toolName: TOOL_NAME,
+        success: false,
+        error: `"${effectiveCron}" repeats, but this beat is one-time. Pin the exact minute, hour, day-of-month and month and leave day-of-week as "*" (e.g. "30 9 15 6 *"), computed from the current date/time. If the user explicitly asked for a repeating schedule (every day/week/month/year), call again with recurring: true.`,
+      };
     }
 
     const updated = heartbeats.update(id, {
@@ -99,6 +111,7 @@ export async function updateBeat(
       cronExpression: cronExpression?.trim(),
       channel,
       target,
+      runOnce: recurring === undefined ? undefined : !recurring,
     });
     heartbeats.reschedule();
 
@@ -122,7 +135,7 @@ export function create(context: ToolPluginContext): Plugin {
     setup(registry) {
       const definition = defineTool({
         name: TOOL_NAME,
-        description: 'Update an existing beat. Call this when the user wants to change the description, type, or schedule of a beat. Use list_beats first if the ID is not known.',
+        description: 'Update an existing beat. Call this when the user wants to change the description, type, or schedule of a beat. Use list_beats first if the ID is not known. A one-time beat (runOnce: true in list_beats) keeps a pinned date unless you also pass recurring: true.',
         parameters: {
           id: { type: 'string', required: true, description: 'The UUID of the beat to update.' },
           beat: { type: 'string', description: 'New description for the beat (optional).' },
@@ -133,7 +146,11 @@ export function create(context: ToolPluginContext): Plugin {
           },
           cron_expression: {
             type: 'string',
-            description: 'New 5-field cron expression for the schedule (optional). Examples: "0 9 * * *" (daily at 9am), "0 9 * * 1" (every Monday at 9am).',
+            description: 'New 5-field cron expression for the schedule (optional). One-time beats need a pinned date (e.g. "30 9 15 6 *" = June 15th at 9:30am, derived from the current date/time). Recurring examples: "0 9 * * *" (daily at 9am), "0 9 * * 1" (every Monday at 9am), "0 9 25 12 *" (every year on December 25th).',
+          },
+          recurring: {
+            type: 'boolean',
+            description: 'Optional. true turns the beat into a recurring one (keeps firing every year until deleted); false turns it into a one-time beat (fires once at its pinned date, then is deleted). Omit to keep the current behavior.',
           },
           channel: {
             type: 'string',
