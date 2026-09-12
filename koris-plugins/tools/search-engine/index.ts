@@ -2,28 +2,16 @@ import type { ILogger, Plugin, ToolPluginContext, ToolResult } from '../contract
 import { COMMANDS } from '../contracts';
 import { defineTool } from '../define-tool';
 import { executeSearchViaSearxng } from './searxng';
-import { executeSearchViaSerpApi } from './serpapi';
 import { TOOL_NAME } from './constants';
 
 export { TOOL_NAME };
-
-// Set to true to fall back to SerpAPI when SearXNG fails or isn't configured.
-// Inactivated while SearXNG is being trialed as the primary provider.
-const SERPAPI_FALLBACK_ENABLED = false;
 
 export async function executeSearch(
   logger: ILogger,
   args: Record<string, unknown>,
   searxngUrl: string,
-  searchApiKey: string,
 ): Promise<ToolResult> {
-  const result = await executeSearchViaSearxng(logger, args, searxngUrl);
-  if (result.success || !SERPAPI_FALLBACK_ENABLED) {
-    return result;
-  }
-
-  logger.warn('SearXNG search failed, falling back to SerpAPI', { error: result.error });
-  return executeSearchViaSerpApi(logger, args, searchApiKey);
+  return executeSearchViaSearxng(logger, args, searxngUrl);
 }
 
 export function create(context: ToolPluginContext): Plugin {
@@ -53,7 +41,7 @@ export function create(context: ToolPluginContext): Plugin {
             description: 'Search type (default: "web").',
           },
         },
-        handler: (logger, args) => executeSearch(logger, args, context.config.searxngUrl, context.config.searchApiKey),
+        handler: (logger, args) => executeSearch(logger, args, context.config.searxngUrl),
         enabled: (opts) => opts.trusted && context.pluginEnablement.isEnabled('search-engine'),
       });
       registry.extend(COMMANDS, definition);

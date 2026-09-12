@@ -3,8 +3,8 @@ import { getOptionalNumberArg, getOptionalStringArg, getRequiredStringArg, isAll
 import { TOOL_NAME } from './constants';
 
 const DEFAULT_RESULT_COUNT = 5;
-// SearXNG has no analog to SerpAPI's num=100 promise — it returns whatever the
-// enabled engines produced for a page (~10-30). Clamp lower to keep expectations honest.
+// SearXNG returns whatever the enabled engines produced for a page (~10-30)
+// rather than honoring a high requested count. Clamp lower to keep expectations honest.
 const MAX_RESULT_COUNT = 50;
 const MAX_RESULT_OUTPUT = 20000;
 // SearXNG paginates in whole pages, not row offsets. This is a best-effort approximation.

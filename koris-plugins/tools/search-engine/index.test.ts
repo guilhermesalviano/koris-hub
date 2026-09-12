@@ -1,14 +1,9 @@
 import { beforeEach, describe, it, expect, vi } from 'vitest';
 
 const mockSearxng = vi.hoisted(() => vi.fn());
-const mockSerpApi = vi.hoisted(() => vi.fn());
 
 vi.mock('./searxng', () => ({
   executeSearchViaSearxng: mockSearxng,
-}));
-
-vi.mock('./serpapi', () => ({
-  executeSearchViaSerpApi: mockSerpApi,
 }));
 
 import { executeSearch, create } from './index';
@@ -30,20 +25,18 @@ describe('search_engine tool (orchestrator)', () => {
   it('uses SearXNG and returns its result on success', async () => {
     mockSearxng.mockResolvedValue({ toolName: 'search_engine', success: true, result: '[]' });
 
-    const result = await executeSearch(mockLogger, { query: 'test query' }, 'http://localhost:8080', 'api-key');
+    const result = await executeSearch(mockLogger, { query: 'test query' }, 'http://localhost:8080');
 
     expect(mockSearxng).toHaveBeenCalledWith(mockLogger, { query: 'test query' }, 'http://localhost:8080');
-    expect(mockSerpApi).not.toHaveBeenCalled();
     expect(result).toEqual({ toolName: 'search_engine', success: true, result: '[]' });
   });
 
-  it('does not fall back to SerpAPI when SearXNG fails, since the fallback is inactivated', async () => {
+  it('returns the SearXNG result as-is when it fails', async () => {
     mockSearxng.mockResolvedValue({ toolName: 'search_engine', success: false, error: 'SearXNG URL is not configured' });
 
-    const result = await executeSearch(mockLogger, { query: 'test query' }, '', 'api-key');
+    const result = await executeSearch(mockLogger, { query: 'test query' }, '');
 
     expect(mockSearxng).toHaveBeenCalled();
-    expect(mockSerpApi).not.toHaveBeenCalled();
     expect(result.success).toBe(false);
     expect(result.error).toBe('SearXNG URL is not configured');
   });
@@ -52,7 +45,7 @@ describe('search_engine tool (orchestrator)', () => {
 describe('create', () => {
   function register(isEnabled: () => boolean): ToolDefinition {
     const context = {
-      config: { searxngUrl: '', searchApiKey: '' },
+      config: { searxngUrl: '' },
       pluginEnablement: { isEnabled },
     } as unknown as ToolPluginContext;
     let registered: ToolDefinition | undefined;
