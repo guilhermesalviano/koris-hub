@@ -11,25 +11,33 @@
  * `.github/workflows/build-channels.yml`. `koris` pulls the `.ts`/`.yml`/
  * `package.json` from the repo folder and the `index.js` from that release.
  *
- * Cross-repo imports (`../contracts`, `../channel-config`, `../../registry`) are
- * marked EXTERNAL: those modules live in `koris`, and once the bundle is pulled
- * to `koris/plugins/channels/<slug>/index.js` they resolve at load time against
- * `koris/plugins/channels/contracts.ts` etc. The third-party runtime deps
- * (`@whiskeysockets/baileys`, `@guilhermesalviano/telegram-bot`,
- * `qrcode-terminal`) ARE inlined.
+ * The bundle must be SELF-CONTAINED with respect to the host modules
+ * (`../contracts`, `../channel-config`, `../../registry`). They used to be
+ * marked external on the theory that they'd "resolve at load time against
+ * koris/plugins/channels/contracts.ts" — they can't: koris ships those as
+ * `.ts`, and Node's CJS resolver never tries a `.ts` extension, so every
+ * published bundle threw `Cannot find module '../contracts'` the moment
+ * koris's plugin loader required it, and the channel silently vanished.
+ *
+ * They are therefore bundled in, resolved against the copies vendored at
+ * `koris-plugins/channels/contracts.ts`, `koris-plugins/channels/
+ * channel-config.ts`, `koris-plugins/registry.ts` and `koris-plugins/config/*`
+ * — mirroring koris's own `plugins/` layout so the channel sources' relative
+ * imports resolve with no bundler config at all. `scripts/check-host-sync.ts`
+ * fails if those copies drift from a local koris checkout.
+ *
+ * Inlining is safe for the `ADAPTERS` extension point: `PluginRegistry` stores
+ * registrations under `point.id` (the string `'channels.adapters'`), not by
+ * object identity, so the bundle's own `ExtensionPoint` instance still collects
+ * through koris core's.
  *
  * Baileys' OPTIONAL peers (`jimp`, `link-preview-js`, `bufferutil`, native
  * `sharp`/`ws` speedups, …) are left EXTERNAL: baileys `require()`s them lazily
  * inside try/catch and degrades gracefully, and `koris` already ships the ones
  * it wants (e.g. `jimp`) so its copy is reused rather than duplicated into the
- * bundle. So the only unresolved requires in the output should be those, the
- * three cross-repo relatives, and `node:*` builtins.
- *
- * NOTE: the earlier hand-built artifact inlined `../contracts`. If koris's
- * plugin loader ever needs it inlined (e.g. `ADAPTERS` extension-point identity
- * must be the exact same object as core's), drop the relative entries from
- * `EXTERNAL` below and add a `koris` checkout step to the workflow so esbuild
- * can resolve them.
+ * bundle. So the only unresolved requires in the output should be those and
+ * `node:*` builtins — in particular NO relative specifier may survive, and the
+ * check below fails the build if one does.
  */
 import { build, type Metafile } from 'esbuild';
 import { builtinModules } from 'node:module';
@@ -38,9 +46,6 @@ import { join } from 'node:path';
 
 const CHANNELS_DIR = join(process.cwd(), 'koris-plugins/channels');
 const SLUGS = ['telegram', 'whatsapp'];
-
-// Provided by koris at load time — never bundled here.
-const EXTERNAL_RELATIVE = ['../contracts', '../channel-config', '../../registry'];
 
 // Baileys' optional peers: lazily required inside try/catch, degrade gracefully
 // when absent, and koris supplies the ones it wants. Left external so the bundle
@@ -57,10 +62,9 @@ const OPTIONAL_PEERS = [
   'supports-color',
 ];
 
-const ALLOWED_EXTERNAL = [...EXTERNAL_RELATIVE, ...OPTIONAL_PEERS];
+const ALLOWED_EXTERNAL = OPTIONAL_PEERS;
 
 const EXTERNAL = [
-  ...EXTERNAL_RELATIVE,
   ...OPTIONAL_PEERS,
   ...builtinModules,
   ...builtinModules.map((m) => `node:${m}`),
@@ -99,16 +103,25 @@ async function main(): Promise<void> {
 
     const bytes = statSync(outfile).size;
     const mb = (bytes / 1024 / 1024).toFixed(2);
-    const stray = unresolvedRequires(result.metafile, relOut).filter(
-      (p) => !ALLOWED_EXTERNAL.includes(p),
-    );
+    const unresolved = unresolvedRequires(result.metafile, relOut);
+    // A surviving relative specifier is the exact failure this build guards
+    // against: koris would throw `Cannot find module '../contracts'` on load.
+    const relatives = unresolved.filter((p) => p.startsWith('.'));
+    const stray = unresolved.filter((p) => !p.startsWith('.') && !ALLOWED_EXTERNAL.includes(p));
 
     console.log(`\n${slug}: ${relOut}  (${mb} MB)`);
-    console.log(`  external (expected): ${EXTERNAL_RELATIVE.join(', ')}, optional peers, node:*`);
+    console.log('  external (expected): optional peers, node:*');
+    if (relatives.length) {
+      console.error(
+        `  ✗ relative import(s) left unbundled: ${relatives.join(', ')} — koris cannot resolve these at load time (it ships them as .ts). Check the vendored host modules under koris-plugins/.`,
+      );
+      failed = true;
+    }
     if (stray.length) {
       console.error(`  ✗ unexpected unresolved import(s): ${stray.join(', ')}`);
       failed = true;
-    } else {
+    }
+    if (!relatives.length && !stray.length) {
       console.log('  ✓ no unexpected unresolved imports');
     }
   }

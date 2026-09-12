@@ -16,11 +16,20 @@ matching `sourcePath` in `content/marketplace/channels/<slug>.json` (whose
 ```
 koris-plugins/channels/<slug>/
   index.ts, adapter.ts, channel.ts, config.ts, factory.ts, ...   maintained source
-  *.test.ts                                                       vitest specs (run in koris)
+  *.test.ts                                                       vitest specs
   config.example.yml                                              config template
   package.json                                                    { "main": "index.js" }
   index.js                                                        BUILT — git-ignored, not here
+
+koris-plugins/channels/contracts.ts, channel-config.ts             vendored from koris
+koris-plugins/registry.ts, config/*.ts                             vendored from koris
 ```
+
+`contracts.ts` and `channel-config.ts` sit next to the slug folders (not inside
+one) because that is exactly where each plugin's `../contracts` /
+`../channel-config` imports resolve. They are byte-identical copies of `koris`'s
+originals — see "Vendored host modules" in `koris-plugins/README.md`, and
+`pnpm check:host-sync`.
 
 ## The `index.js` bundle
 
@@ -30,14 +39,20 @@ the `.ts` source by `scripts/build-channels.ts` (`pnpm build:channels`, esbuild
 prerelease by `.github/workflows/build-channels.yml`.
 
 The bundle inlines the third-party runtime deps (`@whiskeysockets/baileys`,
-`@guilhermesalviano/telegram-bot`, `qrcode-terminal`) and leaves these
-unresolved, to be provided by `koris` at load time:
+`@guilhermesalviano/telegram-bot`, `qrcode-terminal`, `yaml`) **and** the koris
+host modules (`../contracts`, `../channel-config`, `../../registry`, resolved
+against the vendored copies described above).
 
-- `../contracts`, `../channel-config`, `../../registry` — koris core modules;
-  they resolve against `koris/plugins/channels/` once the bundle is pulled there.
-- Baileys' optional peers (`jimp`, `link-preview-js`, `bufferutil`, native
-  `sharp`/`ws` speedups, ...) — lazily `require()`d inside try/catch; baileys
-  degrades gracefully and koris supplies the ones it wants.
+The only thing left unresolved is Baileys' optional peers (`jimp`,
+`link-preview-js`, `bufferutil`, native `sharp`/`ws` speedups, ...) — lazily
+`require()`d inside try/catch; baileys degrades gracefully and koris supplies
+the ones it wants.
+
+The host modules were external until they turned out to be unresolvable: `koris`
+ships them as `.ts` and Node's CJS resolver will not load a `.ts` file, so the
+bundle threw `Cannot find module '../contracts'` on load and `koris`'s loader
+swallowed it — the channel silently never appeared. `build-channels.ts` now
+**fails the build** if any relative specifier survives into the output.
 
 ## Contents
 
@@ -61,7 +76,10 @@ comes from the `channels-latest` release asset.
 1. Move its directory in under `koris-plugins/channels/<slug>/` (source +
    `config.example.yml` + a `package.json` with `"main": "index.js"`; leave any
    runtime `config.yml` behind).
-2. Add its slug to `SLUGS` in `scripts/build-channels.ts`.
+2. Add its slug to `SLUGS` in `scripts/build-channels.ts`. If it imports a
+   `koris` module that isn't vendored yet, vendor it at the path its relative
+   import resolves to and register it in `VENDORED_HOST_MODULES`
+   (`scripts/check-host-sync.ts`) — the build refuses to ship it as external.
 3. Add the matching `content/marketplace/channels/<slug>.json` with `sourcePath`
    / `sourceUrl` pointing here.
 4. Note the move in this file, `koris-plugins/README.md`, and AGENTS.md's

@@ -12,6 +12,10 @@ on:
     branches: [main]
     paths:
       - 'koris-plugins/channels/**'
+      # Host modules vendored from koris and bundled into every channel — a
+      # change here changes the published bundles (see koris-plugins/README.md).
+      - 'koris-plugins/registry.ts'
+      - 'koris-plugins/config/**'
       - 'scripts/build-channels.ts'
       - '.github/workflows/build-channels.yml'
   workflow_dispatch:
