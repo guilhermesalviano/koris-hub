@@ -57,6 +57,7 @@ export class WhatsAppChannel implements IWhatsAppChannel {
         quotedText: options?.quotedText,
         externalId: options?.externalId,
         conversationId: jid,
+        ...(options?.peerAliases?.length ? { peerAliases: options.peerAliases } : {}),
         isGroup,
         mentionsBot,
         isTrustedSender,

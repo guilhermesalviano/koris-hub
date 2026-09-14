@@ -149,6 +149,27 @@ describe('whatsapp plugin', () => {
     expect(fakeSock.sendMessage).toHaveBeenCalledWith('5511999999999@s.whatsapp.net', { text: 'pong' });
   });
 
+  it('forwards the phone-number JID behind a LID-addressed DM as a peer alias', async () => {
+    const { calls } = await start('pong');
+
+    await emitUpsert([waMessage({
+      key: { remoteJid: '141789856067723@lid', remoteJidAlt: '5511948449969@s.whatsapp.net', fromMe: false, id: 'MSG-LID' },
+      message: { conversation: 'Temos na quarta feira, as 19h' },
+    })]);
+
+    expect(calls).toHaveLength(1);
+    expect(calls[0].target).toBe('141789856067723@lid');
+    expect(calls[0].message).toMatchObject({ peerAliases: ['5511948449969@s.whatsapp.net'] });
+  });
+
+  it('sends no peer aliases for a DM without an alternate address', async () => {
+    const { calls } = await start('pong');
+
+    await emitUpsert([waMessage({ message: { conversation: 'hello there' } })]);
+
+    expect(calls[0].message.peerAliases).toBeUndefined();
+  });
+
   it('sends to a loosely-formatted number by canonicalizing it through onWhatsApp', async () => {
     await start('n/a');
     fakeSock.onWhatsApp.mockResolvedValueOnce([{ jid: '5511999999999@s.whatsapp.net', exists: true }]);

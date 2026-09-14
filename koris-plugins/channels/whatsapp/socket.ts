@@ -167,7 +167,13 @@ export async function startBaileysSocket(options: WhatsAppChannelStartOptions): 
         isGroup && isAddressedToBot({ text, mentionedJids, quotedParticipant }, botIdentity());
       if (isGroup && !mentionsBot) continue;
 
-      void handleInboundMessage(options, sock, jid, senderName, text, mentionedJids, image, sticker, quotedText, quotedImage, isWhitelisted, mentionsBot, externalId ?? undefined, audio, quotedAudio).catch((err: Error) => {
+      // A DM can arrive under the sender's LID while Koris knows them by phone
+      // number (e.g. an errand sent to it); core matches on either address.
+      const peerAliases = isGroup
+        ? []
+        : [key.remoteJidAlt].filter((alt): alt is string => typeof alt === 'string' && !!alt && alt !== jid);
+
+      void handleInboundMessage(options, sock, jid, senderName, text, mentionedJids, image, sticker, quotedText, quotedImage, isWhitelisted, mentionsBot, externalId ?? undefined, audio, quotedAudio, peerAliases).catch((err: Error) => {
         options.logger.warn(`WhatsApp message handling error: ${err.message}`);
       });
     }
@@ -192,6 +198,7 @@ async function handleInboundMessage(
   externalId?: string,
   audio?: ExtractedAudio | null,
   quotedAudio?: ExtractedQuotedAudio | null,
+  peerAliases: string[] = [],
 ): Promise<void> {
   const channel = new WhatsAppChannel(sock);
 
@@ -269,5 +276,6 @@ async function handleInboundMessage(
     stickers,
     quotedText: resolvedQuotedText ?? undefined,
     externalId,
+    ...(peerAliases.length ? { peerAliases } : {}),
   });
 }

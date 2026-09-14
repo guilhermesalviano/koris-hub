@@ -33,6 +33,8 @@ export interface WhatsAppInboundOptions {
   stickers?: StickerReference[];
   quotedText?: string;
   externalId?: string;
+  /** Other JIDs of the same DM sender (e.g. the phone-number JID behind a LID). */
+  peerAliases?: string[];
 }
 
 export interface IWhatsAppChannel {
