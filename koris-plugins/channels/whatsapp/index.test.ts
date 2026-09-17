@@ -297,9 +297,9 @@ describe('whatsapp plugin', () => {
     expect(whatsappState.botNumber).toBe(BOT_NUMBER);
     expect(whatsappState.botLid).toBe('199999999998888');
     expect(whatsappState.botName).toBe('koris');
-    expect(logger.info).toHaveBeenCalledWith(`WhatsApp bot number auto-detected: ${BOT_NUMBER}`);
-    expect(logger.info).toHaveBeenCalledWith('WhatsApp bot LID auto-detected: 199999999998888');
-    expect(logger.info).toHaveBeenCalledWith('WhatsApp bot name token adopted: "koris"');
+    expect(logger.info).toHaveBeenCalledWith(`[whatsapp] bot number auto-detected: ${BOT_NUMBER}`);
+    expect(logger.info).toHaveBeenCalledWith('[whatsapp] bot LID auto-detected: 199999999998888');
+    expect(logger.info).toHaveBeenCalledWith('[whatsapp] bot name token adopted: "koris"');
 
     await emitUpsert([
       waMessage({

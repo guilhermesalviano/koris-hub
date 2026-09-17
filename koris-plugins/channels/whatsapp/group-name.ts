@@ -29,7 +29,7 @@ export async function resolveGroupName(sock: SocketLike, jid: string, logger: IL
     groupNameCache.set(jid, { name: metadata.subject, fetchedAt: Date.now() });
     return metadata.subject;
   } catch (err) {
-    logger.warn(`Failed to fetch WhatsApp group metadata for ${jid}: ${err instanceof Error ? err.message : String(err)}`);
+    logger.warn(`[whatsapp] failed to fetch group metadata for ${jid}: ${err instanceof Error ? err.message : String(err)}`);
     return undefined;
   }
 }

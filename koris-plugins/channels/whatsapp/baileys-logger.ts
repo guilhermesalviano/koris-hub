@@ -15,10 +15,10 @@ export function createBaileysLogger(logger: ILogger) {
     level: 'silent' as const,
     trace: () => {},
     debug: () => {},
-    info: (msg: unknown) => logger.debug(`[baileys] ${formatBaileysLog(msg)}`),
-    warn: (msg: unknown) => logger.warn(`[baileys] ${formatBaileysLog(msg)}`),
-    error: (msg: unknown) => logger.error(`[baileys] ${formatBaileysLog(msg)}`),
-    fatal: (msg: unknown) => logger.error(`[baileys] fatal: ${formatBaileysLog(msg)}`),
+    info: (msg: unknown) => logger.debug(`[whatsapp] [baileys] ${formatBaileysLog(msg)}`),
+    warn: (msg: unknown) => logger.warn(`[whatsapp] [baileys] ${formatBaileysLog(msg)}`),
+    error: (msg: unknown) => logger.error(`[whatsapp] [baileys] ${formatBaileysLog(msg)}`),
+    fatal: (msg: unknown) => logger.error(`[whatsapp] [baileys] fatal: ${formatBaileysLog(msg)}`),
     child: () => createBaileysLogger(logger),
   };
 }

@@ -15,7 +15,7 @@ export function createWhatsAppAdapter(options: WhatsAppPluginOptions): ChannelDe
 
       WhatsAppChannelFactory.start({ authFolder: options.authFolder, gateway, logger })
         .then(({ stop }) => { stopFn = stop; })
-        .catch((err: Error) => logger.warn(`Failed to start WhatsApp: ${err.message}`));
+        .catch((err: Error) => logger.warn(`[whatsapp] failed to start: ${err.message}`));
 
       return () => { stopFn?.(); };
     },

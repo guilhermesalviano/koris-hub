@@ -8,7 +8,7 @@ export async function downloadAudioBuffer(audio: ExtractedAudio, logger: ILogger
     const buffer = await downloadMediaMessage(audio.message, 'buffer', {}) as Buffer;
     return buffer;
   } catch (err) {
-    logger.warn(`WhatsApp audio download failed: ${err instanceof Error ? err.message : String(err)}`);
+    logger.warn(`[whatsapp] audio download failed: ${err instanceof Error ? err.message : String(err)}`);
     return null;
   }
 }
@@ -19,7 +19,7 @@ export async function downloadImageBase64(image: ExtractedImage, logger: ILogger
     const buffer = await downloadMediaMessage(image.message, 'buffer', {}) as Buffer;
     return { data: buffer.toString('base64'), mimeType: image.mimetype };
   } catch (err) {
-    logger.warn(`WhatsApp image download failed: ${err instanceof Error ? err.message : String(err)}`);
+    logger.warn(`[whatsapp] image download failed: ${err instanceof Error ? err.message : String(err)}`);
     return null;
   }
 }
@@ -34,7 +34,7 @@ export async function downloadQuotedAudioBuffer(jid: string, audio: ExtractedQuo
     const buffer = await downloadMediaMessage(syntheticMessage, 'buffer', {}) as Buffer;
     return buffer;
   } catch (err) {
-    logger.warn(`WhatsApp quoted audio download failed: ${err instanceof Error ? err.message : String(err)}`);
+    logger.warn(`[whatsapp] quoted audio download failed: ${err instanceof Error ? err.message : String(err)}`);
     return null;
   }
 }
@@ -49,7 +49,7 @@ export async function downloadQuotedImageBase64(jid: string, image: ExtractedQuo
     const buffer = await downloadMediaMessage(syntheticMessage, 'buffer', {}) as Buffer;
     return { data: buffer.toString('base64'), mimeType: image.mimetype, source: 'quoted' };
   } catch (err) {
-    logger.warn(`WhatsApp quoted image download failed: ${err instanceof Error ? err.message : String(err)}`);
+    logger.warn(`[whatsapp] quoted image download failed: ${err instanceof Error ? err.message : String(err)}`);
     return null;
   }
 }

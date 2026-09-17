@@ -44,7 +44,7 @@ function adoptBotIdentity(source: BotIdentitySource | undefined, logger: ILogger
     const pn = firstJidMatching('@s.whatsapp.net', source.phoneNumber, source.id);
     if (pn) {
       whatsappState.botNumber = pn;
-      logger.info(`WhatsApp bot number auto-detected: ${pn}`);
+      logger.info(`[whatsapp] bot number auto-detected: ${pn}`);
     }
   }
 
@@ -52,7 +52,7 @@ function adoptBotIdentity(source: BotIdentitySource | undefined, logger: ILogger
     const lid = firstJidMatching('@lid', source.lid, source.id);
     if (lid) {
       whatsappState.botLid = lid;
-      logger.info(`WhatsApp bot LID auto-detected: ${lid}`);
+      logger.info(`[whatsapp] bot LID auto-detected: ${lid}`);
     }
   }
 
@@ -60,7 +60,7 @@ function adoptBotIdentity(source: BotIdentitySource | undefined, logger: ILogger
     const name = botNameToken(source.name ?? source.verifiedName ?? source.notify);
     if (name) {
       whatsappState.botName = name;
-      logger.info(`WhatsApp bot name token adopted: "${name}"`);
+      logger.info(`[whatsapp] bot name token adopted: "${name}"`);
     }
   }
 }
@@ -84,7 +84,7 @@ export async function startBaileysSocket(options: WhatsAppChannelStartOptions): 
 
   sock.ev.on('connection.update', ({ connection, lastDisconnect, qr }) => {
     if (qr) {
-      options.logger.info('Scan the QR code below with WhatsApp on your phone:');
+      options.logger.info('[whatsapp] Scan the QR code below with WhatsApp on your phone:');
       qrcode.generate(qr, { small: true });
     }
 
@@ -93,13 +93,13 @@ export async function startBaileysSocket(options: WhatsAppChannelStartOptions): 
       const shouldReconnect = statusCode !== DisconnectReason.loggedOut;
 
       options.logger.warn(
-        `WhatsApp connection closed (code=${statusCode ?? 'unknown'}). Reconnect=${shouldReconnect}`,
+        `[whatsapp] connection closed (code=${statusCode ?? 'unknown'}). Reconnect=${shouldReconnect}`,
       );
 
       if (shouldReconnect) {
         startBaileysSocket(options)
           .then((newSock) => { whatsappState.activeSocket = newSock; })
-          .catch((err: Error) => options.logger.warn(`WhatsApp reconnect failed: ${err.message}`));
+          .catch((err: Error) => options.logger.warn(`[whatsapp] reconnect failed: ${err.message}`));
       } else {
         whatsappState.activeSocket = null;
       }
@@ -115,13 +115,13 @@ export async function startBaileysSocket(options: WhatsAppChannelStartOptions): 
             .then((lid) => {
               if (lid && !whatsappState.botLid) {
                 whatsappState.botLid = jidToNumber(lid);
-                options.logger.info(`WhatsApp bot LID resolved via mapping: ${whatsappState.botLid}`);
+                options.logger.info(`[whatsapp] bot LID resolved via mapping: ${whatsappState.botLid}`);
               }
             })
             .catch(() => {});
         }
       }
-      options.logger.info('WhatsApp is ready!');
+      options.logger.info('[whatsapp] ready!');
     }
   });
 
@@ -174,7 +174,7 @@ export async function startBaileysSocket(options: WhatsAppChannelStartOptions): 
         : [key.remoteJidAlt].filter((alt): alt is string => typeof alt === 'string' && !!alt && alt !== jid);
 
       void handleInboundMessage(options, sock, jid, senderName, text, mentionedJids, image, sticker, quotedText, quotedImage, isWhitelisted, mentionsBot, externalId ?? undefined, audio, quotedAudio, peerAliases).catch((err: Error) => {
-        options.logger.warn(`WhatsApp message handling error: ${err.message}`);
+        options.logger.warn(`[whatsapp] message handling error: ${err.message}`);
       });
     }
   });
@@ -245,7 +245,7 @@ async function handleInboundMessage(
       if (!result.error && result.text.trim()) {
         resolvedQuotedText = `[Voice message]: ${result.text.trim()}`;
       } else if (result.error) {
-        options.logger.debug(`WhatsApp quoted voice note not transcribed: ${result.error}`);
+        options.logger.debug(`[whatsapp] quoted voice note not transcribed: ${result.error}`);
       }
     }
   }

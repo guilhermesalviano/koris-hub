@@ -39,9 +39,9 @@
  * `node:*` builtins — in particular NO relative specifier may survive, and the
  * check below fails the build if one does.
  */
-import { build, type Metafile } from 'esbuild';
+import { build, type Metafile, type Plugin } from 'esbuild';
 import { builtinModules } from 'node:module';
-import { statSync } from 'node:fs';
+import { readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 
 const CHANNELS_DIR = join(process.cwd(), 'koris-plugins/channels');
@@ -69,6 +69,25 @@ const EXTERNAL = [
   ...builtinModules,
   ...builtinModules.map((m) => `node:${m}`),
 ];
+
+// libsignal (pulled in by baileys) dumps whole `SessionEntry` objects — key
+// material included — to stdout via bare `console.*` on every session
+// open/close. Strip those calls; nothing else in libsignal's output is touched.
+const SESSION_ENTRY_LOG = /console\.(?:info|warn)\((?:"Closing session:"|"Opening session:"|"Removing old closed session:"|"Session already closed"), [^)]*\);/g;
+
+const stripSessionEntryLogs: Plugin = {
+  name: 'strip-libsignal-session-entry-logs',
+  setup(b) {
+    b.onLoad({ filter: /[\\/]libsignal[\\/]src[\\/]session_record\.js$/ }, (args) => {
+      const source = readFileSync(args.path, 'utf8');
+      const contents = source.replace(SESSION_ENTRY_LOG, '');
+      if (contents === source) {
+        throw new Error(`no SessionEntry logs found in ${args.path} — libsignal changed, update SESSION_ENTRY_LOG`);
+      }
+      return { contents, loader: 'js' };
+    });
+  },
+};
 
 function unresolvedRequires(meta: Metafile, outfile: string): string[] {
   const out = meta.outputs[outfile];
@@ -99,6 +118,7 @@ async function main(): Promise<void> {
       logLevel: 'warning',
       metafile: true,
       legalComments: 'none',
+      plugins: [stripSessionEntryLogs],
     });
 
     const bytes = statSync(outfile).size;
