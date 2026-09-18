@@ -1,5 +1,6 @@
-import { REPO_URL, RELEASES_API_URL, RELEASES_URL } from './constants';
+import { REPO_URL, RELEASES_URL } from './constants';
 import { PLATFORM_LABELS, type Platform } from './platform';
+import { fetchRawGitHubReleases, type GitHubRelease } from './github-releases';
 
 export type { Platform };
 
@@ -33,20 +34,6 @@ export interface LatestDownloads {
   source: SourceDownload; // build-from-source path for the same tag
 }
 
-interface GitHubAsset {
-  name: string;
-  browser_download_url: string;
-  size: number;
-}
-
-interface GitHubRelease {
-  tag_name: string;
-  html_url: string;
-  published_at: string | null;
-  draft: boolean;
-  prerelease: boolean;
-  assets: GitHubAsset[];
-}
 
 // Installer / binary extensions we surface. electron-builder also uploads
 // auto-update metadata (`.blockmap`, `latest*.yml`, `.zsync`) and checksums
@@ -73,22 +60,12 @@ function archOf(name: string): string | null {
 
 const PLATFORM_ORDER: Platform[] = ['mac', 'windows', 'linux'];
 
-// Data layer for the `/api/downloads` route handler. Hits the public koris Releases
-// API (no auth needed for public repos), takes the newest stable release, and groups
-// its installer assets by OS. A failed fetch or a release with no usable assets
-// resolves to `null` so the route still returns valid JSON and the build never breaks.
+// Data layer for the `/api/downloads` route handler. Hits the centralized releases
+// service (deduplicated, cached with TTL), takes the newest stable release, and groups
+// its installer assets by OS.
 export async function fetchLatestDownloads(): Promise<LatestDownloads | null> {
   try {
-    const res = await fetch(`${RELEASES_API_URL}?per_page=30`, {
-      headers: { Accept: 'application/vnd.github+json' },
-    });
-
-    if (!res.ok) {
-      console.warn(`[downloads] GitHub releases fetch failed: ${res.status} ${res.statusText}`);
-      return null;
-    }
-
-    const releases = (await res.json()) as GitHubRelease[];
+    const releases = await fetchRawGitHubReleases();
     const latest = releases.find((r) => !r.draft && !r.prerelease && r.assets.length > 0);
     if (!latest) return null;
 

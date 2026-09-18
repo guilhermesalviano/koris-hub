@@ -6,6 +6,8 @@ import type { DownloadAsset, LatestDownloads, Platform } from '@/lib/downloads';
 import { PLATFORM_LABELS, detectPlatform } from '@/lib/platform';
 import type { Dictionary } from '@/i18n';
 
+import { fetchCachedDownloads } from '@/lib/client-api';
+
 interface Props {
   dict: Dictionary;
   className?: string;
@@ -42,14 +44,9 @@ export function DownloadButton({
   useEffect(() => {
     setDetected(detectPlatform());
     let active = true;
-    fetch('/api/downloads')
-      .then((res) => (res.ok ? (res.json() as Promise<LatestDownloads | null>) : null))
-      .then((d) => {
-        if (active) setData(d);
-      })
-      .catch(() => {
-        if (active) setData(null);
-      });
+    fetchCachedDownloads().then((d) => {
+      if (active) setData(d);
+    });
     return () => {
       active = false;
     };

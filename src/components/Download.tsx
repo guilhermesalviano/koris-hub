@@ -5,6 +5,7 @@ import type { Dictionary } from '@/i18n';
 import { RELEASES_URL } from '@/lib/constants';
 import type { DownloadAsset, LatestDownloads, Platform, PlatformDownloads } from '@/lib/downloads';
 import { detectPlatform } from '@/lib/platform';
+import { fetchCachedDownloads } from '@/lib/client-api';
 
 type TabId = 'desktop' | 'source';
 
@@ -80,14 +81,9 @@ export function Download({ dict }: { dict: Dictionary }) {
   useEffect(() => {
     setDetected(detectPlatform());
     let active = true;
-    fetch('/api/downloads')
-      .then((res) => (res.ok ? (res.json() as Promise<LatestDownloads | null>) : null))
-      .then((d) => {
-        if (active) setData(d);
-      })
-      .catch(() => {
-        if (active) setData(null);
-      });
+    fetchCachedDownloads().then((d) => {
+      if (active) setData(d);
+    });
     return () => {
       active = false;
     };

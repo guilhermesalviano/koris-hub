@@ -13,8 +13,8 @@ export const en = {
 
   hero: {
     badge: '✨ Open Source & Local-First AI Framework',
-    titleLead: 'An ',
-    titleAccent: 'autonomous AI assistant',
+    titleLead: 'Your ',
+    titleAccent: 'AI Teammates',
     titleTail: ', running on your own infrastructure',
     subtitle:
       'Koris Bot is a TypeScript framework for building AI assistants with pluggable channels, extensible skills, and memory that persists across sessions — not just within a chat window.',
@@ -49,24 +49,24 @@ export const en = {
 
   testimonials: {
     tag: 'Community',
-    title: 'Made for people who love building.',
+    title: 'Made for people who love building',
     subtitle: 'A few ways developers, self-hosters, and teams turn Koris into their autonomous daily driver.',
     q1Text: 'Running Koris on my home server with Ollama. Having a personal assistant on WhatsApp that remembers my notes without sending data to third parties is unbeatable.',
-    q1Author: 'Alex Rivera',
+    q1Author: 'Alex Oliveira',
     q1Role: 'Homelab & Self-Host Enthusiast',
-    q1Avatar: 'AR',
+    q1Avatar: 'AO',
     q2Text: 'The Markdown skill system is brilliant. Drop a single file with instructions and curl commands, and the bot immediately executes staging tasks reliably.',
-    q2Author: 'Jordan Lee',
+    q2Author: 'João Pedro',
     q2Role: 'DevOps Lead',
-    q2Avatar: 'JL',
+    q2Avatar: 'JP',
     q3Text: 'Unlike bloated AI frameworks, Koris is clean TypeScript with local SQLite. Fast to boot, zero lock-in, and dead simple to customize.',
-    q3Author: 'Casey Morgan',
+    q3Author: 'Higor Santos',
     q3Role: 'Fullstack Developer',
-    q3Avatar: 'CM',
+    q3Avatar: 'HS',
     q4Text: 'Unified Telegram and Web UI messaging backed by the same persistent memory tree. Exactly what our team needed for internal automations.',
-    q4Author: 'Taylor Quinn',
+    q4Author: 'Robson Rocha',
     q4Role: 'Systems Architect',
-    q4Avatar: 'TQ',
+    q4Avatar: 'RR',
   },
 
   faq: {
@@ -125,7 +125,7 @@ export const en = {
   footer: {
     license: 'ISC License',
     builtBy: 'Built with ❤️ by Koaris',
-    tagline: 'Autonomous AI assistant running on your own infrastructure.',
+    tagline: 'Your AI teammates running on your own infrastructure.',
     product: 'Product',
     marketplace: 'Marketplace',
     docs: 'Documentation',

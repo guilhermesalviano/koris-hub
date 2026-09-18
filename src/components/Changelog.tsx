@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import type { ChangelogEntry } from '@/lib/changelog';
 import { REPO_URL } from '@/lib/constants';
+import { fetchCachedChangelog } from '@/lib/client-api';
 import type { Dictionary } from '@/i18n';
 
 export function Changelog({ dict }: { dict: Dictionary }) {
@@ -13,14 +14,9 @@ export function Changelog({ dict }: { dict: Dictionary }) {
 
   useEffect(() => {
     let active = true;
-    fetch('/api/changelog')
-      .then((res) => (res.ok ? (res.json() as Promise<ChangelogEntry[]>) : []))
-      .then((data) => {
-        if (active) setEntries(data);
-      })
-      .catch(() => {
-        if (active) setEntries([]);
-      });
+    fetchCachedChangelog().then((data) => {
+      if (active) setEntries(data);
+    });
     return () => {
       active = false;
     };
