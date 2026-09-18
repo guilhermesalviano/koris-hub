@@ -49,7 +49,7 @@ function buildLlmsTxt(): string {
 
 Koris runs on your own infrastructure — there is no hosted service and no
 subscription. It is provider-agnostic: you point it at the LLM provider you
-choose. Source: https://github.com/guilhermesalviano/koris
+choose. Source: https://github.com/guilhermesalviano/koris-bot
 
 Key facts:
 

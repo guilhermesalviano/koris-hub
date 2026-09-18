@@ -5,11 +5,11 @@
 export const SITE_URL = 'https://hub.koaris.com';
 
 // The code repository (releases, source, issues).
-export const REPO_URL = 'https://github.com/guilhermesalviano/koris';
+export const REPO_URL = 'https://github.com/guilhermesalviano/koris-bot';
 export const RELEASES_URL = `${REPO_URL}/releases/latest`;
 
 // Releases REST API for the code repo — the changelog is built from this at build time.
-export const RELEASES_API_URL = 'https://api.github.com/repos/guilhermesalviano/koris/releases';
+export const RELEASES_API_URL = 'https://api.github.com/repos/guilhermesalviano/koris-bot/releases';
 
 // This repo — the website / marketplace / docs. Used for "edit this entry" links.
 export const HUB_REPO_URL = 'https://github.com/guilhermesalviano/koris-hub';

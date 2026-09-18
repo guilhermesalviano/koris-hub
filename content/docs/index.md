@@ -32,4 +32,4 @@ state persists across restarts.
 ## Elsewhere
 
 - **[Marketplace](/marketplace)** — browse the tools, channels, and skills that ship with Koris.
-- **[Source on GitHub](https://github.com/guilhermesalviano/koris)** — the framework itself.
+- **[Source on GitHub](https://github.com/guilhermesalviano/koris-bot)** — the framework itself.

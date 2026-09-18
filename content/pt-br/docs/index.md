@@ -32,4 +32,4 @@ local, de modo que o estado sobrevive a reinicializações.
 ## Em outros lugares
 
 - **[Marketplace](/pt-br/marketplace)** — navegue pelas ferramentas, canais e skills que acompanham o Koris.
-- **[Código no GitHub](https://github.com/guilhermesalviano/koris)** — o framework em si.
+- **[Código no GitHub](https://github.com/guilhermesalviano/koris-bot)** — o framework em si.

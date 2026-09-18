@@ -16,7 +16,7 @@ import { join } from 'path';
 import matter from 'gray-matter';
 
 const CATALOG_DIR = join(process.cwd(), 'content/marketplace');
-const REPO_TREE = 'https://github.com/guilhermesalviano/koris/tree/main';
+const REPO_TREE = 'https://github.com/guilhermesalviano/koris-bot/tree/main';
 
 /** recursively collect every *.json file under dir (entries live in family subfolders) */
 function collectEntryFiles(dir: string): string[] {

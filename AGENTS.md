@@ -1,7 +1,7 @@
 # AGENTS.md
 
 Guidance for agents working in `koris-hub` — the public website, plugins
-marketplace, and docs for [Koris](https://github.com/guilhermesalviano/koris).
+marketplace, and docs for [Koris](https://github.com/guilhermesalviano/koris-bot).
 
 ## What this is
 

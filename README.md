@@ -1,6 +1,6 @@
 # koris-hub
 
-The public web presence for [Koris](https://github.com/guilhermesalviano/koris) — the
+The public web presence for [Koris](https://github.com/guilhermesalviano/koris-bot) — the
 autonomous AI assistant framework. This repo holds:
 
 - **`/`** — the marketing landing page
@@ -49,7 +49,7 @@ becomes a section via its `index.md`. The left sidebar is generated from the tre
 ## Changelog
 
 The landing page's changelog is built from the `koris` repo's [GitHub
-Releases](https://github.com/guilhermesalviano/koris/releases). `src/lib/changelog.ts`
+Releases](https://github.com/guilhermesalviano/koris-bot/releases). `src/lib/changelog.ts`
 fetches the Releases API during `next build`, so the section refreshes on every deploy
 (stable releases only; a fetch failure just omits the section). CI passes a read-only
 `GITHUB_TOKEN` to raise the API rate limit.

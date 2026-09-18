@@ -5,7 +5,7 @@ import { getRequiredStringArg, getOptionalStringArg } from '../runtime';
 
 export const TOOL_NAME = 'issue' as const;
 
-const ATTRIBUTION = '_Filed by [Koris](https://github.com/guilhermesalviano/koris)_';
+const ATTRIBUTION = '_Filed by [Koris](https://github.com/guilhermesalviano/koris-bot)_';
 
 /** Appends the attribution line every issue this tool creates carries. */
 function withAttribution(body: string | null): string {
