@@ -5,7 +5,7 @@ order: 3
 
 # Primeiros passos
 
-O Koris é um framework de agente de IA autônomo escrito em TypeScript. Ele recebe
+O Koris Bot é um framework de agente de IA autônomo escrito em TypeScript. Ele recebe
 mensagens por canais plugáveis (Telegram, WhatsApp, uma interface de terminal e um
 dashboard web), processa cada uma com um LLM e pode executar ferramentas em seu nome.
 O estado fica em um banco SQLite local, então memória e sessões sobrevivem a
@@ -47,7 +47,7 @@ formato atual.
 ## App desktop
 
 `apps/desktop/` é uma casca fina em Electron. Ele não reimplementa a interface: gerencia
-o servidor do Koris e carrega o dashboard web existente em uma janela nativa. É
+o servidor do Koris Bot e carrega o dashboard web existente em uma janela nativa. É
 empacotado com o electron-builder.
 
 ## Limpando o estado

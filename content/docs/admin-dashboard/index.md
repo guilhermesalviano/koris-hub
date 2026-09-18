@@ -5,7 +5,7 @@ order: 12
 
 # Admin Dashboard
 
-Koris ships a browser dashboard for chatting with the agent and managing its configuration.
+Koris Bot ships a browser dashboard for chatting with the agent and managing its configuration.
 
 ## What serves it
 

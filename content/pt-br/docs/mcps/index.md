@@ -5,14 +5,14 @@ order: 10
 
 # Servidores MCP
 
-Plugins de servidores MCP (Model Context Protocol) permitem que o Koris se conecte
+Plugins de servidores MCP (Model Context Protocol) permitem que o Koris Bot se conecte
 a ecossistemas externos de ferramentas e dashboards via Streamable HTTP, sem tocar
 no código do core. Cada integração é um [plugin](/pt-br/docs/plugins) em
 `plugins/mcps/`, estruturado em uma pasta independente.
 
-## Como o Koris se conecta a um servidor MCP
+## Como o Koris Bot se conecta a um servidor MCP
 
-Na inicialização, o Koris varre `plugins/mcps/` em busca de plugins de servidores
+Na inicialização, o Koris Bot varre `plugins/mcps/` em busca de plugins de servidores
 instalados. Cada plugin registra uma definição no ponto de extensão `MCP_SERVERS`.
 
 Quando um servidor MCP está ativado:
@@ -20,13 +20,13 @@ Quando um servidor MCP está ativado:
 1. O `McpManager` estabelece uma conexão Streamable HTTP para a URL configurada
    (por exemplo, `http://mac.local:3000/api/mcp`), enviando o token de autorização se configurado.
 2. O servidor retorna a lista de ferramentas e esquemas disponíveis.
-3. O Koris registra dinamicamente essas ferramentas no pipeline padrão de execução,
+3. O Koris Bot registra dinamicamente essas ferramentas no pipeline padrão de execução,
    com o prefixo `<servidor>__<ferramenta>` (por exemplo, `coredash__calendar`).
 4. O modelo de IA pode chamar a ferramenta de forma transparente durante as respostas.
    As chamadas são encaminhadas de volta pelo transporte Streamable HTTP.
 
-Se um servidor MCP ficar inacessível, o Koris registra um aviso e continua operando.
-Uma falha de conexão nunca derruba o agente nem trava o chat. O Koris tenta reconectar
+Se um servidor MCP ficar inacessível, o Koris Bot registra um aviso e continua operando.
+Uma falha de conexão nunca derruba o agente nem trava o chat. O Koris Bot tenta reconectar
 ao ser ativado/desativado, quando a configuração é atualizada ou na reinicialização do processo.
 
 ## Configuração

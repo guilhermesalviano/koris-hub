@@ -52,7 +52,7 @@ Apenas remetentes confiáveis recebem skills aprendidas. Um remetente não confi
 uma resposta simples, sem skills e sem ferramentas. Veja
 [Segurança](/pt-br/docs/security) para como a confiança é decidida por canal.
 
-## Skills que acompanham o Koris
+## Skills que acompanham o Koris Bot
 
 - `weather`
 - `cat-fact`

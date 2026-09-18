@@ -31,7 +31,7 @@ export function RootLayoutView({
             '@context': 'https://schema.org',
             '@type': 'WebSite',
             '@id': `${SITE_URL}/#website`,
-            name: 'Koris',
+            name: 'Koris Bot',
             url: `${SITE_URL}/`,
             description: dict.meta.siteDescription,
             inLanguage: HTML_LANG[locale],

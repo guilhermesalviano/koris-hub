@@ -71,7 +71,7 @@ export function createServer(): McpServer {
     {
       title: 'Search Koris Marketplace',
       description:
-        'Find Koris tools, channels, skills, and MCP servers by free-text query, family, or exact tags. This only searches the catalog; it does not execute plugins.',
+        'Find Koris Bot tools, channels, skills, and MCP servers by free-text query, family, or exact tags. This only searches the catalog; it does not execute plugins.',
       inputSchema: {
         query: z.string().optional().describe('Words to find in names, descriptions, tags, or triggers.'),
         family: z.enum(FAMILIES).optional().describe('Limit results to a tool, channel, skill, or mcp server.'),
@@ -98,7 +98,7 @@ export function createServer(): McpServer {
     {
       title: 'Get Koris Marketplace Entry',
       description:
-        'Return the complete catalog entry for one Koris plugin by slug. This only returns metadata and source links; it does not install or execute the plugin.',
+        'Return the complete catalog entry for one Koris Bot plugin by slug. This only returns metadata and source links; it does not install or execute the plugin.',
       inputSchema: {
         slug: z.string().min(1).describe('The marketplace slug, for example read-url or telegram.'),
         family: z.enum(FAMILIES).optional().describe('Optional family check for the slug.'),
@@ -132,7 +132,7 @@ export function createServer(): McpServer {
     CATALOG_URI,
     {
       title: 'Koris Marketplace Catalog',
-      description: 'The complete read-only catalog of Koris tools, channels, skills, and MCP servers.',
+      description: 'The complete read-only catalog of Koris Bot tools, channels, skills, and MCP servers.',
       mimeType: 'application/json',
     },
     async () => ({

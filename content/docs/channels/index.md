@@ -5,7 +5,7 @@ order: 5
 
 # Channels
 
-A channel is a message entry point. Koris runs the same agent behind every channel;
+A channel is a message entry point. Koris Bot runs the same agent behind every channel;
 the channel plugin only handles transport and normalisation.
 
 ## How a message enters

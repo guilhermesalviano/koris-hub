@@ -21,10 +21,10 @@ koris-plugins/mcps/<slug>/
   config.yml          RUNTIME ONLY — git-ignored, not committed
 ```
 
-## How Koris interacts with MCP servers
+## How Koris Bot interacts with MCP servers
 
-MCP integrations connect Koris to remote or local MCP servers over Streamable
-HTTP (`/api/mcp`). Koris owns the Streamable HTTP client, discovers each enabled
+MCP integrations connect Koris Bot to remote or local MCP servers over Streamable
+HTTP (`/api/mcp`). Koris Bot owns the Streamable HTTP client, discovers each enabled
 server's exposed tools dynamically, and registers them into its standard tool
 execution pipeline with a `<server>__<tool>` prefix.
 
@@ -41,7 +41,7 @@ disabled at runtime without restarting the server:
 
 1 MCP server:
 
-- `coredash/` — Connects Koris to the [Coredash](https://github.com/guilhermesalviano/coredash) personal assistant dashboard (a lightweight, self-hosted personal dashboard for personal automation, system monitoring, habit tracking, and home-lab workflows),
+- `coredash/` — Connects Koris Bot to the [Coredash](https://github.com/guilhermesalviano/coredash) personal assistant dashboard (a lightweight, self-hosted personal dashboard for personal automation, system monitoring, habit tracking, and home-lab workflows),
   enabling tools for calendar, tasks, emails, and system operations.
 
 ## How `koris` consumes these
@@ -52,7 +52,7 @@ disabled at runtime without restarting the server:
 - From the admin marketplace: click **Pull**
 
 The `.ts` source and `config.example.yml` come from this folder over
-`raw.githubusercontent.com` into `plugins/mcps/<slug>/`. Koris's `McpSyncService`
+`raw.githubusercontent.com` into `plugins/mcps/<slug>/`. Koris Bot's `McpSyncService`
 detects the new plugin on disk within ~500ms and registers it without requiring a
 rebuild or restart.
 

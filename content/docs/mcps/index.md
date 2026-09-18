@@ -5,14 +5,14 @@ order: 10
 
 # MCP Servers
 
-MCP (Model Context Protocol) server plugins allow Koris to connect to external
+MCP (Model Context Protocol) server plugins allow Koris Bot to connect to external
 tool ecosystems and dashboards over Streamable HTTP without modifying core code.
 Each integration is a [plugin](/docs/plugins) under `plugins/mcps/`, structured as
 a standalone folder.
 
-## How Koris connects to an MCP server
+## How Koris Bot connects to an MCP server
 
-At startup, Koris scans `plugins/mcps/` for installed server plugins. Each plugin
+At startup, Koris Bot scans `plugins/mcps/` for installed server plugins. Each plugin
 registers a server descriptor on the `MCP_SERVERS` extension point.
 
 When an MCP server is enabled:
@@ -20,14 +20,14 @@ When an MCP server is enabled:
 1. `McpManager` opens a Streamable HTTP connection to the configured server URL
    (e.g. `http://mac.local:3000/api/mcp`), presenting the bearer token if provided.
 2. The server returns its list of available tools and schemas.
-3. Koris dynamically registers those tools into the standard tool execution
+3. Koris Bot dynamically registers those tools into the standard tool execution
    pipeline, prefixed as `<server>__<tool>` (for example, `coredash__calendar`).
 4. The model can invoke the tool seamlessly during reasoning turns. Calls are
    delegated back over the Streamable HTTP transport.
 
-If an MCP server becomes unreachable, Koris logs a connection warning and
+If an MCP server becomes unreachable, Koris Bot logs a connection warning and
 gracefully degrades. A connection failure never crashes the agent or blocks chat.
-Koris retries connection when toggled, when its configuration is patched, or upon
+Koris Bot retries connection when toggled, when its configuration is patched, or upon
 process restart.
 
 ## Configuration

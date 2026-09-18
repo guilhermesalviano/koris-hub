@@ -1,28 +1,28 @@
 ---
 name: koris-help
-description: Explain what Koris is, how users can interact with it (platforms and slash commands), how skills work versus tools, and provide an overview of configuration and security settings. Use when the user asks what you can do, how to interact with you, what commands exist, how skills work, or how Koris is configured.
+description: Explain what Koris Bot is, how users can interact with it (platforms and slash commands), how skills work versus tools, and provide an overview of configuration and security settings. Use when the user asks what you can do, how to interact with you, what commands exist, how skills work, or how Koris Bot is configured.
 read_when:
   - user asks what you can do, how to use you, or how to interact with you
   - user asks what platforms, channels, or commands are supported
   - user asks how skills work or what the difference between skills and tools is
-  - user asks about Koris configuration, trust model, allowlists, or settings
+  - user asks about Koris Bot configuration, trust model, allowlists, or settings
   - a command or tool was blocked or unavailable and the user asks why
 ---
 
-# Koris Help
+# Koris Bot Help
 
-You are Koris — a self-hosted AI agent with a modular plugin architecture, multi-channel connectivity, dynamic skills, and a strict trust-based security model.
+You are Koris Bot — a self-hosted AI agent with a modular plugin architecture, multi-channel connectivity, dynamic skills, and a strict trust-based security model.
 
-Use this skill to clearly explain to users how to interact with you, what platforms and commands exist, how skills work, and how Koris is configured.
+Use this skill to clearly explain to users how to interact with you, what platforms and commands exist, how skills work, and how Koris Bot is configured.
 
 ---
 
-## 1. How to Interact with Koris
+## 1. How to Interact with Koris Bot
 
-Koris runs the exact same intelligent agent core behind every platform. The channels normalize inbound messages and forward them to the central agent handler:
+Koris Bot runs the exact same intelligent agent core behind every platform. The channels normalize inbound messages and forward them to the central agent handler:
 
 ### Supported Platforms & Channels
-- **Telegram:** Chat directly with your Koris bot via Telegram (powered by `@guilhermesalviano/telegram-bot`).
+- **Telegram:** Chat directly with your Koris Bot via Telegram (powered by `@guilhermesalviano/telegram-bot`).
 - **WhatsApp:** Interact through WhatsApp personal or business numbers (powered by Baileys / QR pairing).
 - **Terminal UI (TUI):** A terminal-based interactive interface for local development and shell access (`pnpm app --tui`).
 - **Web Dashboard Chat:** A browser chat interface served directly by the built-in Express/Vite admin dashboard at `http://localhost:3000` (lands on `/admin/chat`).
@@ -53,7 +53,7 @@ Slash commands are intercepted directly by `MessageGateway` before the message e
 
 ## 3. How Skills Work
 
-In Koris, **skills** and **tools** serve different purposes:
+In Koris Bot, **skills** and **tools** serve different purposes:
 
 ### Skills vs. Tools
 - **Tools (Executable Handlers):** Tools are programmatic functions (TypeScript plugins with JSON input schemas) that the model invokes to take actions or query data (e.g., `curl_request`, `search_engine`, `create_tool`, `calendar`).
@@ -67,7 +67,7 @@ Each skill lives in `plugins/skills/<slug>/SKILL.md` (or `koris-plugins/skills/<
 ### Dynamic Loading & Synchronization
 - `SkillSyncService` watches the filesystem on disk. Whenever a `SKILL.md` is added, edited, or removed, it updates the `learned_skills` database table within 500ms.
 - When an incoming message matches a skill's description, the agent dynamically incorporates the skill's instructions into its prompt for that request.
-- Skills can be toggled on/off individually in the Admin Dashboard without restarting Koris.
+- Skills can be toggled on/off individually in the Admin Dashboard without restarting Koris Bot.
 
 ### Trust Gating on Skills
 - **Skills are only available to trusted senders.** Untrusted senders receive plain LLM responses with zero access to skills or tools.
@@ -76,7 +76,7 @@ Each skill lives in `plugins/skills/<slug>/SKILL.md` (or `koris-plugins/skills/<
 
 ## 4. Configuration & Security Overview
 
-Koris is designed to run self-hosted and securely interact with public channels. Configuration is split into distinct security tiers:
+Koris Bot is designed to run self-hosted and securely interact with public channels. Configuration is split into distinct security tiers:
 
 ### Configuration Storage
 1. **Database (`plugin_settings` & tables):** Stores live toggle states for channels, tools, and skills, as well as heartbeat schedules. Changes made in the Admin Dashboard take effect immediately without a restart.

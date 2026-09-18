@@ -5,7 +5,7 @@ import { getRequiredStringArg, getOptionalStringArg } from '../runtime';
 
 export const TOOL_NAME = 'issue' as const;
 
-const ATTRIBUTION = '_Filed by [Koris](https://github.com/guilhermesalviano/koris-bot)_';
+const ATTRIBUTION = '_Filed by [Koris Bot](https://github.com/guilhermesalviano/koris-bot)_';
 
 /** Appends the attribution line every issue this tool creates carries. */
 function withAttribution(body: string | null): string {
@@ -109,7 +109,7 @@ export function create(context: ToolPluginContext): Plugin {
         description:
           'Create a GitHub issue. If GitHub API is configured with owner/repo and a token, creates the issue via the GitHub API. Otherwise returns formatted issue text for manual creation. ' +
           "The human will usually describe the issue in free-form text, not as an explicit title/body — derive both from that description yourself: title is a short, clear summary (a few words); body is the fuller description, expanded from what the human said, without inventing details they didn't mention. " +
-          'The created issue automatically gets a trailing line noting it was filed by Koris — do not add your own attribution or signature to the body. ' +
+          'The created issue automatically gets a trailing line noting it was filed by Koris Bot — do not add your own attribution or signature to the body. ' +
           `REQUIRES CONFIRMATION: this is a state-changing action. ${confirmationNote} Only call this tool after the human has explicitly confirmed in a follow-up message.`,
         parameters: {
           title: {

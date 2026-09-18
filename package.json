@@ -2,7 +2,7 @@
   "name": "koris-hub",
   "private": true,
   "version": "0.1.0",
-  "description": "Public website, plugins marketplace, and docs for Koris.",
+  "description": "Public website, plugins marketplace, and docs for Koris Bot.",
   "packageManager": "pnpm@10.18.3",
   "engines": {
     "node": ">=24.0.0"

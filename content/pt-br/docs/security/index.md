@@ -5,7 +5,7 @@ order: 13
 
 # Segurança
 
-O Koris roda na sua própria infraestrutura e conversa com pessoas não confiáveis por
+O Koris Bot roda na sua própria infraestrutura e conversa com pessoas não confiáveis por
 canais públicos. Os controles abaixo limitam o que o agente alcança e quem pode conduzi-lo.
 
 ## Lista de domínios permitidos

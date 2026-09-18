@@ -11,21 +11,21 @@ export function rootMetadata(locale: Locale): Metadata {
 
   return {
     metadataBase: new URL(SITE_URL),
-    title: { default: dict.meta.siteTitle, template: '%s · Koris' },
+    title: { default: dict.meta.siteTitle, template: '%s · Koris Bot' },
     description: dict.meta.siteDescription,
-    applicationName: 'Koris',
+    applicationName: 'Koris Bot',
     authors: [{ name: 'guilhermesalviano', url: REPO_URL }],
     creator: 'guilhermesalviano',
     alternates: { canonical: home, languages: languageAlternates('/') },
     openGraph: {
       type: 'website',
-      siteName: 'Koris',
+      siteName: 'Koris Bot',
       title: dict.meta.siteTitle,
       description: dict.meta.siteDescription,
       url: home,
       locale: OG_LOCALE[locale],
       alternateLocale: LOCALES.filter((l) => l !== locale).map((l) => OG_LOCALE[l]),
-      images: [{ url: '/logo.png', width: 128, height: 128, alt: 'Koris' }],
+      images: [{ url: '/logo.png', width: 128, height: 128, alt: 'Koris Bot' }],
     },
     twitter: {
       card: 'summary',

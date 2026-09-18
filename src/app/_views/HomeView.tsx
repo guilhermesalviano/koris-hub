@@ -19,7 +19,7 @@ export function HomeView({ locale }: { locale: Locale }) {
           '@context': 'https://schema.org',
           '@type': 'SoftwareApplication',
           '@id': `${SITE_URL}/#software`,
-          name: 'Koris',
+          name: 'Koris Bot',
           applicationCategory: 'DeveloperApplication',
           applicationSubCategory: 'AI agent framework',
           operatingSystem: 'Linux, macOS, Windows',

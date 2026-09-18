@@ -5,7 +5,7 @@ order: 3
 
 # Getting Started
 
-Koris is an autonomous AI-agent framework written in TypeScript. It receives messages
+Koris Bot is an autonomous AI-agent framework written in TypeScript. It receives messages
 through pluggable channels (Telegram, WhatsApp, a terminal UI, and a web dashboard),
 runs them through an LLM, and can execute tools on your behalf. State lives in a local
 SQLite database, so memory and sessions persist across restarts.

@@ -39,15 +39,15 @@ function buildLlmsTxt(): string {
     })
     .join('\n\n');
 
-  return `# Koris
+  return `# Koris Bot
 
-> Koris is an open-source, self-hosted AI agent framework written in TypeScript.
+> Koris Bot is an open-source, self-hosted AI agent framework written in TypeScript.
 > It receives messages through pluggable channels (Telegram, WhatsApp, a terminal
 > UI, and a web dashboard), runs them through an LLM, and executes tools on the
 > user's behalf. Memory and sessions persist in a local SQLite database, so state
 > survives restarts.
 
-Koris runs on your own infrastructure — there is no hosted service and no
+Koris Bot runs on your own infrastructure — there is no hosted service and no
 subscription. It is provider-agnostic: you point it at the LLM provider you
 choose. Source: https://github.com/guilhermesalviano/koris-bot
 
@@ -76,7 +76,7 @@ English URL declares its pt-BR counterpart via hreflang, and vice versa.
 
 ## Marketplace
 
-The tools, channels, and skills bundled with Koris.
+The tools, channels, and skills bundled with Koris Bot.
 
 ${catalog}
 `;

@@ -5,7 +5,7 @@ order: 4
 
 # Concepts
 
-How a message becomes a reply in Koris, and the pieces that keep state between messages.
+How a message becomes a reply in Koris Bot, and the pieces that keep state between messages.
 
 ## Message flow
 

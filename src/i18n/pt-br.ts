@@ -21,7 +21,7 @@ export const ptBr: Dictionary = {
     titleAccent: 'assistente de IA autônomo',
     titleTail: ', rodando na sua própria infraestrutura',
     subtitle:
-      'O Koris Assistant é um framework em TypeScript para criar assistentes de IA com canais plugáveis, skills extensíveis e memória que persiste entre sessões — não só dentro de uma janela de conversa.',
+      'O Koris Bot é um framework em TypeScript para criar assistentes de IA com canais plugáveis, skills extensíveis e memória que persiste entre sessões — não só dentro de uma janela de conversa.',
     readDocs: 'Ler a documentação',
   },
 
@@ -38,7 +38,7 @@ export const ptBr: Dictionary = {
   },
 
   download: {
-    title: 'Coloque o Koris no ar',
+    title: 'Coloque o Koris Bot no ar',
     subtitle:
       'Instale o app desktop ou compile a partir do código-fonte. De qualquer forma, o primeiro acesso já abre o assistente de configuração no navegador — sem editar arquivo de config na mão.',
     tabDesktop: 'App desktop',
@@ -87,7 +87,7 @@ export const ptBr: Dictionary = {
     parameters: 'Parâmetros',
     readWhen: 'Quando usar',
     setupGuidance: 'Guia de Configuração e Instalação',
-    downloadTitle: 'Baixar pelo Koris',
+    downloadTitle: 'Baixar pelo Koris Bot',
     downloadFromRepo: 'Execute este comando na raiz do repositório koris:',
     downloadFromChat: 'Remetentes confiáveis também podem baixá-lo pelo chat:',
     downloadOverwrite: 'Se o plugin já estiver instalado, adicione',
@@ -115,17 +115,17 @@ export const ptBr: Dictionary = {
   },
 
   meta: {
-    siteTitle: 'Koris — framework de assistente de IA auto-hospedado',
+    siteTitle: 'Koris Bot — framework de assistente de IA auto-hospedado',
     siteDescription:
-      'O Koris é um framework de agente de IA open source e auto-hospedado, escrito em TypeScript. Roda na sua própria infraestrutura, conversa por Telegram e WhatsApp, lembra entre sessões e se estende com ferramentas e skills em Markdown.',
+      'O Koris Bot é um framework de agente de IA open source e auto-hospedado, escrito em TypeScript. Roda na sua própria infraestrutura, conversa por Telegram e WhatsApp, lembra entre sessões e se estende com ferramentas e skills em Markdown.',
     docsTitle: 'Documentação',
     docsDescription:
-      'Documentação do Koris — instale e configure o agente de IA auto-hospedado, conecte canais no Telegram ou WhatsApp e estenda com ferramentas e skills.',
+      'Documentação do Koris Bot — instale e configure o agente de IA auto-hospedado, conecte canais no Telegram ou WhatsApp e estenda com ferramentas e skills.',
     marketplaceTitle: 'Marketplace',
     marketplaceDescription:
-      'Todas as ferramentas, canais, skills e servidores MCP que acompanham o Koris — o que cada um faz, os parâmetros que aceita e um link para o código-fonte.',
+      'Todas as ferramentas, canais, skills e servidores MCP que acompanham o Koris Bot — o que cada um faz, os parâmetros que aceita e um link para o código-fonte.',
     marketplaceIntroLead:
-      'As ferramentas, canais, skills e servidores MCP que acompanham o Koris hoje. Cada um vive no repositório',
+      'As ferramentas, canais, skills e servidores MCP que acompanham o Koris Bot hoje. Cada um vive no repositório',
     marketplaceIntroTail: '— este é um índice navegável, não um instalador.',
     notFoundTitle: '404 — página não encontrada',
   },

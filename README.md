@@ -1,10 +1,10 @@
 # koris-hub
 
-The public web presence for [Koris](https://github.com/guilhermesalviano/koris-bot) — the
+The public web presence for [Koris Bot](https://github.com/guilhermesalviano/koris-bot) — the
 autonomous AI assistant framework. This repo holds:
 
 - **`/`** — the marketing landing page
-- **`/marketplace`** — a browsable catalog of the tools, channels, and skills that ship with Koris
+- **`/marketplace`** — a browsable catalog of the tools, channels, and skills that ship with Koris Bot
 - **`/docs`** — the documentation site (currently a hello-world scaffold)
 
 It is a standalone [Next.js](https://nextjs.org) App Router app, statically exported

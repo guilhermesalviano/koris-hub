@@ -16,7 +16,7 @@ export const en = {
     titleAccent: 'autonomous AI assistant',
     titleTail: ', running on your own infrastructure',
     subtitle:
-      'Koris Assistant is a TypeScript framework for building AI assistants with pluggable channels, extensible skills, and memory that persists across sessions — not just within a chat window.',
+      'Koris Bot is a TypeScript framework for building AI assistants with pluggable channels, extensible skills, and memory that persists across sessions — not just within a chat window.',
     readDocs: 'Read the docs',
   },
 
@@ -33,7 +33,7 @@ export const en = {
   },
 
   download: {
-    title: 'Get Koris running',
+    title: 'Get Koris Bot running',
     subtitle:
       'Install the desktop app, or build it from source. Either way, the first launch drops you into a browser setup wizard — no manual config editing.',
     tabDesktop: 'Desktop app',
@@ -82,7 +82,7 @@ export const en = {
     parameters: 'Parameters',
     readWhen: 'Read when',
     setupGuidance: 'Setup & Configuration Guidance',
-    downloadTitle: 'Download from Koris',
+    downloadTitle: 'Download from Koris Bot',
     downloadFromRepo: 'Run this from the koris repository root:',
     downloadFromChat: 'Trusted senders can also download it from chat:',
     downloadOverwrite: 'If the plugin is already installed, add',
@@ -110,16 +110,16 @@ export const en = {
   },
 
   meta: {
-    siteTitle: 'Koris — self-hosted AI assistant framework',
+    siteTitle: 'Koris Bot — self-hosted AI assistant framework',
     siteDescription:
-      'Koris is an open-source, self-hosted AI agent framework in TypeScript. It runs on your own infrastructure, talks over Telegram and WhatsApp, remembers across sessions, and extends through tools and Markdown skills.',
+      'Koris Bot is an open-source, self-hosted AI agent framework in TypeScript. It runs on your own infrastructure, talks over Telegram and WhatsApp, remembers across sessions, and extends through tools and Markdown skills.',
     docsTitle: 'Docs',
     docsDescription:
-      'Documentation for Koris — install and configure the self-hosted AI agent, connect Telegram or WhatsApp channels, and extend it with tools and skills.',
+      'Documentation for Koris Bot — install and configure the self-hosted AI agent, connect Telegram or WhatsApp channels, and extend it with tools and skills.',
     marketplaceTitle: 'Marketplace',
     marketplaceDescription:
-      'Every tool, channel, skill, and MCP server that ships with Koris — what each one does, the parameters it takes, and a link to its source.',
-    marketplaceIntroLead: 'The tools, channels, skills, and MCP servers bundled with Koris today. Each one lives in the',
+      'Every tool, channel, skill, and MCP server that ships with Koris Bot — what each one does, the parameters it takes, and a link to its source.',
+    marketplaceIntroLead: 'The tools, channels, skills, and MCP servers bundled with Koris Bot today. Each one lives in the',
     marketplaceIntroTail: 'repo — this is a browsable index, not an installer.',
     notFoundTitle: '404 — page not found',
   },

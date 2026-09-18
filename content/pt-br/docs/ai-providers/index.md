@@ -5,7 +5,7 @@ order: 6
 
 # Provedores de IA
 
-O Koris conversa com modelos de linguagem por um pequeno conjunto de implementações de
+O Koris Bot conversa com modelos de linguagem por um pequeno conjunto de implementações de
 provedor. Você escolhe qual provedor atende cada papel no `koris.json`; o framework
 resolve a partir daí o modelo, a janela de contexto e as credenciais.
 
@@ -80,14 +80,14 @@ embeddings. Veja [Conceitos](/pt-br/docs/concepts) para como a memória usa embe
 
 ### Sem migração de layouts antigos
 
-Este é o único formato de `ai` que o Koris entende. Não há migração automática a partir de
+Este é o único formato de `ai` que o Koris Bot entende. Não há migração automática a partir de
 layouts anteriores — se o arquivo divergir, gere o bloco `ai` de novo a partir do
 `koris.example.json`.
 
 ## Erros e novas tentativas
 
 As mensagens de erro dos provedores preservam um token de status `(NNN)` ou uma palavra-
-chave reconhecida. O Koris as classifica em `aborted`, `timeout`, `authentication`,
+chave reconhecida. O Koris Bot as classifica em `aborted`, `timeout`, `authentication`,
 `rate_limited`, `unavailable`, `malformed_response`, `context_length` ou `unknown`, e
 repete as que valem a pena repetir.
 

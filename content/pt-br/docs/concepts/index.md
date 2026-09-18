@@ -5,7 +5,7 @@ order: 4
 
 # Conceitos
 
-Como uma mensagem vira uma resposta no Koris, e as peças que mantêm o estado entre uma
+Como uma mensagem vira uma resposta no Koris Bot, e as peças que mantêm o estado entre uma
 mensagem e outra.
 
 ## Fluxo de mensagens

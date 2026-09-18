@@ -5,7 +5,7 @@ order: 13
 
 # Security
 
-Koris runs on your own infrastructure and talks to untrusted people over public
+Koris Bot runs on your own infrastructure and talks to untrusted people over public
 channels. The controls below limit what the agent can reach and who can drive it.
 
 ## Domain allowlist gate

@@ -5,7 +5,7 @@ order: 9
 
 # Plugins
 
-Plugins são a forma de estender o Koris sem tocar no core. Há três famílias de plugin —
+Plugins são a forma de estender o Koris Bot sem tocar no core. Há três famílias de plugin —
 [canais](/pt-br/docs/channels), [ferramentas](/pt-br/docs/tools) e [servidores MCP](/pt-br/docs/mcps) —
 que compartilham o mesmo formato e o mesmo kernel, descritos abaixo. A pasta `plugins/` também abriga
 [skills](/pt-br/docs/skills), mas skills são um tipo diferente de extensão: Markdown

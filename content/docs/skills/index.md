@@ -50,7 +50,7 @@ placeholder resolved to `config.GATEWAY_HOST`.
 Only trusted senders receive learned skills. An untrusted sender gets a plain reply with no
 skills and no tools. See [Security](/docs/security) for how trust is decided per channel.
 
-## Skills that ship with Koris
+## Skills that ship with Koris Bot
 
 - `weather`
 - `cat-fact`

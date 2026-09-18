@@ -5,7 +5,7 @@ order: 12
 
 # Dashboard administrativo
 
-O Koris inclui um dashboard no navegador para conversar com o agente e gerenciar sua
+O Koris Bot inclui um dashboard no navegador para conversar com o agente e gerenciar sua
 configuração.
 
 ## O que o serve

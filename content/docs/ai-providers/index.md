@@ -5,7 +5,7 @@ order: 6
 
 # AI Providers
 
-Koris talks to language models through a small set of provider implementations. You pick
+Koris Bot talks to language models through a small set of provider implementations. You pick
 which provider serves each role in `koris.json`; the framework resolves the model, context
 window, and credentials from there.
 
@@ -79,12 +79,12 @@ embeddings-capable provider. See [Concepts](/docs/concepts) for how memory uses 
 
 ### No migration from older layouts
 
-This is the only `ai` shape Koris understands. There is no auto-migration from earlier
+This is the only `ai` shape Koris Bot understands. There is no auto-migration from earlier
 layouts — if the file drifts, regenerate the `ai` block from `koris.example.json`.
 
 ## Errors and retries
 
-Provider error strings keep a `(NNN)` status token or a recognised keyword. Koris classifies
+Provider error strings keep a `(NNN)` status token or a recognised keyword. Koris Bot classifies
 them into `aborted`, `timeout`, `authentication`, `rate_limited`, `unavailable`,
 `malformed_response`, `context_length`, or `unknown`, and retries the ones worth retrying.
 

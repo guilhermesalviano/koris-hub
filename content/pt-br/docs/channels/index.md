@@ -5,7 +5,7 @@ order: 5
 
 # Canais
 
-Um canal é um ponto de entrada de mensagens. O Koris roda o mesmo agente por trás de
+Um canal é um ponto de entrada de mensagens. O Koris Bot roda o mesmo agente por trás de
 todos os canais; o plugin de canal cuida apenas do transporte e da normalização.
 
 ## Como uma mensagem entra

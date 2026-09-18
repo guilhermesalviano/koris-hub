@@ -16,7 +16,7 @@ export function MarketplaceView({ locale }: { locale: Locale }) {
         data={{
           '@context': 'https://schema.org',
           '@type': 'ItemList',
-          name: 'Koris marketplace',
+          name: 'Koris Bot marketplace',
           description: dict.meta.marketplaceDescription,
           url: `${SITE_URL}${localePath(locale, '/marketplace/')}`,
           inLanguage: HTML_LANG[locale],

@@ -1,4 +1,4 @@
-// Catalog schema for the Koris plugins marketplace.
+// Catalog schema for the Koris Bot plugins marketplace.
 //
 // Each entry is one `<family-dir>/<slug>.json` file under this directory, grouped
 // by family (see FAMILY_DIRS below), e.g. `tools/issue.json`, `skills/weather.json`.

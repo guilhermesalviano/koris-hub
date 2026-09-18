@@ -1,6 +1,6 @@
 # Koris Hub MCP server
 
-This directory contains a read-only Model Context Protocol server for the Koris
+This directory contains a read-only Model Context Protocol server for the Koris Bot
 marketplace catalog. It helps an AI agent discover tools, channels, and skills;
 it does not install or execute plugin code.
 
