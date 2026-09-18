@@ -109,7 +109,7 @@ export function Download({ dict }: { dict: Dictionary }) {
   }, [data]);
 
   return (
-    <section id="download" className="mt-24 scroll-mt-20">
+    <section id="download" className="mt-24 scroll-mt-20 px-4 sm:px-6">
       <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:gap-12">
         <div className="lg:w-72 lg:flex-shrink-0">
           <h2 className="text-3xl font-bold tracking-tight text-txt sm:text-4xl">{dict.download.title}</h2>

@@ -326,7 +326,7 @@ export function ChatDemo({ dict, locale }: { dict: Dictionary; locale: Locale })
   );
 
   return (
-    <section id="demo" className="mt-24 scroll-mt-20">
+    <section id="demo" className="mt-24 scroll-mt-20 px-4 sm:px-6">
       <div className={`${styles.root} flex h-[600px] w-full flex-col overflow-hidden rounded-2xl border border-[var(--subtle)] bg-[var(--bg)]`}>
         <header className="flex h-14 flex-shrink-0 items-center justify-between gap-2 border-b border-[var(--subtle)] bg-[color-mix(in_srgb,var(--bg)_80%,transparent)] px-4 backdrop-blur-md">
           <div className="flex min-w-0 items-center gap-2.5">

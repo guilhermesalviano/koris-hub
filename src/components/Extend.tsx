@@ -78,7 +78,7 @@ export function Extend({ dict, locale }: { dict: Dictionary; locale: Locale }) {
   const docLabel = tab === 'skill' ? dict.extend.docLabelSkill : dict.extend.docLabelTool;
 
   return (
-    <section id="extend" className="mt-24 scroll-mt-20">
+    <section id="extend" className="mt-24 scroll-mt-20 px-4 sm:px-6">
       <div className="mb-8 max-w-xl">
         <h2 className="text-3xl font-bold tracking-tight text-txt sm:text-4xl">{dict.extend.title}</h2>
         <p className="mt-3 text-muted">

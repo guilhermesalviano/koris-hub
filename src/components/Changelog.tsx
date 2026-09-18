@@ -51,7 +51,7 @@ export function Changelog({ dict }: { dict: Dictionary }) {
   const loading = entries === null;
 
   return (
-    <section id="changelog" className="mt-24 scroll-mt-20">
+    <section id="changelog" className="mt-24 scroll-mt-20 px-4 sm:px-6">
       {/* Header with Title and Scroll Navigation Controls */}
       <div className="mb-8 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
         <div>
@@ -121,20 +121,20 @@ export function Changelog({ dict }: { dict: Dictionary }) {
         {canScrollLeft && (
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute -left-6 top-0 bottom-6 z-10 w-12 bg-gradient-to-r from-bg to-transparent"
+            className="pointer-events-none absolute -left-4 sm:-left-6 top-0 bottom-6 z-10 w-8 sm:w-12 bg-gradient-to-r from-bg to-transparent"
           />
         )}
         {canScrollRight && (
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute -right-6 top-0 bottom-6 z-10 w-12 bg-gradient-to-l from-bg to-transparent"
+            className="pointer-events-none absolute -right-4 sm:-right-6 top-0 bottom-6 z-10 w-8 sm:w-12 bg-gradient-to-l from-bg to-transparent"
           />
         )}
 
         <div
           ref={scrollerRef}
           onScroll={updateScrollButtons}
-          className="-mx-6 flex gap-5 overflow-x-auto px-6 pb-6 pt-2 scroll-smooth snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="-mx-4 sm:-mx-6 flex gap-5 overflow-x-auto px-4 sm:px-6 pb-6 pt-2 scroll-smooth snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
           {loading
             ? Array.from({ length: 3 }).map((_, i) => (

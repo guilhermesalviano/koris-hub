@@ -7,7 +7,7 @@ import { localePath } from '@/i18n/locales';
 
 export function Footer({ dict, locale = 'en' }: { dict: Dictionary; locale?: Locale }) {
   return (
-    <footer className="mt-28 border-t border-border/80 pt-16 pb-12 overflow-hidden">
+    <footer className="mt-28 border-t border-border/80 px-4 sm:px-6 pt-16 pb-12 overflow-hidden">
       {/* Top CTA banner */}
       <div className="rounded-2xl border border-border/80 bg-card p-8 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-6 mb-16">
         <div>

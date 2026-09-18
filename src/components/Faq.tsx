@@ -19,7 +19,7 @@ export function Faq({ dict }: { dict: Dictionary }) {
   };
 
   return (
-    <section id="faq" className="mt-24 scroll-mt-20">
+    <section id="faq" className="mt-24 scroll-mt-20 px-4 sm:px-6">
       <div className="text-center max-w-2xl mx-auto mb-14">
         <div className="inline-flex items-center gap-1.5 rounded-full border border-border/80 bg-bg-subtle/80 px-3 py-1 text-xs font-mono font-medium text-accent mb-3">
           {dict.faq.tag}

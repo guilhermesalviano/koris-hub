@@ -15,7 +15,7 @@ export function HomeView({ locale }: { locale: Locale }) {
   const dict = getDictionary(locale);
 
   return (
-    <main className="mx-auto max-w-5xl max-sm:px-4">
+    <main className="mx-auto max-w-5xl">
       <JsonLd
         data={{
           '@context': 'https://schema.org',
