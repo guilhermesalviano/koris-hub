@@ -4,16 +4,18 @@ import { Extend } from '@/components/Extend';
 import { Changelog } from '@/components/Changelog';
 import { Footer } from '@/components/Footer';
 import { ChatDemo } from '@/components/chat-demo/ChatDemo';
+import { FeaturedCapabilities } from '@/components/FeaturedCapabilities';
+import { Testimonials } from '@/components/Testimonials';
+import { Faq } from '@/components/Faq';
 import { JsonLd } from '@/components/JsonLd';
 import { REPO_URL, SITE_URL } from '@/lib/constants';
 import { getDictionary, type Locale } from '@/i18n';
-import { HTML_LANG } from '@/i18n/locales';
 
 export function HomeView({ locale }: { locale: Locale }) {
   const dict = getDictionary(locale);
 
   return (
-    <main className="mx-auto max-w-5xl px-6 py-12 sm:py-16">
+    <main className="mx-auto max-w-5xl">
       <JsonLd
         data={{
           '@context': 'https://schema.org',
@@ -41,17 +43,32 @@ export function HomeView({ locale }: { locale: Locale }) {
         }}
       />
 
-      <Hero dict={dict} />
+      {/* Hero section with ObsidianUI references */}
+      <Hero dict={dict} locale={locale} />
 
+      {/* Interactive Chat Demo */}
       <ChatDemo dict={dict} locale={locale} />
 
+      {/* Featured capabilities 2x2 cards (ObsidianUI "Featured Components" reference) */}
+      <FeaturedCapabilities dict={dict} locale={locale} />
+
+      {/* Code extension tabs (Skills & Tools) */}
       <Extend dict={dict} locale={locale} />
 
+      {/* Community / Builder quotes (ObsidianUI "Made for people who love building" reference) */}
+      <Testimonials dict={dict} />
+
+      {/* Download & Installation */}
       <Download dict={dict} />
 
+      {/* FAQ Accordion (ObsidianUI "Frequently Asked Questions" reference) */}
+      <Faq dict={dict} />
+
+      {/* GitHub Releases Changelog */}
       <Changelog dict={dict} />
 
-      <Footer dict={dict} />
+      {/* Multi-column Footer with status badge and bottom wordmark */}
+      <Footer dict={dict} locale={locale} />
     </main>
   );
 }
