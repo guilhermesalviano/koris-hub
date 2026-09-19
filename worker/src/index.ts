@@ -13,6 +13,9 @@ import { DOC_TOPICS, type DocLocale, type DocTopic } from './doc-topics.generate
 interface Env {
   TYPESAFE_API_KEY: string;
   TYPESAFE_API_BASE?: string;
+  ASSETS?: {
+    fetch(request: Request | string): Promise<Response>;
+  };
 }
 
 const MODEL = 'jev-latest';
@@ -25,7 +28,7 @@ const RATE_LIMIT_WINDOW_MS = 60_000;
 const RATE_LIMIT_MAX = 10;
 
 const ALLOWED_ORIGINS = new Set([
-  'https://hub.koaris.com',
+  'https://imkoris.com',
   'http://localhost:3000',
   'http://127.0.0.1:3000',
 ]);
@@ -155,19 +158,27 @@ export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const origin = request.headers.get('Origin');
     const headers = corsHeaders(origin);
-
-    if (request.method === 'OPTIONS') {
-      return new Response(null, { status: 204, headers });
-    }
-
     const url = new URL(request.url);
 
-    if (request.method === 'GET' && url.pathname === '/health') {
+    if (request.method === 'GET' && (url.pathname === '/health' || url.pathname === '/api/health')) {
       return json({ ok: true }, 200, headers);
     }
 
-    if (request.method !== 'POST' || url.pathname !== '/ask') {
+    const isAskEndpoint = url.pathname === '/ask' || url.pathname === '/api/ask';
+
+    if (request.method === 'OPTIONS' && isAskEndpoint) {
+      return new Response(null, { status: 204, headers });
+    }
+
+    if (!isAskEndpoint) {
+      if (env.ASSETS) {
+        return env.ASSETS.fetch(request);
+      }
       return json({ error: 'not_found' }, 404, headers);
+    }
+
+    if (request.method !== 'POST') {
+      return json({ error: 'method_not_allowed' }, 405, headers);
     }
 
     if (origin && !ALLOWED_ORIGINS.has(origin)) {

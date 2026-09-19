@@ -1,8 +1,8 @@
-// Canonical origin of this site — must match public/CNAME. Used for
-// metadataBase, canonical URLs, the sitemap, and JSON-LD `@id`s. No trailing
-// slash; `trailingSlash: true` in next.config.ts means route paths carry their
-// own (e.g. `${SITE_URL}/docs/`).
-export const SITE_URL = 'https://hub.koaris.com';
+// Canonical origin of this site — must match the Workers custom domain in the
+// root wrangler.toml. Used for metadataBase, canonical URLs, the sitemap, and
+// JSON-LD `@id`s. No trailing slash; `trailingSlash: true` in next.config.ts
+// means route paths carry their own (e.g. `${SITE_URL}/docs/`).
+export const SITE_URL = 'https://imkoris.com';
 
 // The code repository (releases, source, issues).
 export const REPO_URL = 'https://github.com/guilhermesalviano/koris-bot';
@@ -22,4 +22,7 @@ export const BASE_PATH = '';
 // Public Cloudflare Worker (see worker/wrangler.toml) that proxies the "Ask
 // about the docs" widget to TypeSafe Jev. The API key stays in the Worker; this
 // URL is safe to ship in the client bundle.
-export const ASK_API_URL = 'https://api.hub.koaris.com/ask';
+// Origin of the FAQ / Ask proxy. Served by the same Cloudflare Worker that
+// serves the static site, so relative `/api/ask` works same-origin without CORS.
+// Overridable via NEXT_PUBLIC_ASK_API_URL for local development if needed.
+export const ASK_API_URL = process.env.NEXT_PUBLIC_ASK_API_URL || '/api/ask';

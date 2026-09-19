@@ -1,7 +1,8 @@
 import type { NextConfig } from 'next';
 
-// Served from the custom domain https://hub.koaris.com (public/CNAME).
-// Site is at the domain root, so no basePath.
+// Served from the custom domain https://imkoris.com (Cloudflare Workers
+// custom domain in the root wrangler.toml). Site is at the domain root, so no
+// basePath.
 const nextConfig: NextConfig = {
   output: 'export',
   basePath: '',

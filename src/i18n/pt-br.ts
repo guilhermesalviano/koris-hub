@@ -98,7 +98,7 @@ export const ptBr: Dictionary = {
     askNotCovered: 'A documentação ainda não parece cobrir isso.',
     askConfidence: 'de correspondência',
     askReadDoc: 'Ler a página completa',
-    askPoweredBy: 'Roteado pelo Jev · docs de hub.koaris.com',
+    askPoweredBy: 'Roteado pelo Jev · docs de imkoris.com',
   },
 
   extend: {

@@ -1,0 +1,16 @@
+# Local secrets for `pnpm worker:dev` (wrangler dev).
+#
+# Wrangler reads `.dev.vars` from the root directory alongside wrangler.toml.
+# Copy this file to `.dev.vars` and fill in your keys for local testing.
+# The real file is git-ignored — never commit it.
+#
+# In production on Cloudflare:
+# Add TYPESAFE_API_KEY directly in the Cloudflare Dashboard under:
+# Workers & Pages -> koris-hub -> Settings -> Variables and Secrets.
+
+# TypeSafe Jev API key. Required for /api/ask. Never expose this to the browser.
+TYPESAFE_API_KEY=
+
+# Optional. Overrides the TypeSafe API root for testing against a proxy.
+# Defaults to https://api.typesafe.ai when unset.
+TYPESAFE_API_BASE=https://api.typesafe.ai

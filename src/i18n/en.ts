@@ -93,7 +93,7 @@ export const en = {
     askNotCovered: 'The docs do not seem to cover that yet.',
     askConfidence: 'match',
     askReadDoc: 'Read the full page',
-    askPoweredBy: 'Routed by Jev · docs from hub.koaris.com',
+    askPoweredBy: 'Routed by Jev · docs from imkoris.com',
   },
 
   extend: {

@@ -9,11 +9,11 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "tsx scripts/generate-doc-topics.ts && next build",
     "build:channels": "tsx scripts/build-channels.ts",
     "gen:doc-topics": "tsx scripts/generate-doc-topics.ts",
-    "worker:dev": "pnpm dlx wrangler dev --config worker/wrangler.toml",
-    "worker:deploy": "pnpm gen:doc-topics && pnpm dlx wrangler deploy --config worker/wrangler.toml",
+    "deploy": "pnpm build && wrangler deploy",
+    "worker:dev": "wrangler dev",
     "check:host-sync": "tsx scripts/check-host-sync-cli.ts",
     "preview": "pnpm dlx serve out",
     "lint": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p worker/tsconfig.json",
@@ -27,7 +27,7 @@
   "bugs": {
     "url": "https://github.com/guilhermesalviano/koris-hub/issues"
   },
-  "homepage": "https://hub.koaris.com",
+  "homepage": "https://imkoris.com",
   "author": "guilhermesalviano",
   "license": "ISC",
   "dependencies": {
@@ -54,6 +54,7 @@
     "tsx": "^4.23.12",
     "typescript": "^7.0.2",
     "vitest": "^5.0.0",
+    "wrangler": "^4.135.0",
     "yaml": "^2.9.0"
   }
 }
