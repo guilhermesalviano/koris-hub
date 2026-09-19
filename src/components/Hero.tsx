@@ -1,5 +1,4 @@
 import { DownloadButton } from '@/components/DownloadButton';
-import { CopyButton } from '@/components/Download';
 import Link from 'next/link';
 import type { Dictionary, Locale } from '@/i18n';
 import { localePath } from '@/i18n/locales';
@@ -59,17 +58,6 @@ export function Hero({ dict, locale }: { dict: Dictionary; locale: Locale }) {
           >
             {dict.hero.readDocs}
           </Link>
-        </div>
-
-        {/* Command bar / Quick install: handles small screen overflow gracefully */}
-        <div className="mt-6 sm:mt-8 flex w-full max-w-md items-center justify-between gap-2 rounded-xl border border-border/80 bg-bg-subtle/80 px-3 sm:px-4 py-2 text-[11px] sm:text-xs font-mono text-muted backdrop-blur-md shadow-sm">
-          <div className="flex items-center gap-2 min-w-0 overflow-hidden">
-            <span className="text-accent font-bold select-none shrink-0">$</span>
-            <span className="text-txt/90 select-all truncate">
-              {dict.hero.installCmd}
-            </span>
-          </div>
-          <CopyButton text={dict.hero.installCmd} className="shrink-0 py-0.5 px-2 text-[10px] sm:text-xs" />
         </div>
 
         {/* Tech stack & trust specs row: clean chips on mobile */}
