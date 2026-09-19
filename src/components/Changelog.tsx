@@ -30,9 +30,22 @@ export function Changelog({ dict }: { dict: Dictionary }) {
   }, []);
 
   useEffect(() => {
+    const el = scrollerRef.current;
+    if (el) {
+      el.scrollLeft = 0;
+    }
     updateScrollButtons();
+    const rafId = requestAnimationFrame(() => {
+      if (scrollerRef.current) {
+        scrollerRef.current.scrollLeft = 0;
+      }
+      updateScrollButtons();
+    });
     window.addEventListener('resize', updateScrollButtons);
-    return () => window.removeEventListener('resize', updateScrollButtons);
+    return () => {
+      cancelAnimationFrame(rafId);
+      window.removeEventListener('resize', updateScrollButtons);
+    };
   }, [entries, updateScrollButtons]);
 
   const handleScroll = (direction: 'left' | 'right') => {
@@ -116,31 +129,32 @@ export function Changelog({ dict }: { dict: Dictionary }) {
       </div>
 
       {/* Horizontal Carousel Container */}
-      <div className="relative">
+      <div className="relative w-full min-w-0">
         {/* Subtle edge indicators when content overflows */}
         {canScrollLeft && (
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute -left-4 sm:-left-6 top-0 bottom-6 z-10 w-8 sm:w-12 bg-gradient-to-r from-bg to-transparent"
+            className="pointer-events-none absolute left-0 top-0 bottom-6 z-10 w-8 sm:w-12 bg-gradient-to-r from-bg to-transparent"
           />
         )}
         {canScrollRight && (
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute -right-4 sm:-right-6 top-0 bottom-6 z-10 w-8 sm:w-12 bg-gradient-to-l from-bg to-transparent"
+            className="pointer-events-none absolute right-0 top-0 bottom-6 z-10 w-8 sm:w-12 bg-gradient-to-l from-bg to-transparent"
           />
         )}
 
         <div
           ref={scrollerRef}
+          dir="ltr"
           onScroll={updateScrollButtons}
-          className="-mx-4 sm:-mx-6 flex gap-5 overflow-x-auto px-4 sm:px-6 pb-6 pt-2 scroll-smooth snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="flex flex-row flex-nowrap items-stretch gap-4 sm:gap-5 overflow-x-auto overflow-y-hidden w-full min-w-0 touch-pan-x pb-6 pt-2 scroll-smooth snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
           {loading
             ? Array.from({ length: 3 }).map((_, i) => (
                 <div
                   key={i}
-                  className="h-[180px] w-[280px] sm:w-[320px] flex-shrink-0 animate-pulse rounded-2xl border border-border/80 bg-card p-6 flex flex-col justify-between"
+                  className="h-[180px] w-[280px] sm:w-[320px] shrink-0 animate-pulse rounded-2xl border border-border/80 bg-card p-6 flex flex-col justify-between"
                 >
                   <div className="flex items-center justify-between">
                     <div className="h-5 w-20 rounded bg-bg-subtle" />
@@ -158,7 +172,7 @@ export function Changelog({ dict }: { dict: Dictionary }) {
                     href={entry.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group relative flex w-[280px] sm:w-[320px] flex-shrink-0 snap-start flex-col justify-between rounded-2xl border border-border/80 bg-card p-6 transition-all duration-300 hover:border-accent/50 hover:shadow-xl hover:shadow-accent/5 hover:-translate-y-1"
+                    className="group relative flex w-[280px] sm:w-[320px] shrink-0 snap-start flex-col justify-between rounded-2xl border border-border/80 bg-card p-6 transition-all duration-300 hover:border-accent/50 hover:shadow-xl hover:shadow-accent/5 hover:-translate-y-1"
                   >
                     {/* Top Row: Version and Date/Latest Badge */}
                     <div>
@@ -244,7 +258,7 @@ export function Changelog({ dict }: { dict: Dictionary }) {
             href={`${REPO_URL}/releases`}
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative flex w-[240px] sm:w-[280px] flex-shrink-0 snap-start flex-col justify-between rounded-2xl border border-dashed border-border/80 bg-card/40 p-6 transition-all duration-300 hover:border-accent/50 hover:bg-card hover:shadow-xl hover:shadow-accent/5 hover:-translate-y-1"
+            className="group relative flex w-[240px] sm:w-[280px] shrink-0 snap-start flex-col justify-between rounded-2xl border border-dashed border-border/80 bg-card/40 p-6 transition-all duration-300 hover:border-accent/50 hover:bg-card hover:shadow-xl hover:shadow-accent/5 hover:-translate-y-1"
           >
             <div>
               <div className="flex size-9 items-center justify-center rounded-xl border border-border/80 bg-bg-subtle text-muted transition-colors group-hover:border-accent/40 group-hover:text-accent">
