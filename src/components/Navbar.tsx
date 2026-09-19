@@ -35,7 +35,7 @@ export function Navbar({ locale, dict }: { locale: Locale; dict: Dictionary }) {
         <a
           href={REPO_URL}
           target="_blank"
-          rel="noopener"
+          rel="noopener noreferrer"
           className="shrink-0 rounded-lg border border-border bg-bg-subtle px-3 py-1.5 text-sm font-semibold text-txt transition-colors hover:border-accent sm:px-4 sm:py-2 sm:text-md"
         >
           {dict.nav.github}

@@ -25,4 +25,4 @@ export const BASE_PATH = '';
 // Origin of the FAQ / Ask proxy. Served by the same Cloudflare Worker that
 // serves the static site, so relative `/api/ask` works same-origin without CORS.
 // Overridable via NEXT_PUBLIC_ASK_API_URL for local development if needed.
-export const ASK_API_URL = process.env.NEXT_PUBLIC_ASK_API_URL || '/api/ask';
+export const ASK_API_URL = process.env.NEXT_PUBLIC_ASK_API_URL || '/api/ask/';

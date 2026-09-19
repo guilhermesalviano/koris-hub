@@ -67,7 +67,7 @@ export function DownloadButton({
   return (
     <a
       href={href}
-      {...(external ? { target: '_blank', rel: 'noopener' } : {})}
+      {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
       className={className}
     >
       {label}

@@ -11,18 +11,21 @@ export interface AskTopic {
 
 export interface AskResult {
   topic: AskTopic | null;
-  /** Jev's probability (0–1) that the docs cover the question. */
-  covered: number | null;
+  /** Jev's probability (0–1) that the answer to the question is "yes". */
+  answer: number | null;
+  /** Synthesized response message explaining the verdict and topic context. */
+  message?: string | null;
   /** Confidence in the chosen topic, when the model returns one. */
   confidence: number | null;
   model: string;
 }
 
 /**
- * Ask the docs through the Cloudflare Worker. Jev routes the question to the
- * best-matching documentation page; the returned `topic.excerpt` is rendered as
- * the answer. Returns `null` on any failure so the widget can show its error
- * state without leaking upstream details.
+ * Ask the docs through the Worker. Jev answers the question yes/no and picks
+ * the best-matching documentation page; the returned `topic.excerpt` is
+ * rendered as the argument underneath the answer. Returns `null` on any
+ * failure so the widget can show its error state without leaking upstream
+ * details.
  */
 export async function askDocs(question: string, locale: Locale): Promise<AskResult | null> {
   try {

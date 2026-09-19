@@ -85,8 +85,10 @@ in the root `wrangler.toml`. The Worker owns the key as a secret and talks to
 `POST https://api.typesafe.ai/v1/systemone`.
 
 - Jev does **not** generate prose. It returns typed answers (`choice`, `noul`,
-  `score`); the widget asks it to pick the best-matching documentation section and
-  report coverage, then renders that page's baked `excerpt` as the answer.
+  `score`); the widget asks it to answer the question **yes/no** (`noul`) and to
+  pick the documentation section that argues the answer. The Worker then synthesizes
+  a deterministic `message` response based on the verdict and topic summary, and
+  returns it alongside the page's baked `excerpt`.
 - `scripts/generate-doc-topics.ts` bakes `content/docs` + `content/pt-br/docs`
   into `worker/src/doc-topics.generated.ts` (committed). **`pnpm build` runs
   `pnpm gen:doc-topics` automatically** so the baked index is always in sync.

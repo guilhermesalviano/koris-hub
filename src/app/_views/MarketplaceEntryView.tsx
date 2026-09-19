@@ -198,7 +198,7 @@ export function MarketplaceEntryView({ locale, slug }: { locale: Locale; slug: s
         <a
           href={entry.sourceUrl}
           target="_blank"
-          rel="noopener"
+          rel="noopener noreferrer"
           className="font-semibold text-txt transition-colors hover:text-accent"
         >
           {dict.marketplace.viewSource} &rarr;
@@ -206,7 +206,7 @@ export function MarketplaceEntryView({ locale, slug }: { locale: Locale; slug: s
         <a
           href={editUrl}
           target="_blank"
-          rel="noopener"
+          rel="noopener noreferrer"
           className="font-semibold text-muted transition-colors hover:text-accent"
         >
           {dict.marketplace.improveEntry} &rarr;

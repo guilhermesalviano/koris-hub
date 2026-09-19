@@ -37,7 +37,7 @@ export function MarketplaceView({ locale }: { locale: Locale }) {
         </h1>
         <p className="mt-3 text-muted">
           {dict.meta.marketplaceIntroLead}{' '}
-          <a href={REPO_URL} target="_blank" rel="noopener" className="text-accent hover:underline">
+          <a href={REPO_URL} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
             koris
           </a>{' '}
           {dict.meta.marketplaceIntroTail}

@@ -51,7 +51,7 @@ export default function GlobalNotFound() {
         <a
           href={REPO_URL}
           target="_blank"
-          rel="noopener"
+          rel="noopener noreferrer"
           className="rounded-lg border border-border bg-bg-subtle px-8 py-4 text-sm font-semibold text-txt transition-colors hover:border-accent"
         >
           File a bug report

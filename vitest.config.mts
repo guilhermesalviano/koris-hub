@@ -12,7 +12,7 @@ import { defineConfig } from 'vitest/config';
 export default defineConfig({
   test: {
     environment: 'node',
-    include: ['koris-plugins/channels/**/*.test.ts', 'scripts/**/*.test.ts'],
+    include: ['koris-plugins/channels/**/*.test.ts', 'scripts/**/*.test.ts', 'worker/**/*.test.ts'],
   },
   resolve: {
     // `pnpm build:channels` drops a bundled `index.js` next to each plugin's

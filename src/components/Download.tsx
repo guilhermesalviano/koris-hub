@@ -145,7 +145,7 @@ export function Download({ dict }: { dict: Dictionary }) {
                     <a
                       href={data.url}
                       target="_blank"
-                      rel="noopener"
+                      rel="noopener noreferrer"
                       className="font-semibold text-txt transition-colors hover:text-accent"
                     >
                       v{data.version}
@@ -165,7 +165,7 @@ export function Download({ dict }: { dict: Dictionary }) {
                 <a
                   href={RELEASES_URL}
                   target="_blank"
-                  rel="noopener"
+                  rel="noopener noreferrer"
                   className="mt-5 inline-flex rounded-md bg-accent px-4 py-2 text-xs font-semibold text-bg transition-colors hover:brightness-110"
                 >
                   {dict.download.fromGitHub}
@@ -214,7 +214,7 @@ export function Download({ dict }: { dict: Dictionary }) {
                 <a
                   href={RELEASES_URL}
                   target="_blank"
-                  rel="noopener"
+                  rel="noopener noreferrer"
                   className="font-semibold text-muted underline decoration-border underline-offset-2 transition-colors hover:text-accent"
                 >
                   latest GitHub release
