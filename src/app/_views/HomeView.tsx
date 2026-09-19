@@ -62,7 +62,7 @@ export function HomeView({ locale }: { locale: Locale }) {
       <Download dict={dict} />
 
       {/* FAQ Accordion (ObsidianUI "Frequently Asked Questions" reference) */}
-      <Faq dict={dict} />
+      <Faq dict={dict} locale={locale} />
 
       {/* GitHub Releases Changelog */}
       <Changelog dict={dict} />

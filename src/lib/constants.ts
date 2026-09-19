@@ -18,3 +18,8 @@ export const HUB_REPO_URL = 'https://github.com/guilhermesalviano/koris-hub';
 // local `src` values with basePath in this static-export setup.
 // Empty: the site is served from the root of the custom domain.
 export const BASE_PATH = '';
+
+// Public Cloudflare Worker (see worker/wrangler.toml) that proxies the "Ask
+// about the docs" widget to TypeSafe Jev. The API key stays in the Worker; this
+// URL is safe to ship in the client bundle.
+export const ASK_API_URL = 'https://api.hub.koaris.com/ask';

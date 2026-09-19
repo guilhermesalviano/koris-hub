@@ -40,6 +40,7 @@
   ],
   "exclude": [
     "node_modules",
-    "koris-plugins"
+    "koris-plugins",
+    "worker"
   ]
 }

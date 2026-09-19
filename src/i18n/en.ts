@@ -83,6 +83,17 @@ export const en = {
     a4: 'Skills are Markdown files (SKILL.md) that instruct the LLM on multi-step procedures in natural language. Tools are TypeScript functions in plugins/tools/ that give the agent programmatic execution powers, like curl requests or system interactions.',
     q5: 'What platforms are supported?',
     a5: 'Koris Bot runs on Linux, macOS, and Windows. You can download the precompiled desktop app, run directly via pnpm and Node.js 20+, or deploy inside a lightweight Docker container.',
+    askQ: 'Have a question the docs can answer?',
+    askHint: 'Ask about install, channels, tools, or anything else documented — Jev finds the page.',
+    askPlaceholder: 'e.g. How do I connect WhatsApp?',
+    askSubmit: 'Ask',
+    askLoading: 'Searching the docs…',
+    askError: 'Could not reach the docs assistant. Please try again.',
+    askShort: 'Type a question first.',
+    askNotCovered: 'The docs do not seem to cover that yet.',
+    askConfidence: 'match',
+    askReadDoc: 'Read the full page',
+    askPoweredBy: 'Routed by Jev · docs from hub.koaris.com',
   },
 
   extend: {

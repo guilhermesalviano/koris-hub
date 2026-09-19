@@ -11,9 +11,12 @@
     "dev": "next dev",
     "build": "next build",
     "build:channels": "tsx scripts/build-channels.ts",
+    "gen:doc-topics": "tsx scripts/generate-doc-topics.ts",
+    "worker:dev": "pnpm dlx wrangler dev --config worker/wrangler.toml",
+    "worker:deploy": "pnpm gen:doc-topics && pnpm dlx wrangler deploy --config worker/wrangler.toml",
     "check:host-sync": "tsx scripts/check-host-sync-cli.ts",
     "preview": "pnpm dlx serve out",
-    "lint": "tsc --noEmit -p tsconfig.json",
+    "lint": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p worker/tsconfig.json",
     "test": "vitest run",
     "mcp:stdio": "tsx mcp/server.ts"
   },

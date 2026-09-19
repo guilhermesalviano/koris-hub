@@ -88,6 +88,17 @@ export const ptBr: Dictionary = {
     a4: 'Skills são arquivos Markdown (SKILL.md) que instruem o modelo sobre procedimentos em várias etapas. Ferramentas são funções TypeScript em plugins/tools/ que dão capacidades programáticas de execução ao agente.',
     q5: 'Quais plataformas são suportadas?',
     a5: 'O Koris Bot roda em Linux, macOS e Windows. Você pode baixar o aplicativo desktop pré-compilado, rodar diretamente via pnpm e Node.js 20+, ou implantar em um container Docker leve.',
+    askQ: 'Tem uma pergunta que a documentação pode responder?',
+    askHint: 'Pergunte sobre instalação, canais, ferramentas ou qualquer outro tema documentado — o Jev encontra a página.',
+    askPlaceholder: 'ex.: Como conecto o WhatsApp?',
+    askSubmit: 'Perguntar',
+    askLoading: 'Buscando na documentação…',
+    askError: 'Não foi possível falar com o assistente. Tente novamente.',
+    askShort: 'Digite uma pergunta primeiro.',
+    askNotCovered: 'A documentação ainda não parece cobrir isso.',
+    askConfidence: 'de correspondência',
+    askReadDoc: 'Ler a página completa',
+    askPoweredBy: 'Roteado pelo Jev · docs de hub.koaris.com',
   },
 
   extend: {

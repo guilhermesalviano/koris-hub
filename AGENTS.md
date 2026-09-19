@@ -16,8 +16,10 @@ Independent repo; not part of the `koris` pnpm workspace (it has its own
 
 - `pnpm dev` — dev server (`http://localhost:3000/koris`)
 - `pnpm build` — static export to `out/`
-- `pnpm lint` — `tsc --noEmit -p tsconfig.json` (no ESLint; strict TS)
+- `pnpm lint` — `tsc --noEmit` against both the app and `worker/` (no ESLint; strict TS)
 - `pnpm preview` — `serve out/` (does **not** replicate the `/koris` prefix)
+- `pnpm gen:doc-topics` — regenerate `worker/src/doc-topics.generated.ts` from `content/docs`
+- `pnpm worker:dev` / `pnpm worker:deploy` — run/deploy the Cloudflare Worker
 
 Run `pnpm lint` and `pnpm build` before considering a change done.
 
@@ -35,8 +37,11 @@ src/lib/            constants.ts, changelog.ts, downloads.ts, marketplace.ts,
 content/marketplace/  catalog entries as <family-dir>/<slug>.json (tools/, channels/,
                     skills/, mcps/) + schema.ts (typed)
 content/docs/         *.md docs (frontmatter: title, order); index.md per section
-scripts/              generate-catalog.ts (sketch), build-channels.ts (esbuild →
+scripts/              generate-catalog.ts (sketch), generate-doc-topics.ts (docs index →
+                      worker/src/doc-topics.generated.ts), build-channels.ts (esbuild →
                       koris-plugins/channels/*/index.js, git-ignored)
+worker/               Cloudflare Worker `koris-hub-ask` at api.hub.koaris.com: the
+                      secret-holding Jev proxy behind the FAQ "ask the docs" widget
 koris-plugins/        canonical home for tool / skill / channel / mcp source that has moved
                       out of `koris` (reference only, not built/imported by this app —
                       except `pnpm build:channels`); see koris-plugins/README.md,
@@ -67,6 +72,30 @@ koris-plugins/        canonical home for tool / skill / channel / mcp source tha
   its `family`, and the `family` enum itself, all at load time — a bad entry
   fails the build. `scripts/generate-catalog.ts` only *merges* derived fields.
 - **`@content/*`** tsconfig alias → `./content/*`; `@/*` → `./src/*`.
+
+## Ask-the-docs widget (TypeSafe Jev)
+
+The FAQ's last item is a question box backed by TypeSafe's Jev model. The site is
+static and cannot hold `TYPESAFE_API_KEY`, so the browser calls the Cloudflare
+Worker in `worker/`, which owns the key as a secret and talks to
+`POST https://api.typesafe.ai/v1/systemone`.
+
+- Jev does **not** generate prose. It returns typed answers (`choice`, `noul`,
+  `score`); the widget asks it to pick the best-matching documentation section and
+  report coverage, then renders that page's baked `excerpt` as the answer.
+- `scripts/generate-doc-topics.ts` bakes `content/docs` + `content/pt-br/docs`
+  into `worker/src/doc-topics.generated.ts` (committed). **Regenerate with
+  `pnpm gen:doc-topics` whenever docs change** — the Worker deploy workflow does
+  this automatically.
+- The Worker keeps a fixed question template, a 500-char question cap, CORS for
+  `hub.koaris.com`/`localhost:3000`, and an in-memory per-IP limit (10/min). It
+  never echoes the key or raw upstream errors.
+- Client helper: `src/lib/ask-jev.ts`; endpoint constant: `ASK_API_URL` in
+  `src/lib/constants.ts`; UI: `AskDocsItem` in `src/components/Faq.tsx`.
+- Secrets/CI: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, and
+  `TYPESAFE_API_KEY` in GitHub Actions
+  (`.github/workflows/deploy-worker.yml`). The route
+  `api.hub.koaris.com` is created by `custom_domain` in `worker/wrangler.toml`.
 
 ## Relationship to koris
 
