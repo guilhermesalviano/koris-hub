@@ -85,7 +85,7 @@ export const en = {
     a5: 'Koris Bot runs on Linux, macOS, and Windows. You can download the precompiled desktop app, run directly via pnpm and Node.js 20+, or deploy inside a lightweight Docker container.',
     askQ: 'Have a question the docs can answer?',
     askHint: 'Ask about install, channels, tools, or anything else documented — Jev finds the page.',
-    askPlaceholder: 'Ask anything',
+    askPlaceholder: 'What would you like to know?',
     askSubmit: 'Ask',
     askLoading: 'Searching the docs…',
     askError: 'Could not reach the docs assistant. Please try again.',

@@ -90,7 +90,7 @@ export const ptBr: Dictionary = {
     a5: 'O Koris Bot roda em Linux, macOS e Windows. Você pode baixar o aplicativo desktop pré-compilado, rodar diretamente via pnpm e Node.js 20+, ou implantar em um container Docker leve.',
     askQ: 'Tem uma pergunta que a documentação pode responder?',
     askHint: 'Pergunte sobre instalação, canais, ferramentas ou qualquer outro tema documentado — o Jev encontra a página.',
-    askPlaceholder: 'Pergunte qualquer coisa',
+    askPlaceholder: 'O que você gostaria de saber?',
     askSubmit: 'Perguntar',
     askLoading: 'Buscando na documentação…',
     askError: 'Não foi possível falar com o assistente. Tente novamente.',
