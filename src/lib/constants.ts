@@ -18,11 +18,3 @@ export const HUB_REPO_URL = 'https://github.com/guilhermesalviano/koris-hub';
 // local `src` values with basePath in this static-export setup.
 // Empty: the site is served from the root of the custom domain.
 export const BASE_PATH = '';
-
-// Public Cloudflare Worker (see worker/wrangler.toml) that proxies the "Ask
-// about the docs" widget to TypeSafe Jev. The API key stays in the Worker; this
-// URL is safe to ship in the client bundle.
-// Origin of the FAQ / Ask proxy. Served by the same Cloudflare Worker that
-// serves the static site, so relative `/api/ask` works same-origin without CORS.
-// Overridable via NEXT_PUBLIC_ASK_API_URL for local development if needed.
-export const ASK_API_URL = process.env.NEXT_PUBLIC_ASK_API_URL || '/api/ask/';

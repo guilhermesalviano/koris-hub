@@ -9,9 +9,8 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "tsx scripts/generate-doc-topics.ts && next build",
+    "build": "next build",
     "build:channels": "tsx scripts/build-channels.ts",
-    "gen:doc-topics": "tsx scripts/generate-doc-topics.ts",
     "deploy": "pnpm build && wrangler deploy",
     "worker:dev": "wrangler dev",
     "check:host-sync": "tsx scripts/check-host-sync-cli.ts",
