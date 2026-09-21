@@ -3,12 +3,13 @@ import Link from 'next/link';
 import { BASE_PATH, REPO_URL } from '@/lib/constants';
 import type { Dictionary } from '@/i18n';
 import { localePath, type Locale } from '@/i18n/locales';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 export function Navbar({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   const navLinks = [
     { href: '/bot/', label: dict.nav.bot },
-    { href: '/marketplace/', label: dict.nav.marketplace },
     { href: '/docs/', label: dict.nav.docs },
+    { href: '/marketplace/', label: dict.nav.marketplace },
   ];
 
   return (
@@ -33,14 +34,17 @@ export function Navbar({ locale, dict }: { locale: Locale; dict: Dictionary }) {
           </div>
         </div>
 
-        <a
-          href={REPO_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="shrink-0 rounded-lg border border-border bg-bg-subtle px-3 py-1.5 text-sm font-semibold text-txt transition-colors hover:border-accent sm:px-4 sm:py-2 sm:text-md"
-        >
-          {dict.nav.github}
-        </a>
+        <div className="flex items-center gap-2 sm:gap-3">
+          <ThemeToggle />
+          <a
+            href={REPO_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="shrink-0 rounded-lg border border-border bg-bg-subtle px-3 py-1.5 text-sm font-semibold text-txt transition-colors hover:border-accent sm:px-4 sm:py-2 sm:text-md"
+          >
+            {dict.nav.github}
+          </a>
+        </div>
       </nav>
     </header>
   );

@@ -4,6 +4,7 @@ import { LocaleBar } from '@/components/LocaleBar';
 import { JsonLd } from '@/components/JsonLd';
 import { SITE_URL } from '@/lib/constants';
 import { getDictionary } from '@/i18n';
+import { ThemeScript } from '@/components/ThemeScript';
 import { HTML_LANG, type Locale } from '@/i18n/locales';
 
 const geistSans = Geist({ subsets: ['latin'], variable: '--font-sans', display: 'swap' });
@@ -24,7 +25,10 @@ export function RootLayoutView({
   const dict = getDictionary(locale);
 
   return (
-    <html lang={HTML_LANG[locale]} className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html lang={HTML_LANG[locale]} className={`${geistSans.variable} ${geistMono.variable}`} suppressHydrationWarning>
+      <head>
+        <ThemeScript />
+      </head>
       <body className="font-sans">
         <JsonLd
           data={{

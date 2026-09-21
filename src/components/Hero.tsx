@@ -32,7 +32,7 @@ export function Hero({ dict, locale }: { dict: Dictionary; locale: Locale }) {
         </div>
 
         {/* Gradient headline: adjusted for small mobile screens without breaking words */}
-        <h1 className="mb-4 sm:mb-6 text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-200 to-zinc-400 leading-[1.12] sm:leading-[1.08] text-balance">
+        <h1 className="mb-4 sm:mb-6 text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-txt via-txt/90 to-muted leading-[1.12] sm:leading-[1.08] text-balance">
           {dict.hero.titleLead}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent via-[#ff7e60] to-accent font-extrabold">
             {dict.hero.titleAccent}

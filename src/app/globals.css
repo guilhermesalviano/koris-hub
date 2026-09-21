@@ -1,24 +1,69 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *, .dark, .dark *));
+
 @theme {
   --font-sans: "Geist", system-ui, -apple-system, sans-serif;
   --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
 
-  --color-bg: #09090b;
-  --color-bg-subtle: #1c1c21;
-  --color-card: #131316;
+  --color-bg: var(--theme-bg);
+  --color-bg-subtle: var(--theme-bg-subtle);
+  --color-card: var(--theme-card);
 
-  --color-txt: #f4f4f5;
-  --color-muted: #9a9aa5;
+  --color-txt: var(--theme-txt);
+  --color-muted: var(--theme-muted);
 
   --color-accent: #f36246;
-  --color-accent-muted: rgb(243 98 70 / 12%);
+  --color-accent-muted: var(--theme-accent-muted);
 
-  --color-border: #26262c;
+  --color-border: var(--theme-border);
 }
 
 :root {
+  --theme-bg: #09090b;
+  --theme-bg-subtle: #1c1c21;
+  --theme-card: #131316;
+
+  --theme-txt: #f4f4f5;
+  --theme-muted: #9a9aa5;
+
+  --theme-accent-muted: rgb(243 98 70 / 12%);
+
+  --theme-border: #26262c;
+
+  color-scheme: dark;
+}
+
+html.light,
+html[data-theme='light'] {
+  --theme-bg: #ffffff;
+  --theme-bg-subtle: #f4f4f6;
+  --theme-card: #ffffff;
+
+  --theme-txt: #09090b;
+  --theme-muted: #71717a;
+
+  --theme-accent-muted: rgb(243 98 70 / 12%);
+
+  --theme-border: #e4e4e7;
+
+  color-scheme: light;
+}
+
+html.dark,
+html[data-theme='dark'] {
+  --theme-bg: #09090b;
+  --theme-bg-subtle: #1c1c21;
+  --theme-card: #131316;
+
+  --theme-txt: #f4f4f5;
+  --theme-muted: #9a9aa5;
+
+  --theme-accent-muted: rgb(243 98 70 / 12%);
+
+  --theme-border: #26262c;
+
   color-scheme: dark;
 }
 
@@ -36,3 +81,9 @@ body {
   background-size: 48px 48px;
 }
 
+html.light .landing-grid,
+html[data-theme='light'] .landing-grid {
+  background-image: 
+    linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+}
