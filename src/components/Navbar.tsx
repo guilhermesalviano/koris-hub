@@ -6,6 +6,7 @@ import { localePath, type Locale } from '@/i18n/locales';
 
 export function Navbar({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   const navLinks = [
+    { href: '/bot/', label: dict.nav.bot },
     { href: '/marketplace/', label: dict.nav.marketplace },
     { href: '/docs/', label: dict.nav.docs },
   ];

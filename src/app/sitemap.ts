@@ -15,6 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // is what lets each entry carry a complete hreflang alternate map.
   const paths: { path: string; changeFrequency: 'weekly' | 'monthly'; priority: number }[] = [
     { path: '/', changeFrequency: 'weekly', priority: 1 },
+    { path: '/bot/', changeFrequency: 'weekly', priority: 0.9 },
     { path: '/docs/', changeFrequency: 'weekly', priority: 0.9 },
     { path: '/marketplace/', changeFrequency: 'weekly', priority: 0.9 },
     ...getAllDocSlugs().map((slug) => ({

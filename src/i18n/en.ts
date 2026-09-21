@@ -5,10 +5,19 @@
  */
 export const en = {
   nav: {
+    bot: 'Bot',
     marketplace: 'Marketplace',
     docs: 'Docs',
     github: 'GitHub',
     switchLanguage: 'Change language',
+  },
+
+  incoming: {
+    badge: 'coming soon',
+    titleLead: 'Your AI ',
+    titleAccent: 'Colleagues',
+    titleTail: ' is coming soon',
+    subtitle: 'Something new is on the way.',
   },
 
   hero: {
@@ -127,6 +136,7 @@ export const en = {
     builtBy: 'Built with ❤️ by Koaris',
     tagline: 'Your AI teammates running on your own infrastructure.',
     product: 'Product',
+    bot: 'Bot',
     marketplace: 'Marketplace',
     docs: 'Documentation',
     downloads: 'Downloads',
@@ -197,6 +207,11 @@ export const en = {
   meta: {
     siteTitle: 'Koris Bot — self-hosted AI assistant framework',
     siteDescription:
+      'Koris Bot is an open-source, self-hosted AI agent framework in TypeScript. It runs on your own infrastructure, talks over Telegram and WhatsApp, remembers across sessions, and extends through tools and Markdown skills.',
+    incomingTitle: 'Your AI Colleagues is coming soon · Koris',
+    incomingDescription: 'Your AI Colleagues is coming soon.',
+    botTitle: 'Koris Bot — self-hosted AI assistant framework',
+    botDescription:
       'Koris Bot is an open-source, self-hosted AI agent framework in TypeScript. It runs on your own infrastructure, talks over Telegram and WhatsApp, remembers across sessions, and extends through tools and Markdown skills.',
     docsTitle: 'Docs',
     docsDescription:

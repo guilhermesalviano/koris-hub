@@ -30,7 +30,7 @@ export function DocView({ locale, slug }: { locale: Locale; slug: string[] }) {
           '@context': 'https://schema.org',
           '@type': 'BreadcrumbList',
           itemListElement: [
-            { '@type': 'ListItem', position: 1, name: 'Koris Bot', item: `${SITE_URL}${localePath(locale, '/')}` },
+            { '@type': 'ListItem', position: 1, name: 'Koris Bot', item: `${SITE_URL}${localePath(locale, '/bot/')}` },
             { '@type': 'ListItem', position: 2, name: 'Docs', item: `${SITE_URL}${localePath(locale, '/docs/')}` },
             { '@type': 'ListItem', position: 3, name: doc.meta.title, item: url },
           ],

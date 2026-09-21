@@ -10,10 +10,19 @@ import type { Dictionary } from './index';
  */
 export const ptBr: Dictionary = {
   nav: {
+    bot: 'Bot',
     marketplace: 'Marketplace',
     docs: 'Documentação',
     github: 'GitHub',
     switchLanguage: 'Mudar idioma',
+  },
+
+  incoming: {
+    badge: 'em breve',
+    titleLead: 'Seus ',
+    titleAccent: 'Colegas',
+    titleTail: ' de IA estão a caminho',
+    subtitle: 'Algo novo está chegando.',
   },
 
   hero: {
@@ -132,6 +141,7 @@ export const ptBr: Dictionary = {
     builtBy: 'Feito com ❤️ pela Koaris',
     tagline: 'Seus colegas de equipe de IA rodando na sua própria infraestrutura.',
     product: 'Produto',
+    bot: 'Bot',
     marketplace: 'Marketplace',
     docs: 'Documentação',
     downloads: 'Downloads',
@@ -202,6 +212,11 @@ export const ptBr: Dictionary = {
   meta: {
     siteTitle: 'Koris Bot — framework de assistente de IA auto-hospedado',
     siteDescription:
+      'O Koris Bot é um framework de agente de IA open source e auto-hospedado, escrito em TypeScript. Roda na sua própria infraestrutura, conversa por Telegram e WhatsApp, lembra entre sessões e se estende com ferramentas e skills em Markdown.',
+    incomingTitle: 'Seus Colegas de IA estão a caminho · Koris',
+    incomingDescription: 'Seus Colegas de IA estão a caminho.',
+    botTitle: 'Koris Bot — framework de assistente de IA auto-hospedado',
+    botDescription:
       'O Koris Bot é um framework de agente de IA open source e auto-hospedado, escrito em TypeScript. Roda na sua própria infraestrutura, conversa por Telegram e WhatsApp, lembra entre sessões e se estende com ferramentas e skills em Markdown.',
     docsTitle: 'Documentação',
     docsDescription:

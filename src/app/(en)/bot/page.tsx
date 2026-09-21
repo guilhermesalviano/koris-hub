@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { IndexView } from '@/app/_views/IndexView';
+import { BotView } from '@/app/_views/BotView';
 import { getDictionary } from '@/i18n';
 import { pageMetadata } from '@/lib/metadata';
 
@@ -7,11 +7,11 @@ const dict = getDictionary('en');
 
 export const metadata: Metadata = pageMetadata({
   locale: 'en',
-  path: '/',
-  title: dict.meta.incomingTitle,
-  description: dict.meta.incomingDescription,
+  path: '/bot/',
+  title: dict.meta.botTitle,
+  description: dict.meta.botDescription,
 });
 
 export default function Page() {
-  return <IndexView locale={'en'} />;
+  return <BotView locale={'en'} />;
 }

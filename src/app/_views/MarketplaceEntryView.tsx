@@ -61,7 +61,7 @@ export function MarketplaceEntryView({ locale, slug }: { locale: Locale; slug: s
           '@context': 'https://schema.org',
           '@type': 'BreadcrumbList',
           itemListElement: [
-            { '@type': 'ListItem', position: 1, name: 'Koris Bot', item: `${SITE_URL}${localePath(locale, '/')}` },
+            { '@type': 'ListItem', position: 1, name: 'Koris Bot', item: `${SITE_URL}${localePath(locale, '/bot/')}` },
             { '@type': 'ListItem', position: 2, name: 'Marketplace', item: `${SITE_URL}${localePath(locale, '/marketplace/')}` },
             { '@type': 'ListItem', position: 3, name: entry.name, item: `${SITE_URL}${path}` },
           ],

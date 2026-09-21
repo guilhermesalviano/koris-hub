@@ -71,6 +71,7 @@ ${SITE_URL}/pt-br/ — same pages, same structure, translated content. Each
 English URL declares its pt-BR counterpart via hreflang, and vice versa.
 
 - [Início](${SITE_URL}${localePath('pt-br', '/')})
+- [Bot](${SITE_URL}${localePath('pt-br', '/bot/')})
 - [Documentação](${SITE_URL}${localePath('pt-br', '/docs/')})
 - [Marketplace](${SITE_URL}${localePath('pt-br', '/marketplace/')})
 
