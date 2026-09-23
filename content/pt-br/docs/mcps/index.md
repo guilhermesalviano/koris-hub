@@ -98,6 +98,3 @@ export function create(context?: McpPluginContext): Plugin | null {
   };
 }
 ```
-
-Para explorar os servidores MCP disponíveis ou contribuir com um novo, acesse o
-[Marketplace](/pt-br/marketplace).

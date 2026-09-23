@@ -24,7 +24,6 @@ learned skills, prompt prefixing, reply splitting — and then calls
 - **TUI** — the terminal UI in `apps/tui/`. Run it with `pnpm app --tui`.
 - **Web dashboard chat** — served on port 3000. See [Admin dashboard](/docs/admin-dashboard).
 
-Browse the full set on the [marketplace](/marketplace).
 
 ## Trust and unlisted senders
 

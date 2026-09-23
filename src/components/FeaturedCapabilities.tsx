@@ -8,7 +8,7 @@ export function FeaturedCapabilities({ dict, locale }: { dict: Dictionary; local
       title: dict.featured.cardChannelsTitle,
       description: dict.featured.cardChannelsDesc,
       badge: dict.featured.cardChannelsBadge,
-      href: localePath(locale, '/marketplace/'),
+      href: localePath(locale, '/docs/channels/'),
       preview: (
         <div className="flex flex-col gap-2.5">
           <div className="flex flex-wrap items-center gap-1.5">

@@ -24,7 +24,6 @@ a confiança, prefixo de prompt, divisão de respostas — e então chama
 - **TUI** — a interface de terminal em `apps/tui/`. Rode com `pnpm app --tui`.
 - **Chat do dashboard web** — servido na porta 3000. Veja [Dashboard administrativo](/pt-br/docs/admin-dashboard).
 
-Veja o conjunto completo no [marketplace](/pt-br/marketplace).
 
 ## Confiança e remetentes não listados
 

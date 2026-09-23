@@ -66,7 +66,3 @@ uma resposta simples, sem skills e sem ferramentas. Veja
 3. Na página de Skills do dashboard administrativo você pode ativar ou desativar skills
    individualmente e disparar uma sincronização manual. Veja o
    [dashboard administrativo](/pt-br/docs/admin-dashboard).
-
-Para publicar uma skill no catálogo, siga
-[Adicionando uma entrada no marketplace](/pt-br/docs/marketplace/adding-an-entry); ela
-aparecerá no [marketplace](/pt-br/marketplace) ao lado de ferramentas e canais.

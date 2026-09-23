@@ -73,11 +73,6 @@ export function Footer({ dict, locale = 'en' }: { dict: Dictionary; locale?: Loc
               </Link>
             </li>
             <li>
-              <Link href={localePath(locale, '/marketplace/')} className="hover:text-txt transition-colors">
-                {dict.footer.marketplace}
-              </Link>
-            </li>
-            <li>
               <Link href={localePath(locale, '/docs/')} className="hover:text-txt transition-colors">
                 {dict.footer.docs}
               </Link>

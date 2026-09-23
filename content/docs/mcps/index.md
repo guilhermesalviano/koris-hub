@@ -99,6 +99,3 @@ export function create(context?: McpPluginContext): Plugin | null {
   };
 }
 ```
-
-To browse available MCP servers or contribute one to the community, visit the
-[Marketplace](/marketplace).

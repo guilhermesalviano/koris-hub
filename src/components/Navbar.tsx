@@ -9,7 +9,6 @@ export function Navbar({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   const navLinks = [
     { href: '/bot/', label: dict.nav.bot },
     { href: '/docs/', label: dict.nav.docs },
-    { href: '/marketplace/', label: dict.nav.marketplace },
   ];
 
   return (

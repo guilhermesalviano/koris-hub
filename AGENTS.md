@@ -1,7 +1,7 @@
 # AGENTS.md
 
-Guidance for agents working in `koris-hub` — the public website, plugins
-marketplace, and docs for [Koris Bot](https://github.com/guilhermesalviano/koris-bot).
+Guidance for agents working in `koris-hub` — the public website, plugin source,
+and docs for [Koris Bot](https://github.com/guilhermesalviano/koris-bot).
 
 ## What this is
 
@@ -27,18 +27,16 @@ Run `pnpm lint` and `pnpm build` before considering a change done.
 ## Layout
 
 ```
-src/app/            routes: / (landing), /marketplace, /marketplace/[slug],
+src/app/            routes: / (landing),
                     /docs, /docs/[...slug]; api/changelog, api/downloads
                     (force-static GitHub Releases proxies); layout.tsx,
                     not-found.tsx, globals.css
 src/components/     Navbar, Hero, Download, Feature, Changelog, Footer, icons,
-                    Markdown, MarketplaceCard, ParamTable, DocsSidebar
-src/lib/            constants.ts, changelog.ts, downloads.ts, marketplace.ts,
+                    Markdown, DocsSidebar
+src/lib/            constants.ts, changelog.ts, downloads.ts,
                     docs.ts
-content/marketplace/  catalog entries as <family-dir>/<slug>.json (tools/, channels/,
-                    skills/, mcps/) + schema.ts (typed)
 content/docs/         *.md docs (frontmatter: title, order); index.md per section
-scripts/              generate-catalog.ts (sketch), build-channels.ts (esbuild →
+scripts/              build-channels.ts (esbuild →
                       koris-plugins/channels/*/index.js, git-ignored)
 worker/               Cloudflare Worker `worker/src/index.ts` mounted with static
                       assets in the root `wrangler.toml`: serves `./out` and adds
@@ -53,8 +51,7 @@ koris-plugins/        canonical home for tool / skill / channel / mcp source tha
 ## Conventions / gotchas
 
 - **Static export**: every dynamic route needs `generateStaticParams()` **and**
-  `export const dynamicParams = false`. `/marketplace/[slug]` and `/docs/[...slug]`
-  both do this.
+  `export const dynamicParams = false`. `/docs/[...slug]` does this.
 - **`params` is a Promise** (Next 15+): page and `generateMetadata` are `async` and
   `await params`.
 - **`next/image` + basePath**: local `src` values are not auto-prefixed in this
@@ -67,31 +64,13 @@ koris-plugins/        canonical home for tool / skill / channel / mcp source tha
 - **Markdown**: `react-markdown` + `remark-gfm` in `src/components/Markdown.tsx`.
   No MDX, no second build tool. Keep it that way unless docs genuinely need inline
   React.
-- **Catalog**: JSON files are the source of truth, grouped by family under
-  `content/marketplace/{tools,channels,skills}/`. `src/lib/marketplace.ts`
-  validates `slug === filename`, that the file lives under the folder matching
-  its `family`, and the `family` enum itself, all at load time — a bad entry
-  fails the build. `scripts/generate-catalog.ts` only *merges* derived fields.
 - **`@content/*`** tsconfig alias → `./content/*`; `@/*` → `./src/*`.
 
 ## Relationship to koris
 
-The `koris` repo no longer contains a website. It links here from its README /
-AGENTS.md. Some plugin/skill source still lives in `koris` (under
-`plugins/tools/`, `plugins/skills/`); this repo describes those via `content/marketplace/`. A growing
-set of plugins, skills, channels, and MCP servers (see `koris-plugins/README.md`,
-`koris-plugins/skills/README.md`, `koris-plugins/channels/README.md`, and
-`koris-plugins/mcps/README.md` for the current lists) have had their source
-removed from `koris` and now live here instead, under `koris-plugins/tools/`,
-`koris-plugins/skills/`, `koris-plugins/channels/`, and `koris-plugins/mcps/` — for
-those, `content/marketplace/*.json` `sourcePath`/`sourceUrl` point at this repo,
-not `koris`.
-
-`koris` pulls these on demand via `pnpm hub:pull` (`koris/scripts/hub-sync.ts`),
-which reads files straight from this repo's tree. Channels additionally need
-their built `index.js` — git-ignored here, published to the `channels-latest`
-release by `.github/workflows/build-channels.yml`. MCP servers and tools/skills
-are pulled directly as source from `main`.
+The koris repo runs the agent and this repository holds the public website
+and plugin source under koris-plugins/. The old marketplace catalog and
+download commands have been removed. Plugin installation is handled separately.
 
 <!-- BEGIN:nextjs-agent-rules -->
 

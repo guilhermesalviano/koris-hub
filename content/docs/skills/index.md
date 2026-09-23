@@ -63,7 +63,3 @@ skills and no tools. See [Security](/docs/security) for how trust is decided per
 2. Save the file — the watcher picks it up, or restart the app.
 3. From the Admin dashboard's Skills page you can enable or disable individual skills and
    trigger a manual re-sync. See the [Admin dashboard](/docs/admin-dashboard).
-
-To publish a skill in the catalog, follow
-[Adding a marketplace entry](/docs/marketplace/adding-an-entry); it will appear in the
-[marketplace](/marketplace) alongside tools and channels.

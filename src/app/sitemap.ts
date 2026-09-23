@@ -1,7 +1,6 @@
 import type { MetadataRoute } from 'next';
 import { SITE_URL } from '@/lib/constants';
 import { getAllDocSlugs } from '@/lib/docs';
-import { getAllEntries } from '@/lib/marketplace';
 import { LOCALES, localePath } from '@/i18n/locales';
 import { languageAlternates } from '@/lib/metadata';
 
@@ -17,16 +16,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/', changeFrequency: 'weekly', priority: 1 },
     { path: '/bot/', changeFrequency: 'weekly', priority: 0.9 },
     { path: '/docs/', changeFrequency: 'weekly', priority: 0.9 },
-    { path: '/marketplace/', changeFrequency: 'weekly', priority: 0.9 },
     ...getAllDocSlugs().map((slug) => ({
       path: `/docs/${slug.join('/')}/`,
       changeFrequency: 'monthly' as const,
       priority: 0.7,
-    })),
-    ...getAllEntries().map((entry) => ({
-      path: `/marketplace/${entry.slug}/`,
-      changeFrequency: 'monthly' as const,
-      priority: 0.6,
     })),
   ];
 

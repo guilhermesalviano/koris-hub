@@ -61,5 +61,3 @@ pnpm scaffold:tool <nome> --description "..."
 
 Nenhuma alteração em `core/` é necessária — o scanner encontra a pasta nova na próxima
 inicialização. Veja [Plugins](/pt-br/docs/plugins) para o contrato de plugin.
-
-Para navegar pelas ferramentas que acompanham o Koris Bot, veja o [marketplace](/pt-br/marketplace).

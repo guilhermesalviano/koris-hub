@@ -1,11 +1,10 @@
 import { SITE_URL } from '@/lib/constants';
 import { getAllDocSlugs, getDoc, summarize } from '@/lib/docs';
-import { getFamilyGroups } from '@/lib/marketplace';
 import { localePath } from '@/i18n/locales';
 
 // Static export: this GET handler runs at `next build` and its body is written
 // to out/llms.txt. Generated rather than hand-written so it cannot drift from
-// the docs tree and the marketplace catalog the way a checked-in copy would.
+// the docs tree.
 export const dynamic = 'force-static';
 
 /**
@@ -24,20 +23,6 @@ function buildLlmsTxt(): string {
     })
     .filter(Boolean)
     .join('\n');
-
-  const catalog = getFamilyGroups()
-    .map((group) => {
-      const items = group.entries
-        .map(
-          (entry) =>
-            `- [${entry.name}](${SITE_URL}/marketplace/${entry.slug}/)${
-              entry.toolName ? ` (\`${entry.toolName}\`)` : ''
-            }: ${entry.summary}`,
-        )
-        .join('\n');
-      return `### ${group.label}\n\n${items}`;
-    })
-    .join('\n\n');
 
   return `# Koris Bot
 
@@ -73,13 +58,6 @@ English URL declares its pt-BR counterpart via hreflang, and vice versa.
 - [Início](${SITE_URL}${localePath('pt-br', '/')})
 - [Bot](${SITE_URL}${localePath('pt-br', '/bot/')})
 - [Documentação](${SITE_URL}${localePath('pt-br', '/docs/')})
-- [Marketplace](${SITE_URL}${localePath('pt-br', '/marketplace/')})
-
-## Marketplace
-
-The tools, channels, and skills bundled with Koris Bot.
-
-${catalog}
 `;
 }
 

@@ -4,7 +4,6 @@ The public web presence for [Koris Bot](https://github.com/guilhermesalviano/kor
 autonomous AI assistant framework. This repo holds:
 
 - **`/`** — the marketing landing page
-- **`/marketplace`** — a browsable catalog of the tools, channels, and skills that ship with Koris Bot
 - **`/docs`** — the documentation site (currently a hello-world scaffold)
 
 It is a standalone [Next.js](https://nextjs.org) App Router app, statically exported
@@ -32,14 +31,6 @@ pnpm build      # static export to out/
 pnpm preview    # serve out/ (note: does not replicate the /koris base path)
 pnpm lint       # tsc --noEmit
 ```
-
-## Marketplace catalog
-
-The catalog is plain JSON: one file per entry at `content/marketplace/<slug>.json`,
-typed by `content/marketplace/schema.ts`. The `slug` field must equal the filename.
-See [`/docs/marketplace/adding-an-entry`](content/docs/marketplace/adding-an-entry.md)
-for the authoring guide. `scripts/generate-catalog.ts` is a sketch helper that can
-re-derive `params` / `readWhen` from a local `koris` checkout.
 
 ## Docs
 

@@ -11,7 +11,6 @@ import type { Dictionary } from './index';
 export const ptBr: Dictionary = {
   nav: {
     bot: 'Bot',
-    marketplace: 'Marketplace',
     docs: 'Documentação',
     github: 'GitHub',
     switchLanguage: 'Mudar idioma',
@@ -142,7 +141,6 @@ export const ptBr: Dictionary = {
     tagline: 'Seus colegas de equipe de IA rodando na sua própria infraestrutura.',
     product: 'Produto',
     bot: 'Bot',
-    marketplace: 'Marketplace',
     docs: 'Documentação',
     downloads: 'Downloads',
     changelog: 'Changelog',
@@ -174,33 +172,6 @@ export const ptBr: Dictionary = {
     switchingNote: 'Troca completa no dashboard real',
   },
 
-  marketplace: {
-    backToMarketplace: 'Marketplace',
-    confirmationRequired: 'exige confirmação',
-    offByDefault: 'desativado por padrão',
-    toolName: 'nome da ferramenta:',
-    parameters: 'Parâmetros',
-    readWhen: 'Quando usar',
-    setupGuidance: 'Guia de Configuração e Instalação',
-    downloadTitle: 'Baixar pelo Koris Bot',
-    downloadFromRepo: 'Execute este comando na raiz do repositório koris:',
-    downloadFromChat: 'Remetentes confiáveis também podem baixá-lo pelo chat:',
-    downloadOverwrite: 'Se o plugin já estiver instalado, adicione',
-    downloadOverwriteSuffix: 'para substituí-lo.',
-    downloadLocation: 'Os arquivos baixados vão para',
-    downloadChannelNote: 'Canais são baixados como artefatos compilados da release channels-latest.',
-    downloadToolsSkillsNote: 'Ferramentas, skills e servidores MCP são baixados da branch main.',
-    configFields: 'Campos de Configuração',
-    viewSource: 'Ver código-fonte',
-    improveEntry: 'Melhorar esta entrada',
-    noParameters: 'Sem parâmetros.',
-    paramName: 'Nome',
-    paramType: 'Tipo',
-    paramRequired: 'Obrigatório',
-    paramDescription: 'Descrição',
-    paramYes: 'sim',
-  },
-
   notFound: {
     heading: 'Até um agente com memória persistente esqueceu esta página.',
     body: 'Consultamos a memória de longo prazo, rodamos uma sincronização completa de skills e mandamos um heartbeat pedindo com jeitinho. Esta rota não está nos dados de treino — deve ter saído por aí para se resumir sozinha.',
@@ -221,12 +192,6 @@ export const ptBr: Dictionary = {
     docsTitle: 'Documentação',
     docsDescription:
       'Documentação do Koris Bot — instale e configure o agente de IA auto-hospedado, conecte canais no Telegram ou WhatsApp e estenda com ferramentas e skills.',
-    marketplaceTitle: 'Marketplace',
-    marketplaceDescription:
-      'Todas as ferramentas, canais, skills e servidores MCP que acompanham o Koris Bot — o que cada um faz, os parâmetros que aceita e um link para o código-fonte.',
-    marketplaceIntroLead:
-      'As ferramentas, canais, skills e servidores MCP que acompanham o Koris Bot hoje. Cada um vive no repositório',
-    marketplaceIntroTail: '— este é um índice navegável, não um instalador.',
     notFoundTitle: '404 — página não encontrada',
   },
 };

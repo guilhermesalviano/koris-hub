@@ -6,7 +6,6 @@
 export const en = {
   nav: {
     bot: 'Bot',
-    marketplace: 'Marketplace',
     docs: 'Docs',
     github: 'GitHub',
     switchLanguage: 'Change language',
@@ -137,7 +136,6 @@ export const en = {
     tagline: 'Your AI teammates running on your own infrastructure.',
     product: 'Product',
     bot: 'Bot',
-    marketplace: 'Marketplace',
     docs: 'Documentation',
     downloads: 'Downloads',
     changelog: 'Changelog',
@@ -169,33 +167,6 @@ export const en = {
     switchingNote: 'Full switching in the real dashboard',
   },
 
-  marketplace: {
-    backToMarketplace: 'Marketplace',
-    confirmationRequired: 'confirmation required',
-    offByDefault: 'off by default',
-    toolName: 'tool name:',
-    parameters: 'Parameters',
-    readWhen: 'Read when',
-    setupGuidance: 'Setup & Configuration Guidance',
-    downloadTitle: 'Download from Koris Bot',
-    downloadFromRepo: 'Run this from the koris repository root:',
-    downloadFromChat: 'Trusted senders can also download it from chat:',
-    downloadOverwrite: 'If the plugin is already installed, add',
-    downloadOverwriteSuffix: 'to overwrite it.',
-    downloadLocation: 'Downloaded files go to',
-    downloadChannelNote: 'Channels are downloaded as bundled artifacts from the channels-latest release.',
-    downloadToolsSkillsNote: 'Tools, skills, and MCP servers are downloaded from the main branch.',
-    configFields: 'Configuration Fields',
-    viewSource: 'View source',
-    improveEntry: 'Improve this entry',
-    noParameters: 'No parameters.',
-    paramName: 'Name',
-    paramType: 'Type',
-    paramRequired: 'Required',
-    paramDescription: 'Description',
-    paramYes: 'yes',
-  },
-
   notFound: {
     heading: 'Even an agent with persistent memory forgot this page.',
     body: "We checked the long-term memory store, ran a full skill sync, and sent a heartbeat to ask nicely. This route just isn't in the training data — it probably wandered off to go summarize itself.",
@@ -216,11 +187,6 @@ export const en = {
     docsTitle: 'Docs',
     docsDescription:
       'Documentation for Koris Bot — install and configure the self-hosted AI agent, connect Telegram or WhatsApp channels, and extend it with tools and skills.',
-    marketplaceTitle: 'Marketplace',
-    marketplaceDescription:
-      'Every tool, channel, skill, and MCP server that ships with Koris Bot — what each one does, the parameters it takes, and a link to its source.',
-    marketplaceIntroLead: 'The tools, channels, skills, and MCP servers bundled with Koris Bot today. Each one lives in the',
-    marketplaceIntroTail: 'repo — this is a browsable index, not an installer.',
     notFoundTitle: '404 — page not found',
   },
 } as const;
